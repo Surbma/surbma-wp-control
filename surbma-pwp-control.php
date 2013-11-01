@@ -5,7 +5,7 @@ Plugin Name: Surbma - Premium WordPress Control
 Plugin URI: http://premiumwp.hu/
 GitHub Plugin URI: Surbma/surbma-pwp-control
 Description: Global control plugin for Premium WordPress sites
-Version: 3.0.0
+Version: 3.0.1
 Author: Surbma
 Author URI: http://surbma.hu/
 License: GPL2
@@ -39,5 +39,5 @@ function pwp_control_wp_mail_from( $input ) {
 
 	return get_option( 'wp_mail_from' === current_filter() ? 'admin_email' : 'blogname' );
 }
-add_filter( 'wp_mail_from',	'pwp_control_wp_mail_from' );
+add_filter( 'wp_mail_from', 'pwp_control_wp_mail_from' );
 add_filter( 'wp_mail_from_name', 'pwp_control_wp_mail_from' );
