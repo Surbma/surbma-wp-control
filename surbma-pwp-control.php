@@ -5,7 +5,7 @@ Plugin Name: Surbma - Premium WordPress Control
 Plugin URI: http://premiumwp.hu/
 GitHub Plugin URI: Surbma/surbma-pwp-control
 Description: Global control plugin for Premium WordPress sites
-Version: 3.0.1
+Version: 3.1.0
 Author: Surbma
 Author URI: http://surbma.hu/
 License: GPL2

@@ -21,19 +21,10 @@ add_action( 'admin_head', 'pwp_control_admin_styles' );
 
 /* Custom text in admin footer */
 function pwp_control_custom_admin_footer() {
-	echo PWP_CONTROL_ADMIN_FOOTER;
+	$blogname = get_option( 'blogname' );
+	echo '<a href="' . get_site_option( 'siteurl' ) . '" target="_blank">' . get_site_option( 'site_name', $blogname ) . '</a>';
 }
-add_filter( 'admin_footer_text','pwp_control_custom_admin_footer' );
-
-/* Welcome widget on dashboard */
-function pwp_control_dashboard_widget_function() {
-	echo PWP_CONTROL_DASHBOARD_WIDGET_CONTENT;
-}
-function pwp_control_add_dashboard_widgets() {
-	wp_add_dashboard_widget( 'pwp_control_welcome_widget', PWP_CONTROL_DASHBOARD_WIDGET_TITLE, 'pwp_control_dashboard_widget_function' );
-}
-if ( defined( 'PWP_CONTROL_DASHBOARD_WIDGET_TITLE' ) && defined( 'PWP_CONTROL_DASHBOARD_WIDGET_CONTENT' ) )
-	add_action( 'wp_dashboard_setup', 'pwp_control_add_dashboard_widgets' );
+add_filter( 'admin_footer_text', 'pwp_control_custom_admin_footer' );
 
 /* Tracking across multiple domains */
 function pwp_control_global_google_analytics_admin() {
@@ -67,13 +58,6 @@ function pwp_control_soliloquy_change_cap( $cap ) {
 if ( function_exists( 'soliloquy_slider' ) )
 	add_filter( 'tgmsp_settings_cap', 'pwp_control_soliloquy_change_cap' );
 
-function pwp_control_seo_notice() {
-	if ( get_option( 'blog_public' ) == '0' ) {
-    echo '<div class="error"><p><strong>Figyelem! Nagyon fontos SEO figyelmeztetés:</strong></p><p>A weboldal indexelése jelenleg tiltva van a keresők (Google, Bing, stb.) számára. Az indexelést a <a href="/wp-admin/options-reading.php">Beállítások → Olvasás</a> menüpont alatt lehet engedélyezni. Csak ezután fog megjelenni a weboldal a keresők találatai között. A jelenlegi beállítás a fejlesztés alatt álló és még nem aktivált weboldalak esetén indokolt. Az élesített és publikus weboldalak esetén az indexelés engedélyezése javasolt.</p><p style="text-align:right;"><strong><em>- Prémium WordPress csapata</em></strong></p></div>';
-   }
-}
-add_action( 'admin_notices', 'pwp_control_seo_notice', 0 );
-
 function pwp_control_remove_wpmudev_notice() {
 	if ( function_exists( 'wdp_un_check' ) ) {
 		remove_action( 'admin_notices', 'wdp_un_check', 5 );
@@ -81,4 +65,7 @@ function pwp_control_remove_wpmudev_notice() {
 	}
 }
 add_action ( 'admin_init', 'pwp_control_remove_wpmudev_notice' );
+
+// if ( !isset( $_GET['page'] ) OR @$_GET['paged'] != 'wpengine-common' )
+// 	add_action('admin_init', function() { wp_dequeue_style('wpe-common'); });
 

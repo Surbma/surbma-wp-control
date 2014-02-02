@@ -1,5 +1,7 @@
 <?php
-add_filter( 'widget_text', 'do_shortcode' );
+
+if ( ! has_filter( 'widget_text', 'do_shortcode' ) )
+	add_filter( 'widget_text', 'do_shortcode' );
 
 function pwp_control_enqueue_custom_style() {
 	$uploads = wp_upload_dir();
