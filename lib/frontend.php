@@ -39,11 +39,11 @@ function pwp_control_custom_login_style() {
 if ( defined( 'PWP_CONTROL_LOGIN_STYLE' ) )
 	add_action( 'login_enqueue_scripts','pwp_control_custom_login_style' );
 
-function pwp_control_add_login_text() {
-	echo '<div id="login-info">' . PWP_CONTROL_LOGIN_TEXT . '</div>';
-}
-if ( defined( 'PWP_CONTROL_LOGIN_TEXT' ) )
-	add_action( 'login_footer','pwp_control_add_login_text' );
+// function pwp_control_add_login_text() {
+// 	echo '<div id="login-info">' . PWP_CONTROL_LOGIN_TEXT . '</div>';
+// }
+// if ( defined( 'PWP_CONTROL_LOGIN_TEXT' ) )
+// 	add_action( 'login_footer','pwp_control_add_login_text' );
 
 function pwp_control_add_google_analytics() {
 ?>
