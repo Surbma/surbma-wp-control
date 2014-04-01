@@ -12,7 +12,7 @@ function pwp_control_admin_styles() {
 ?><style type="text/css">
 	.pwp .clearline{border-top:1px solid #ccc;clear:both;margin:10px 0;}
 	.pwp .section-block{background:#fafafa;padding:20px;border:1px solid #ccc;border-radius: 3px;}
-	.pwp .section-block h3{margin:0 0 20px;font-weight:normal;font-size:23px;font-family:"HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif;}
+	.pwp .section-block h3{margin:0 0 20px;}
 	.pwp .icon{float:left;margin:7px 7px 0 0;}
 </style>
 <?php
@@ -25,32 +25,6 @@ function pwp_control_custom_admin_footer() {
 	echo '<a href="' . get_site_option( 'siteurl' ) . '" target="_blank">' . get_site_option( 'site_name', $blogname ) . '</a>';
 }
 add_filter( 'admin_footer_text', 'pwp_control_custom_admin_footer' );
-
-/* Tracking across multiple domains */
-function pwp_control_global_google_analytics_admin() {
-?>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(
-  	['pwp._setAccount', '<?php echo PWP_CONTROL_GOOGLE_ANALYTICS ?>'],
-  	['pwp._setDomainName', 'none'],
-  	['pwp._setAllowLinker', true],
-  	['pwp._trackPageview']
-  );
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-<?php
-}
-/*
-if ( defined( 'PWP_CONTROL_GOOGLE_ANALYTICS' ) ) {
-	add_action( 'admin_head', 'pwp_control_global_google_analytics_admin', 99 );
-}
-*/
 
 function pwp_control_soliloquy_change_cap( $cap ) {
 	return 'install_plugins';
