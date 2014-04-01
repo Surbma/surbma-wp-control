@@ -5,7 +5,7 @@ Plugin Name: Surbma - Premium WordPress Control
 Plugin URI: http://premiumwp.hu/
 GitHub Plugin URI: Surbma/surbma-pwp-control
 Description: Global control plugin for Premium WordPress sites
-Version: 3.1.1
+Version: 3.2.0
 Author: Surbma
 Author URI: http://surbma.hu/
 License: GPL2
@@ -41,3 +41,38 @@ function pwp_control_wp_mail_from( $input ) {
 }
 add_filter( 'wp_mail_from', 'pwp_control_wp_mail_from' );
 add_filter( 'wp_mail_from_name', 'pwp_control_wp_mail_from' );
+
+function pwp_control_add_google_analytics() {
+?>
+	_gaq.push(['pwp._setAccount', '<?php echo PWP_CONTROL_GOOGLE_ANALYTICS; ?>']);
+	_gaq.push(['pwp._setDomainName', 'none']);
+	_gaq.push(['pwp._setAllowLinker', true]);
+	_gaq.push(['pwp._trackPageview']);
+<?php
+}
+function pwp_control_do_google_analytics() {
+	$options = get_option( 'pwp_google_analytics_fields' );
+	if ( function_exists( 'pwp_google_analytics_display' ) && $options['trackingid'] != '' ) {
+		add_action( 'pwp_google_analytics_after_trackpageview', 'pwp_control_add_google_analytics', 999 );
+	} else {
+?>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['pwp._setAccount', '<?php echo PWP_CONTROL_GOOGLE_ANALYTICS; ?>']);
+	_gaq.push(['pwp._setDomainName', 'none']);
+	_gaq.push(['pwp._setAllowLinker', true]);
+	_gaq.push(['pwp._trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+<?php }
+}
+if ( defined( 'PWP_CONTROL_GOOGLE_ANALYTICS' ) ) {
+	add_action( 'wp_head', 'pwp_control_do_google_analytics', 999 );
+	add_action( 'admin_head', 'pwp_control_do_google_analytics', 999 );
+}
+

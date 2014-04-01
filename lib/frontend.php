@@ -45,37 +45,3 @@ if ( defined( 'PWP_CONTROL_LOGIN_STYLE' ) )
 // if ( defined( 'PWP_CONTROL_LOGIN_TEXT' ) )
 // 	add_action( 'login_footer','pwp_control_add_login_text' );
 
-function pwp_control_add_google_analytics() {
-?>
-	_gaq.push(['pwp._setAccount', '<?php echo PWP_CONTROL_GOOGLE_ANALYTICS; ?>']);
-	_gaq.push(['pwp._setDomainName', 'none']);
-	_gaq.push(['pwp._setAllowLinker', true]);
-	_gaq.push(['pwp._trackPageview']);
-<?php
-}
-function pwp_control_do_google_analytics() {
-	if ( !is_user_logged_in() ) {
-		$options = get_option( 'pwp_google_analytics_fields' );
-		if ( function_exists( 'pwp_google_analytics_display' ) && $options['trackingid'] != '' ) {
-			add_action( 'pwp_google_analytics_after_trackpageview', 'pwp_control_add_google_analytics', 999 );
-		} else {
-?>
-<script type="text/javascript">
-	var _gaq = _gaq || [];
-	_gaq.push(['pwp._setAccount', '<?php echo PWP_CONTROL_GOOGLE_ANALYTICS; ?>']);
-	_gaq.push(['pwp._setDomainName', 'none']);
-	_gaq.push(['pwp._setAllowLinker', true]);
-	_gaq.push(['pwp._trackPageview']);
-
-	(function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
-</script>
-<?php }
-	}
-}
-if ( defined( 'PWP_CONTROL_GOOGLE_ANALYTICS' ) )
-	add_action( 'wp_head', 'pwp_control_do_google_analytics', 999 );
-
