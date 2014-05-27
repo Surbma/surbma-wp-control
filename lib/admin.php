@@ -27,10 +27,11 @@ function pwp_control_custom_admin_footer() {
 add_filter( 'admin_footer_text', 'pwp_control_custom_admin_footer' );
 
 function pwp_control_soliloquy_change_cap( $cap ) {
-	return 'install_plugins';
+	if ( class_exists( 'Soliloquy' ) ) {
+		return 'install_plugins';
+	}
 }
-if ( function_exists( 'soliloquy_slider' ) )
-	add_filter( 'tgmsp_settings_cap', 'pwp_control_soliloquy_change_cap' );
+add_filter( 'soliloquy_menu_cap', 'pwp_control_soliloquy_change_cap' );
 
 function pwp_control_remove_wpmudev_notice() {
 	if ( function_exists( 'wdp_un_check' ) ) {
