@@ -4,7 +4,7 @@
 Plugin Name: Surbma - Premium WordPress Control
 Plugin URI: http://premiumwp.hu/
 Description: Global control plugin for Premium WordPress sites
-Version: 3.2.2
+Version: 3.3.0
 Author: Surbma
 Author URI: http://surbma.hu/
 License: GPL2
@@ -43,35 +43,30 @@ add_filter( 'wp_mail_from_name', 'pwp_control_wp_mail_from' );
 
 function pwp_control_add_google_analytics() {
 ?>
-	_gaq.push(['pwp._setAccount', '<?php echo PWP_CONTROL_GOOGLE_ANALYTICS; ?>']);
-	_gaq.push(['pwp._setDomainName', 'none']);
-	_gaq.push(['pwp._setAllowLinker', true]);
-	_gaq.push(['pwp._trackPageview']);
+	ga('create', '<?php echo PWP_CONTROL_GOOGLE_ANALYTICS; ?>', 'auto', {'name': 'pwp'}, {'allowLinker': true});
+	ga('pwp.send', 'pageview');
 <?php
 }
 function pwp_control_do_google_analytics() {
 	$options = get_option( 'pwp_google_analytics_fields' );
-	if ( function_exists( 'pwp_google_analytics_display' ) && $options['trackingid'] != '' ) {
-		add_action( 'pwp_google_analytics_after_trackpageview', 'pwp_control_add_google_analytics', 999 );
+	if ( function_exists( 'pwp_google_analytics_display' ) && $options['universalid'] != '' ) {
+		add_action( 'pwp_universal_analytics_objects', 'pwp_control_add_google_analytics', 999 );
 	} else {
 ?>
-<script type="text/javascript">
-	var _gaq = _gaq || [];
-	_gaq.push(['pwp._setAccount', '<?php echo PWP_CONTROL_GOOGLE_ANALYTICS; ?>']);
-	_gaq.push(['pwp._setDomainName', 'none']);
-	_gaq.push(['pwp._setAllowLinker', true]);
-	_gaq.push(['pwp._trackPageview']);
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-	(function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
+	ga('create', '<?php echo PWP_CONTROL_GOOGLE_ANALYTICS; ?>', 'auto', {'name': 'pwp'}, {'allowLinker': true});
+	ga('pwp.send', 'pageview'); 
 </script>
 <?php }
 }
 if ( defined( 'PWP_CONTROL_GOOGLE_ANALYTICS' ) ) {
 	add_action( 'wp_head', 'pwp_control_do_google_analytics', 999 );
 	add_action( 'admin_head', 'pwp_control_do_google_analytics', 999 );
+	add_action( 'login_head', 'pwp_control_do_google_analytics', 999 );
 }
 
