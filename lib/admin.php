@@ -11,7 +11,7 @@ add_action( 'admin_menu', 'pwp_control_add_menu', 999 );
 function pwp_control_admin_styles() {
 ?><style type="text/css">
 	.pwp .clearline{border-top:1px solid #ccc;clear:both;margin:10px 0;}
-	.pwp .section-block{background:#fafafa;padding:20px;border:1px solid #ccc;border-radius: 3px;}
+	.pwp .section-block{background:#fdfdfd;padding:20px;border:1px solid #ccc;border-radius: 3px;}
 	.pwp .section-block h3{margin:0 0 20px;}
 	.pwp .icon{float:left;margin:7px 7px 0 0;}
 </style>
