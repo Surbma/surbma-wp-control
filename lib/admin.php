@@ -44,3 +44,42 @@ add_action ( 'admin_init', 'pwp_control_remove_wpmudev_notice' );
 // if ( !isset( $_GET['page'] ) OR @$_GET['paged'] != 'wpengine-common' )
 // 	add_action('admin_init', function() { wp_dequeue_style('wpe-common'); });
 
+function pwp_control_set_jetpack_modules() {
+	if ( class_exists( 'Jetpack' ) ) {
+		add_filter( 'jetpack_get_default_modules', '__return_empty_array' );
+		add_filter( 'jetpack_get_available_modules', 'pwp_control_disable_modules' );
+	}
+}
+add_action( 'init', 'pwp_control_set_jetpack_modules', 11 );
+
+function pwp_control_disable_modules ( $modules ) {
+	$pwp_control_jp_mods_to_disable = array(
+		'after-the-deadline',
+		'comments',
+		'contact-form',
+		'gplus-authorship',
+		'gravatar-hovercards',
+		'infinite-scroll',
+		'json-api',
+		'latex',
+		'likes',
+		'markdown',
+		'photon',
+		'post-by-email',
+		'shortlinks',
+		'sso',
+		'vaultpress',
+		'verification-tools',
+		'videopress',
+		'wpcc',
+	);
+
+	foreach ( $pwp_control_jp_mods_to_disable as $mod ) {
+		if ( isset( $modules[$mod] ) ) {
+			unset( $modules[$mod] );
+		}
+	}
+
+	return $modules;
+}
+
