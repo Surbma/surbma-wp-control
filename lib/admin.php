@@ -34,15 +34,14 @@ function pwp_control_soliloquy_change_cap( $cap ) {
 add_filter( 'soliloquy_menu_cap', 'pwp_control_soliloquy_change_cap' );
 
 function pwp_control_remove_wpmudev_notice() {
-	if ( function_exists( 'wdp_un_check' ) ) {
-		remove_action( 'admin_notices', 'wdp_un_check', 5 );
-		remove_action( 'network_admin_notices', 'wdp_un_check', 5 );
+	if ( class_exists( 'WPMUDEV_Dashboard_Notice3' ) ) {
+		global $WPMUDEV_Dashboard_Notice3;
+		remove_action( 'admin_print_styles', array( $WPMUDEV_Dashboard_Notice3, 'notice_styles' ) );
+		remove_action( 'all_admin_notices', array( $WPMUDEV_Dashboard_Notice3, 'install_notice' ), 5 );
+		remove_action( 'all_admin_notices', array( $WPMUDEV_Dashboard_Notice3, 'activate_notice' ), 5 );
 	}
 }
 add_action ( 'admin_init', 'pwp_control_remove_wpmudev_notice' );
-
-// if ( !isset( $_GET['page'] ) OR @$_GET['paged'] != 'wpengine-common' )
-// 	add_action('admin_init', function() { wp_dequeue_style('wpe-common'); });
 
 function pwp_control_set_jetpack_modules() {
 	if ( class_exists( 'Jetpack' ) ) {
