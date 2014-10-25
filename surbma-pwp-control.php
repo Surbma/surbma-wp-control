@@ -4,11 +4,16 @@
 Plugin Name: Surbma - Premium WordPress Control
 Plugin URI: http://premiumwp.hu/
 Description: Global control plugin for Premium WordPress sites
-Version: 3.4.1
+Version: 3.5.0
 Author: Surbma
 Author URI: http://surbma.hu/
 License: GPL2
 */
+
+// Prevent direct access to the plugin
+if ( !defined( 'ABSPATH' ) ) {
+	die( 'Sorry, you are not allowed to access this page directly.' );
+}
 
 define( 'PWP_CONTROL_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PWP_CONTROL_PLUGIN_URL', plugins_url( '', __FILE__ ) );
