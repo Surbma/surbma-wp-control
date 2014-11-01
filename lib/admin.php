@@ -51,6 +51,27 @@ function pwp_control_set_jetpack_modules() {
 }
 add_action( 'init', 'pwp_control_set_jetpack_modules', 11 );
 
+function pwp_control_remove_widgets() {
+	unregister_widget( 'WP_Widget_Pages' );
+	unregister_widget( 'WP_Widget_Calendar' );
+	unregister_widget( 'WP_Widget_Links' );
+	unregister_widget( 'WP_Widget_Meta' );
+	wp_unregister_sidebar_widget( 'wpe_widget_powered_by' );
+}
+add_action( 'widgets_init', 'pwp_control_remove_widgets' );
+
+function pwp_control_remove_dashboard_widgets() {
+    remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'core' );
+    remove_meta_box( 'dashboard_plugins', 'dashboard', 'core' );
+    remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'core' );
+    remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+    remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
+	remove_meta_box( 'dashboard_secondary', 'dashboard', 'side' );
+}
+add_action( 'wp_dashboard_setup', 'pwp_control_remove_dashboard_widgets' );
+
+remove_action( 'welcome_panel', 'wp_welcome_panel' );
+
 function pwp_control_disable_modules ( $modules ) {
 	$pwp_control_jp_mods_to_disable = array(
 		'after-the-deadline',

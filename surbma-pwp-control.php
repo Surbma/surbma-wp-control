@@ -4,7 +4,7 @@
 Plugin Name: Surbma - Premium WordPress Control
 Plugin URI: http://premiumwp.hu/
 Description: Global control plugin for Premium WordPress sites
-Version: 3.5.0
+Version: 3.6.0
 Author: Surbma
 Author URI: http://surbma.hu/
 License: GPL2
@@ -65,7 +65,7 @@ function pwp_control_do_google_analytics() {
 	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
 	ga('create', '<?php echo PWP_CONTROL_GOOGLE_ANALYTICS; ?>', 'auto', {'name': 'pwp'}, {'allowLinker': true});
-	ga('pwp.send', 'pageview'); 
+	ga('pwp.send', 'pageview');
 </script>
 <?php }
 }
