@@ -43,14 +43,6 @@ function pwp_control_remove_wpmudev_notice() {
 }
 add_action ( 'admin_init', 'pwp_control_remove_wpmudev_notice' );
 
-function pwp_control_set_jetpack_modules() {
-	if ( class_exists( 'Jetpack' ) ) {
-		add_filter( 'jetpack_get_default_modules', '__return_empty_array' );
-		add_filter( 'jetpack_get_available_modules', 'pwp_control_disable_modules' );
-	}
-}
-add_action( 'init', 'pwp_control_set_jetpack_modules', 11 );
-
 function pwp_control_remove_widgets() {
 	unregister_widget( 'WP_Widget_Pages' );
 	unregister_widget( 'WP_Widget_Calendar' );
@@ -88,6 +80,7 @@ function pwp_control_disable_modules ( $modules ) {
 		'post-by-email',
 		'shortlinks',
 		'sso',
+		'subscriptions',
 		'vaultpress',
 		'verification-tools',
 		'videopress',
@@ -102,4 +95,12 @@ function pwp_control_disable_modules ( $modules ) {
 
 	return $modules;
 }
+
+function pwp_control_set_jetpack_modules() {
+	if ( class_exists( 'Jetpack' ) ) {
+		add_filter( 'jetpack_get_default_modules', '__return_empty_array' );
+		add_filter( 'jetpack_get_available_modules', 'pwp_control_disable_modules' );
+	}
+}
+add_action( 'init', 'pwp_control_set_jetpack_modules', 11 );
 
