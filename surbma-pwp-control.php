@@ -2,21 +2,33 @@
 
 /*
 Plugin Name: Surbma - Premium WordPress Control
-Plugin URI: http://premiumwp.hu/
+Plugin URI: http://surbma.hu/wordpress-bovitmenyek/
 Description: Global control plugin for Premium WordPress sites
-Version: 3.7.0
+
+Version: 3.8.0
+
 Author: Surbma
 Author URI: http://surbma.hu/
-License: GPL2
+
+License: GPLv2
+
+Text Domain: surbma-pwp-control
+Domain Path: /languages/
 */
 
 // Prevent direct access to the plugin
 if ( !defined( 'ABSPATH' ) ) {
-	die( 'Sorry, you are not allowed to access this page directly.' );
+	die( 'Good try! :)' );
 }
 
 define( 'PWP_CONTROL_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PWP_CONTROL_PLUGIN_URL', plugins_url( '', __FILE__ ) );
+
+// Localization
+function surbma_pwp_control_init() {
+	load_plugin_textdomain( 'surbma-pwp-control', false, dirname( plugin_basename( __FILE__ ) . '/languages/' ) );
+}
+add_action( 'init', 'surbma_pwp_control_init' );
 
 // Include files
 if ( is_admin() ) {
@@ -46,16 +58,16 @@ function pwp_control_wp_mail_from( $input ) {
 add_filter( 'wp_mail_from', 'pwp_control_wp_mail_from' );
 add_filter( 'wp_mail_from_name', 'pwp_control_wp_mail_from' );
 
-function pwp_control_add_google_analytics() {
+function surbma_pwp_control_add_google_analytics() {
 ?>
 	ga('create', '<?php echo PWP_CONTROL_GOOGLE_ANALYTICS; ?>', 'auto', {'name': 'pwp'}, {'allowLinker': true});
 	ga('pwp.send', 'pageview');
 <?php
 }
 function pwp_control_do_google_analytics() {
-	$options = get_option( 'pwp_google_analytics_fields' );
-	if ( function_exists( 'pwp_google_analytics_display' ) && $options['universalid'] != '' ) {
-		add_action( 'pwp_universal_analytics_objects', 'pwp_control_add_google_analytics', 999 );
+	$options = get_option( 'surbma_pwp_options' );
+	if ( function_exists( 'surbma_pwp_google_analytics_display' ) && $options['universalid'] != '' ) {
+		add_action( 'surbma_pwp_universal_analytics_objects', 'surbma_pwp_control_add_google_analytics', 999 );
 	} else {
 ?>
 <script>
