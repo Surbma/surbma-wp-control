@@ -1,17 +1,17 @@
 <?php
 
-function pwp_control_options_init() {
-	register_setting( 'pwp_control_options', 'pwp_control_option', 'pwp_control_options_validate' );
+function surbma_pwp_control_options_init() {
+	register_setting( 'pwp_control_options', 'pwp_control_option', 'surbma_pwp_control_options_validate' );
 }
-add_action( 'admin_init', 'pwp_control_options_init' );
+add_action( 'admin_init', 'surbma_pwp_control_options_init' );
 
-function pwp_control_page() {
+function surbma_pwp_control_page() {
 	if ( ! isset( $_REQUEST['settings-updated'] ) )
 		$_REQUEST['settings-updated'] = false;
 
 	?>
 	<div class="wrap pwp">
-		<img class="icon" alt="icon" src="<?php echo PWP_CONTROL_PLUGIN_URL . '/images/star32.png'; ?>" />
+		<img class="icon" alt="icon" src="<?php echo SURBMA_PWP_CONTROL_PLUGIN_URL . '/images/star32.png'; ?>" />
 		<h2><?php _e( 'Superadmin beállítások', 'pwp-control' ); ?></h2>
 
 		<?php if ( false !== $_REQUEST['settings-updated'] ) : ?>
@@ -36,7 +36,7 @@ function pwp_control_page() {
 						</table>
 
 						<p><input type="submit" class="button-primary" value="<?php _e( 'Save Changes' ); ?>" /></p>
-					
+
 					</form>
 			</div>
 		<div class="clearline"></div>
@@ -67,7 +67,7 @@ function pwp_control_page() {
 /**
  * Sanitize and validate input. Accepts an array, return a sanitized array.
  */
-function pwp_control_options_validate( $input ) {
+function surbma_pwp_control_options_validate( $input ) {
 	// Our checkbox value is either 0 or 1
 	if ( ! isset( $input['backlink'] ) )
 		$input['backlink'] = null;

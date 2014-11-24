@@ -3,7 +3,7 @@ Contributors: Surbma
 Tags: multisite, genesis
 Requires at least: 3.0.1
 Tested up to: 4.0.1
-Stable tag: 3.8.0
+Stable tag: 3.9.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,5 +31,5 @@ It is the reverse version of my last name. ;)
 
 == Changelog ==
 
-= 3.8.0 =
+= 3.9.0 =
 * First commit to official WordPress repo
