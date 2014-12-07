@@ -5,7 +5,7 @@ Plugin Name: Surbma - Premium WordPress Control
 Plugin URI: http://surbma.hu/wordpress-bovitmenyek/
 Description: Global control plugin for Premium WordPress sites
 
-Version: 3.9.0
+Version: 3.9.1
 
 Author: Surbma
 Author URI: http://surbma.hu/

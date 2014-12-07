@@ -69,7 +69,6 @@ function surbma_pwp_control_disable_jetpack_modules ( $modules ) {
 		'after-the-deadline',
 		'comments',
 		'contact-form',
-		'gplus-authorship',
 		'gravatar-hovercards',
 		'infinite-scroll',
 		'json-api',
