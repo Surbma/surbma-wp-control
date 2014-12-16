@@ -71,7 +71,6 @@ function surbma_pwp_control_disable_jetpack_modules ( $modules ) {
 		'contact-form',
 		'gravatar-hovercards',
 		'infinite-scroll',
-		'json-api',
 		'latex',
 		'likes',
 		'markdown',
