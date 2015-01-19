@@ -5,7 +5,7 @@ Plugin Name: Surbma - Premium WordPress Control
 Plugin URI: http://surbma.hu/wordpress-bovitmenyek/
 Description: Global control plugin for Premium WordPress sites
 
-Version: 3.11.0
+Version: 3.12.0
 
 Author: Surbma
 Author URI: http://surbma.hu/
@@ -60,14 +60,14 @@ add_filter( 'wp_mail_from_name', 'surbma_pwp_control_wp_mail_from' );
 
 function surbma_pwp_control_add_google_analytics() {
 ?>
-	ga('create', '<?php echo PWP_CONTROL_GOOGLE_ANALYTICS; ?>', 'auto', {'name': 'pwp'}, {'allowLinker': true});
+	ga('create', '<?php echo SURBMA_PWP_CONTROL_GOOGLE_ANALYTICS; ?>', 'auto', {'name': 'pwp'}, {'allowLinker': true});
 	ga('pwp.send', 'pageview');
 <?php
 }
 function surbma_pwp_control_do_google_analytics() {
-	$options = get_option( 'surbma_pwp_options' );
+	$options = get_option( 'pwp_google_analytics_fields' );
 	if ( function_exists( 'surbma_pwp_google_analytics_display' ) && $options['universalid'] != '' ) {
-		add_action( 'surbma_pwp_universal_analytics_objects', 'surbma_pwp_control_add_google_analytics', 999 );
+		add_action( 'pwp_universal_analytics_objects', 'surbma_pwp_control_add_google_analytics', 999 );
 	} else {
 ?>
 <script>
@@ -76,12 +76,12 @@ function surbma_pwp_control_do_google_analytics() {
 	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-	ga('create', '<?php echo PWP_CONTROL_GOOGLE_ANALYTICS; ?>', 'auto', {'name': 'pwp'}, {'allowLinker': true});
+	ga('create', '<?php echo SURBMA_PWP_CONTROL_GOOGLE_ANALYTICS; ?>', 'auto', {'name': 'pwp'}, {'allowLinker': true});
 	ga('pwp.send', 'pageview');
 </script>
 <?php }
 }
-if ( defined( 'PWP_CONTROL_GOOGLE_ANALYTICS' ) ) {
+if ( defined( 'SURBMA_PWP_CONTROL_GOOGLE_ANALYTICS' ) ) {
 	add_action( 'wp_head', 'surbma_pwp_control_do_google_analytics', 999 );
 	add_action( 'admin_head', 'surbma_pwp_control_do_google_analytics', 999 );
 	add_action( 'login_head', 'surbma_pwp_control_do_google_analytics', 999 );

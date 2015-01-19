@@ -25,8 +25,8 @@ add_filter( 'the_generator', 'surbma_pwp_control_remove_version' );
 function surbma_pwp_control_footer_creds() {
 	$options = get_option( 'surbma_pwp_control_option' );
 	$bloglink = '<a href="' . get_bloginfo( 'url' ) . '" title="' . get_bloginfo( 'name' ) . ' - ' . get_bloginfo( 'description' ) . '">' . get_bloginfo( 'name' ) . '</a>';
-	if ( $options['backlink'] != '1' && defined( 'PWP_CONTROL_FOOTER_CREDS' ) ) {
-		$creds = $bloglink . PWP_CONTROL_FOOTER_CREDS;
+	if ( $options['backlink'] != '1' && defined( 'SURBMA_PWP_CONTROL_FOOTER_CREDS' ) ) {
+		$creds = $bloglink . SURBMA_PWP_CONTROL_FOOTER_CREDS;
 	} else {
 		$creds = $bloglink;
 	}
@@ -34,15 +34,15 @@ function surbma_pwp_control_footer_creds() {
 }
 
 function surbma_pwp_control_custom_login_style() {
-	echo PWP_CONTROL_LOGIN_STYLE;
+	echo SURBMA_PWP_CONTROL_LOGIN_STYLE;
 }
-if ( defined( 'PWP_CONTROL_LOGIN_STYLE' ) )
+if ( defined( 'SURBMA_PWP_CONTROL_LOGIN_STYLE' ) )
 	add_action( 'login_enqueue_scripts', 'surbma_pwp_control_custom_login_style' );
 
 // function surbma_pwp_control_add_login_text() {
-// 	echo '<div id="login-info">' . PWP_CONTROL_LOGIN_TEXT . '</div>';
+// 	echo '<div id="login-info">' . SURBMA_PWP_CONTROL_LOGIN_TEXT . '</div>';
 // }
-// if ( defined( 'PWP_CONTROL_LOGIN_TEXT' ) )
+// if ( defined( 'SURBMA_PWP_CONTROL_LOGIN_TEXT' ) )
 // 	add_action( 'login_footer','surbma_pwp_control_add_login_text' );
 
 function surbma_pwp_control_read_more_link( $excerpt ) {
