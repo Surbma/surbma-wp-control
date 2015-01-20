@@ -23,7 +23,7 @@ function surbma_pwp_control_remove_version() {
 add_filter( 'the_generator', 'surbma_pwp_control_remove_version' );
 
 function surbma_pwp_control_footer_creds() {
-	$options = get_option( 'surbma_pwp_control_option' );
+	$options = get_option( 'pwp_control_option' );
 	$bloglink = '<a href="' . get_bloginfo( 'url' ) . '" title="' . get_bloginfo( 'name' ) . ' - ' . get_bloginfo( 'description' ) . '">' . get_bloginfo( 'name' ) . '</a>';
 	if ( $options['backlink'] != '1' && defined( 'SURBMA_PWP_CONTROL_FOOTER_CREDS' ) ) {
 		$creds = $bloglink . SURBMA_PWP_CONTROL_FOOTER_CREDS;
