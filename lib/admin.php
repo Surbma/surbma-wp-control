@@ -14,6 +14,7 @@ function surbma_pwp_control_admin_styles() {
 	.pwp .section-block{background:#fdfdfd;padding:20px;border:1px solid #ccc;border-radius: 3px;}
 	.pwp .section-block h3{margin:0 0 20px;}
 	.pwp .icon{float:left;margin:7px 7px 0 0;}
+	#wpmu-install-dashboard {display: none;}
 </style>
 <?php
 }
@@ -32,16 +33,6 @@ function surbma_pwp_control_soliloquy_change_cap( $cap ) {
 	}
 }
 add_filter( 'soliloquy_menu_cap', 'surbma_pwp_control_soliloquy_change_cap' );
-
-function surbma_pwp_control_remove_wpmudev_notice() {
-	if ( class_exists( 'WPMUDEV_Dashboard_Notice3' ) ) {
-		global $WPMUDEV_Dashboard_Notice3;
-		remove_action( 'admin_print_styles', array( $WPMUDEV_Dashboard_Notice3, 'notice_styles' ) );
-		remove_action( 'all_admin_notices', array( $WPMUDEV_Dashboard_Notice3, 'install_notice' ), 5 );
-		remove_action( 'all_admin_notices', array( $WPMUDEV_Dashboard_Notice3, 'activate_notice' ), 5 );
-	}
-}
-add_action ( 'admin_init', 'surbma_pwp_control_remove_wpmudev_notice' );
 
 function surbma_pwp_control_remove_widgets() {
 	unregister_widget( 'WP_Widget_Pages' );
