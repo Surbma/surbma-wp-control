@@ -93,3 +93,10 @@ function surbma_pwp_control_set_jetpack_modules() {
 }
 add_action( 'init', 'surbma_pwp_control_set_jetpack_modules', 11 );
 
+function surbma_pwp_control_add_gf_visibility_setting() {
+	if ( class_exists( 'GFForms' ) ) {
+		add_filter( 'gform_enable_field_label_visibility_settings', '__return_true' );
+	}
+}
+add_action( 'init', 'surbma_pwp_control_add_gf_visibility_setting' );
+
