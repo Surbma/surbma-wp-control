@@ -49,3 +49,13 @@ function surbma_pwp_control_read_more_link( $excerpt ) {
    return ' <a href="' . get_permalink() . '">' . $excerpt . '</a>';
 }
 add_filter( 'excerpt_more', 'surbma_pwp_control_read_more_link' );
+
+// Add language code in body class
+function surbma_pwp_control_add_wpml_lang_body_class( $classes ) {
+	if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
+		$classes[] = ICL_LANGUAGE_CODE;
+	}
+	return $classes;
+}
+add_filter( 'body_class', 'surbma_pwp_control_add_wpml_lang_body_class' );
+
