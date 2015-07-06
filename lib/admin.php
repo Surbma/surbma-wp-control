@@ -1,49 +1,58 @@
 <?php
-/* Admin options menu */
-include_once( SURBMA_PWP_CONTROL_PLUGIN_DIR . '/pages/control-page.php' );
 
-function surbma_pwp_control_add_menu() {
-	add_menu_page( 'Prémium WordPress Control', 'PWP Control', 'update_core', 'surbma-pwp-control', 'surbma_pwp_control_page', SURBMA_PWP_CONTROL_PLUGIN_URL . '/images/star16.png' );
+// Admin options menu
+include_once( SURBMA_WP_CONTROL_PLUGIN_DIR . '/pages/control-page.php' );
+
+function surbma_wp_control_add_menu() {
+	if ( is_plugin_active( 'surbma-premium-wordpress/surbma-premium-wordpress.php' ) ) {
+		add_submenu_page( 'pwp-plugins', __( 'WordPress Control', 'surbma-wp-control' ), 'WP Control', 'update_core', 'surbma-wp-control', 'surbma_wp_control_page' );
+	}
+	else {
+		add_menu_page( __( 'WordPress Control', 'surbma-wp-control' ), 'WP Control', 'update_core', 'surbma-wp-control', 'surbma_wp_control_page', SURBMA_WP_CONTROL_PLUGIN_URL . '/images/star16.png' );
+	}
 }
-add_action( 'admin_menu', 'surbma_pwp_control_add_menu', 999 );
+add_action( 'admin_menu', 'surbma_wp_control_add_menu', 999 );
 
-/* Custom style for admin */
-function surbma_pwp_control_admin_styles() {
+// Custom style for admin
+function surbma_wp_control_admin_styles() {
 ?><style type="text/css">
-	.pwp .clearline{border-top:1px solid #ccc;clear:both;margin:10px 0;}
-	.pwp .section-block{background:#fdfdfd;padding:20px;border:1px solid #ccc;border-radius: 3px;}
-	.pwp .section-block h3{margin:0 0 20px;}
-	.pwp .icon{float:left;margin:7px 7px 0 0;}
+	.wp-control .clearline{border-top:1px solid #ccc;clear:both;margin:10px 0;}
+	.wp-control .section-block{background:#fdfdfd;padding:20px;border:1px solid #ccc;border-radius: 3px;}
+	.wp-control .section-block h3{margin:0 0 20px;}
+	.wp-control .icon{float:left;margin:7px 7px 0 0;}
 	#wpmu-install-dashboard {display: none;}
 </style>
 <?php
 }
-add_action( 'admin_head', 'surbma_pwp_control_admin_styles' );
+add_action( 'admin_head', 'surbma_wp_control_admin_styles' );
 
-/* Custom text in admin footer */
-function surbma_pwp_control_custom_admin_footer() {
+// Custom text in admin footer
+function surbma_wp_control_custom_admin_footer() {
 	$blogname = get_option( 'blogname' );
 	echo '<a href="' . get_site_option( 'siteurl' ) . '" target="_blank">' . get_site_option( 'site_name', $blogname ) . '</a>';
 }
-add_filter( 'admin_footer_text', 'surbma_pwp_control_custom_admin_footer' );
+add_filter( 'admin_footer_text', 'surbma_wp_control_custom_admin_footer' );
 
-function surbma_pwp_control_soliloquy_change_cap( $cap ) {
+// Fix for Soliloquy menu capability in a Multisite Network
+function surbma_wp_control_soliloquy_change_cap( $cap ) {
 	if ( class_exists( 'Soliloquy' ) ) {
 		return 'install_plugins';
 	}
 }
-add_filter( 'soliloquy_menu_cap', 'surbma_pwp_control_soliloquy_change_cap' );
+add_filter( 'soliloquy_menu_cap', 'surbma_wp_control_soliloquy_change_cap' );
 
-function surbma_pwp_control_remove_widgets() {
+// Remove some unwanted Widgets
+function surbma_wp_control_remove_widgets() {
 	unregister_widget( 'WP_Widget_Pages' );
 	unregister_widget( 'WP_Widget_Calendar' );
 	unregister_widget( 'WP_Widget_Links' );
 	unregister_widget( 'WP_Widget_Meta' );
 	wp_unregister_sidebar_widget( 'wpe_widget_powered_by' );
 }
-add_action( 'widgets_init', 'surbma_pwp_control_remove_widgets' );
+add_action( 'widgets_init', 'surbma_wp_control_remove_widgets' );
 
-function surbma_pwp_control_remove_dashboard_widgets() {
+// Remove some unwanted Dashboard Widgets
+function surbma_wp_control_remove_dashboard_widgets() {
     remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'core' );
     remove_meta_box( 'dashboard_plugins', 'dashboard', 'core' );
     remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'core' );
@@ -51,11 +60,13 @@ function surbma_pwp_control_remove_dashboard_widgets() {
     remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
 	remove_meta_box( 'dashboard_secondary', 'dashboard', 'side' );
 }
-add_action( 'wp_dashboard_setup', 'surbma_pwp_control_remove_dashboard_widgets' );
+add_action( 'wp_dashboard_setup', 'surbma_wp_control_remove_dashboard_widgets' );
 
+// Disable Welcome Screen
 remove_action( 'welcome_panel', 'wp_welcome_panel' );
 
-function surbma_pwp_control_disable_jetpack_modules ( $modules ) {
+// Remove some unwanted Jetpack modules
+function surbma_wp_control_disable_jetpack_modules ( $modules ) {
 	$pwp_control_jp_mods_to_disable = array(
 		'after-the-deadline',
 		'comments',
@@ -85,18 +96,19 @@ function surbma_pwp_control_disable_jetpack_modules ( $modules ) {
 	return $modules;
 }
 
-function surbma_pwp_control_set_jetpack_modules() {
+// No active modules upon Jetpack activation
+function surbma_wp_control_set_jetpack_modules() {
 	if ( class_exists( 'Jetpack' ) ) {
 		add_filter( 'jetpack_get_default_modules', '__return_empty_array' );
-		add_filter( 'jetpack_get_available_modules', 'surbma_pwp_control_disable_jetpack_modules' );
+		add_filter( 'jetpack_get_available_modules', 'surbma_wp_control_disable_jetpack_modules' );
 	}
 }
-add_action( 'init', 'surbma_pwp_control_set_jetpack_modules', 11 );
+add_action( 'init', 'surbma_wp_control_set_jetpack_modules', 11 );
 
-function surbma_pwp_control_add_gf_visibility_setting() {
+// Enable Gravity Forms visibility option for form fields
+function surbma_wp_control_add_gf_visibility_setting() {
 	if ( class_exists( 'GFForms' ) ) {
 		add_filter( 'gform_enable_field_label_visibility_settings', '__return_true' );
 	}
 }
-add_action( 'init', 'surbma_pwp_control_add_gf_visibility_setting' );
-
+add_action( 'init', 'surbma_wp_control_add_gf_visibility_setting' );

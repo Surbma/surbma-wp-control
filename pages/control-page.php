@@ -1,21 +1,23 @@
 <?php
 
-function surbma_pwp_control_options_init() {
-	register_setting( 'pwp_control_options', 'pwp_control_option', 'surbma_pwp_control_options_validate' );
+// Register setting
+function surbma_wp_control_options_init() {
+	register_setting( 'pwp_control_options', 'pwp_control_option', 'surbma_wp_control_options_validate' );
 }
-add_action( 'admin_init', 'surbma_pwp_control_options_init' );
+add_action( 'admin_init', 'surbma_wp_control_options_init' );
 
-function surbma_pwp_control_page() {
+// Admin page
+function surbma_wp_control_page() {
 	if ( ! isset( $_REQUEST['settings-updated'] ) )
 		$_REQUEST['settings-updated'] = false;
 
 	?>
-	<div class="wrap pwp">
-		<img class="icon" alt="icon" src="<?php echo SURBMA_PWP_CONTROL_PLUGIN_URL . '/images/star32.png'; ?>" />
-		<h2><?php _e( 'Superadmin beállítások', 'pwp-control' ); ?></h2>
+	<div class="wrap wp-control">
+		<img class="icon" alt="icon" src="<?php echo SURBMA_WP_CONTROL_PLUGIN_URL . '/images/star32.png'; ?>" />
+		<h2><?php _e( 'Superadmin Settings', 'surbma-wp-control' ); ?></h2>
 
 		<?php if ( false !== $_REQUEST['settings-updated'] ) : ?>
-		<div class="updated fade"><p><strong><?php _e( 'Adatok mentése sikerült', 'pwp-control' ); ?></strong></p></div>
+		<div class="updated fade is-dismissible"><p><strong><?php _e( 'Settings saved successfully.', 'surbma-wp-control' ); ?></strong></p></div>
 		<?php endif; ?>
 
 		<div class="clearline"></div>
@@ -24,13 +26,13 @@ function surbma_pwp_control_page() {
 						<?php settings_fields( 'pwp_control_options' ); ?>
 						<?php $options = get_option( 'pwp_control_option' ); ?>
 
-						<h2><?php _e( 'Megjelenés beállítása', 'pwp-control' ); ?></h2>
+						<h2><?php _e( 'Display Options', 'surbma-wp-control' ); ?></h2>
 
 						<table class="form-table">
-							<tr valign="top"><th scope="row"><?php _e( 'Referencia link megjelenítése', 'pwp-control' ); ?></th>
+							<tr valign="top"><th scope="row"><?php _e( 'Display backlink?', 'surbma-wp-control' ); ?></th>
 								<td>
 									<input id="pwp_control_option[backlink]" name="pwp_control_option[backlink]" type="checkbox" value="1" <?php checked( '1', $options['backlink'] ); ?> />
-									<label class="description" for="pwp_control_option[backlink]"><?php _e( 'Referencia link törlése az oldal aljáról', 'pwp-control' ); ?></label><br />
+									<label class="description" for="pwp_control_option[backlink]"><?php _e( 'Remove backlink from footer creds text', 'surbma-wp-control' ); ?></label><br />
 								</td>
 							</tr>
 						</table>
@@ -41,7 +43,7 @@ function surbma_pwp_control_page() {
 			</div>
 		<div class="clearline"></div>
 	    <div class="section-block">
-	      <h2>WP Jogosultsági szintek</h2>
+	      <h2><?php _e( 'Blog Roles', 'surbma-wp-control' ); ?></h2>
 	      <?php
 	        $wp_roles = new WP_Roles();
 	        $names = $wp_roles->get_names();
@@ -51,7 +53,7 @@ function surbma_pwp_control_page() {
 		<div class="clearline"></div>
 		<?php if ( is_multisite() ) { ?>
 		<div class="section-block">
-			<h2>Oldal adatok</h2>
+			<h2><?php _e( 'Blog Details', 'surbma-wp-control' ); ?></h2>
 			<?php
 				global $blog_id;
 				$blog_details = get_blog_details( $blog_id );
@@ -64,10 +66,8 @@ function surbma_pwp_control_page() {
 	<?php
 }
 
-/**
- * Sanitize and validate input. Accepts an array, return a sanitized array.
- */
-function surbma_pwp_control_options_validate( $input ) {
+ // Sanitize and validate input. Accepts an array, return a sanitized array.
+function surbma_wp_control_options_validate( $input ) {
 	// Our checkbox value is either 0 or 1
 	if ( ! isset( $input['backlink'] ) )
 		$input['backlink'] = null;
@@ -75,4 +75,3 @@ function surbma_pwp_control_options_validate( $input ) {
 
 	return $input;
 }
-

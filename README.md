@@ -1,4 +1,4 @@
-Surbma - Premium WordPress Control
-==============================
+Surbma - WP Control
+==================================
 
-Global control plugin for Premium WordPress sites
+Global control plugin for WordPress Multisite Networks
