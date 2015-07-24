@@ -78,6 +78,7 @@ function surbma_wp_control_disable_jetpack_modules ( $modules ) {
 		'markdown',
 		'photon',
 		'post-by-email',
+		'protect',
 		'shortlinks',
 		'sso',
 		'subscriptions',
