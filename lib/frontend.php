@@ -58,3 +58,13 @@ function surbma_wp_control_add_wpml_lang_body_class( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'surbma_wp_control_add_wpml_lang_body_class' );
+
+function surbma_wp_control_filter_media_comment_status( $open, $post_id ) {
+	$post = get_post( $post_id );
+	if( $post->post_type == 'attachment' ) {
+		return false;
+	}
+	return $open;
+}
+add_filter( 'comments_open', 'surbma_wp_control_filter_media_comment_status', 10, 2 );
+

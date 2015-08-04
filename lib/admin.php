@@ -4,11 +4,11 @@
 include_once( SURBMA_WP_CONTROL_PLUGIN_DIR . '/pages/control-page.php' );
 
 function surbma_wp_control_add_menu() {
-	if ( is_plugin_active( 'surbma-premium-wordpress/surbma-premium-wordpress.php' ) ) {
-		add_submenu_page( 'pwp-plugins', __( 'WordPress Control', 'surbma-wp-control' ), 'WP Control', 'update_core', 'surbma-wp-control', 'surbma_wp_control_page' );
+	if ( is_plugin_active( 'surbma-premium-wp/surbma-premium-wp.php' ) ) {
+		add_submenu_page( 'surbma-premium-wp-menu', __( 'WP Control', 'surbma-wp-control' ), __( 'WP Control', 'surbma-wp-control' ), 'update_core', 'surbma-wp-control', 'surbma_wp_control_page' );
 	}
 	else {
-		add_menu_page( __( 'WordPress Control', 'surbma-wp-control' ), 'WP Control', 'update_core', 'surbma-wp-control', 'surbma_wp_control_page', SURBMA_WP_CONTROL_PLUGIN_URL . '/images/star16.png' );
+		add_menu_page( __( 'WP Control', 'surbma-wp-control' ), 'WP Control', 'update_core', 'surbma-wp-control', 'surbma_wp_control_page', SURBMA_WP_CONTROL_PLUGIN_URL . '/images/star16.png' );
 	}
 }
 add_action( 'admin_menu', 'surbma_wp_control_add_menu', 999 );

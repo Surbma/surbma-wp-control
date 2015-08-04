@@ -4,7 +4,7 @@ Donate link: http://surbma.com/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, google analytics, jetpack
 Requires at least: 3.0
 Tested up to: 4.2
-Stable tag: 4.1.0
+Stable tag: 4.2.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,13 @@ This plugin was created especially for my Multisite Network, which operates my c
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 4.2.0 =
+
+- WP Control menu will be a submenu, if Surbma - Premium WP plugin is activated.
+- Turn off comments on Attachement pages.
+- Remove post info and post meta on Attachement pages, when Genesis theme is used.
+- Force layout to full-width on Attachement pages, when Genesis theme is used.
 
 = 4.1.0 =
 
