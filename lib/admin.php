@@ -78,7 +78,6 @@ function surbma_wp_control_disable_jetpack_modules ( $modules ) {
 		'markdown',
 		'photon',
 		'post-by-email',
-		'protect',
 		'shortlinks',
 		'sso',
 		'subscriptions',
@@ -92,6 +91,10 @@ function surbma_wp_control_disable_jetpack_modules ( $modules ) {
 		if ( isset( $modules[$mod] ) ) {
 			unset( $modules[$mod] );
 		}
+	}
+
+	if ( !defined( 'SURBMA_WP_CONTROL_JETPACK_ENABLE_PROTECT' ) ) {
+		unset( $modules['protect'] );
 	}
 
 	return $modules;

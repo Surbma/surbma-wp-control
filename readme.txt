@@ -4,7 +4,7 @@ Donate link: http://surbma.com/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, google analytics, jetpack
 Requires at least: 3.0
 Tested up to: 4.2
-Stable tag: 4.2.0
+Stable tag: 4.3.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,10 @@ This plugin was created especially for my Multisite Network, which operates my c
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 4.3.0 =
+
+- Protect module of Jetpack is still disabled by default, but can be enabled by defining a constant: SURBMA_WP_CONTROL_JETPACK_ENABLE_PROTECT
 
 = 4.2.0 =
 
