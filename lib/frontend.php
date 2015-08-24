@@ -68,3 +68,34 @@ function surbma_wp_control_filter_media_comment_status( $open, $post_id ) {
 }
 add_filter( 'comments_open', 'surbma_wp_control_filter_media_comment_status', 10, 2 );
 
+/*
+// Fixes "Lost Password?" URLs on login page
+// Fixes other password reset related urls
+// Fixes URLs in email that goes out
+// Fixes title in password reset email
+// https://gist.github.com/eteubert/293e07a49f56f300ddbb
+*/
+add_filter( 'lostpassword_url', function( $lostpassword_url, $redirect ) {
+	$args = array( 'action' => 'lostpassword' );
+	if ( !empty( $redirect ) )
+		$args['redirect_to'] = $redirect;
+	return add_query_arg( $args, site_url( 'wp-login.php' ) );
+}, 10, 2);
+
+add_filter( 'network_site_url', function($url, $path, $scheme) {
+	if ( stripos( $url, 'action=lostpassword' ) !== false )
+		return site_url( 'wp-login.php?action=lostpassword', $scheme );
+	if ( stripos( $url, 'action=resetpass' ) !== false )
+		return site_url( 'wp-login.php?action=resetpass', $scheme );
+	return $url;
+}, 10, 3 );
+
+add_filter( 'retrieve_password_message', function( $message, $key ) {
+	return str_replace( get_site_url(1), get_site_url(), $message );
+}, 10, 2);
+
+add_filter( 'retrieve_password_title', function( $title ) {
+	$blogname = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
+	$title = sprintf( __('[%s] Password Reset'), $blogname );
+	return $title;
+});

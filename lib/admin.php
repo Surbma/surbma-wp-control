@@ -8,23 +8,19 @@ function surbma_wp_control_add_menu() {
 		add_submenu_page( 'surbma-premium-wp-menu', __( 'WP Control', 'surbma-wp-control' ), __( 'WP Control', 'surbma-wp-control' ), 'update_core', 'surbma-wp-control', 'surbma_wp_control_page' );
 	}
 	else {
-		add_menu_page( __( 'WP Control', 'surbma-wp-control' ), 'WP Control', 'update_core', 'surbma-wp-control', 'surbma_wp_control_page', SURBMA_WP_CONTROL_PLUGIN_URL . '/images/star16.png' );
+		add_menu_page( __( 'WP Control', 'surbma-wp-control' ), 'WP Control', 'update_core', 'surbma-wp-control', 'surbma_wp_control_page', 'dashicons-visibility' );
 	}
 }
 add_action( 'admin_menu', 'surbma_wp_control_add_menu', 999 );
 
-// Custom style for admin
-function surbma_wp_control_admin_styles() {
-?><style type="text/css">
-	.wp-control .clearline{border-top:1px solid #ccc;clear:both;margin:10px 0;}
-	.wp-control .section-block{background:#fdfdfd;padding:20px;border:1px solid #ccc;border-radius: 3px;}
-	.wp-control .section-block h3{margin:0 0 20px;}
-	.wp-control .icon{float:left;margin:7px 7px 0 0;}
-	#wpmu-install-dashboard {display: none;}
-</style>
-<?php
+// Custom styles and scripts for admin pages
+function surbma_wp_control_admin_scripts( $hook ) {
+    if ( $hook == 'toplevel_page_surbma-wp-control' ||
+    $hook == 'premium-wp_page_surbma-wp-control' ) {
+    	wp_enqueue_style( 'surbma-wp-control', SURBMA_WP_CONTROL_PLUGIN_URL . '/css/admin.css' );
+    }
 }
-add_action( 'admin_head', 'surbma_wp_control_admin_styles' );
+add_action( 'admin_enqueue_scripts', 'surbma_wp_control_admin_scripts' );
 
 // Custom text in admin footer
 function surbma_wp_control_custom_admin_footer() {

@@ -1,0 +1,4 @@
+.wp-control .section-block{background:#fdfdfd;margin-bottom:20px;padding:20px;border:1px solid #ccc;border-radius: 3px;}
+.wp-control .section-block h2{padding-top:0;}
+.wp-control h1:before{height:29px;font-size:23px;vertical-align:middle;width:auto;margin-right:5px;}
+#wpmu-install-dashboard {display: none;}

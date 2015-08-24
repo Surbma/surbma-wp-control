@@ -3,8 +3,8 @@ Contributors: Surbma
 Donate link: http://surbma.com/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, google analytics, jetpack
 Requires at least: 3.0
-Tested up to: 4.2
-Stable tag: 4.3.0
+Tested up to: 4.3
+Stable tag: 4.4.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,14 @@ This plugin was created especially for my Multisite Network, which operates my c
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 4.4.0 =
+
+- Tested up to WordPress 4.3 version.
+- Specific style added to separate css file and loading only on WP Control page.
+- Changed menu icons.
+- Fixed all urls and site titles related to password reset on a Multisite network.
+- Code optimization on WP Control page.
 
 = 4.3.0 =
 
