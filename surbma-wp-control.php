@@ -6,7 +6,7 @@ Plugin URI: http://surbma.com/wordpress-plugins/
 Description: Global control plugin for WordPress Multisite Networks
 Network: True
 
-Version: 4.4.0
+Version: 4.4.1
 
 Author: Surbma
 Author URI: http://surbma.hu/
@@ -18,9 +18,7 @@ Domain Path: /languages/
 */
 
 // Prevent direct access to the plugin
-if ( !defined( 'ABSPATH' ) ) {
-	die( 'Good try! :)' );
-}
+if ( !defined( 'ABSPATH' ) ) exit( 'Good try! :)' );
 
 // Define some constants
 define( 'SURBMA_WP_CONTROL_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );

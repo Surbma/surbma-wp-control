@@ -2,9 +2,9 @@
 Contributors: Surbma
 Donate link: http://surbma.com/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, google analytics, jetpack
-Requires at least: 3.0
+Requires at least: 4.0
 Tested up to: 4.3
-Stable tag: 4.4.0
+Stable tag: 4.4.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,7 @@ This is a very complex plugin, which is very useful for Multisite Networks made 
 - Adds language code in body class if WPML plugin is activated.
 - Customizes Genesis breadcrumb.
 - Removes the edit link from Genesis themes in the front-end.
+- Fixes links and titles in the password reset emails in a Multisite Network.
 
 **Do you want to contribute or help improving this plugin?**
 
@@ -69,6 +70,10 @@ This plugin was created especially for my Multisite Network, which operates my c
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 4.4.1 =
+
+- Removed some unnecessary images.
 
 = 4.4.0 =
 
