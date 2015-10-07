@@ -35,20 +35,16 @@ function surbma_wp_control_page() {
 		</div>
 	    <div class="section-block">
 			<h2><?php _e( 'Blog Roles', 'surbma-wp-control' ); ?></h2>
-			<?php
-				$wp_roles = new WP_Roles();
-				$names = $wp_roles->get_names();
-				print_r( $names );
-			?>
+			<?php $wp_roles = new WP_Roles(); ?>
+			<?php $names = $wp_roles->get_names(); ?>
+			<pre><?php print_r( $names ); ?></pre>
 		</div>
 		<?php if ( is_multisite() ) { ?>
 		<div class="section-block">
 			<h2><?php _e( 'Blog Details', 'surbma-wp-control' ); ?></h2>
-			<?php
-				global $blog_id;
-				$blog_details = get_blog_details( $blog_id );
-				print_r( $blog_details );
-			?>
+			<?php global $blog_id; ?>
+			<?php $blog_details = get_blog_details( $blog_id ); ?>
+			<pre><?php print_r( $blog_details ); ?></pre>
 		</div>
 		<?php } ?>
 	</div>
