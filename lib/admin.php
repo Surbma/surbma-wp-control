@@ -55,6 +55,7 @@ function surbma_wp_control_remove_dashboard_widgets() {
     remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
     remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
 	remove_meta_box( 'dashboard_secondary', 'dashboard', 'side' );
+    remove_meta_box( 'wpe_dify_news_feed', 'dashboard', 'core' );
 }
 add_action( 'wp_dashboard_setup', 'surbma_wp_control_remove_dashboard_widgets' );
 
