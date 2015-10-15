@@ -6,7 +6,7 @@ Plugin URI: http://surbma.com/wordpress-plugins/
 Description: Global control plugin for WordPress Multisite Networks
 Network: True
 
-Version: 4.5.0
+Version: 4.5.1
 
 Author: Surbma
 Author URI: http://surbma.hu/
@@ -68,9 +68,9 @@ function surbma_wp_control_add_google_analytics() {
 }
 function surbma_wp_control_do_google_analytics() {
 	// Check if Surbma - Premium WordPress plugin is activated and Google Analytics tracking is enabled
-	$options = get_option( 'pwp_google_analytics_fields' );
-	if ( function_exists( 'pwp_google_analytics_display' ) && $options['universalid'] != '' ) {
-		add_action( 'pwp_universal_analytics_objects', 'surbma_wp_control_add_google_analytics', 999 );
+	$options = get_option( 'surbma_premium_wp_google_analytics_fields' );
+	if ( function_exists( 'surbma_premium_wp_google_analytics_display' ) && $options['universalid'] != '' ) {
+		add_action( 'surbma_premium_wp_universal_analytics_objects', 'surbma_wp_control_add_google_analytics', 999 );
 	} else {
 ?>
 <script>
