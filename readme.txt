@@ -4,7 +4,7 @@ Donate link: http://surbma.com/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, google analytics, jetpack
 Requires at least: 4.0
 Tested up to: 4.3
-Stable tag: 4.5.2
+Stable tag: 4.6.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,7 @@ This is a very complex plugin, which is very useful for Multisite Networks made 
 - Adds language code in body class if WPML plugin is activated.
 - Customizes Genesis breadcrumb.
 - Removes the edit link from Genesis themes in the front-end.
+- Override default Genesis favicon, if there is a favicon in the main WordPress folder. File formats accepted: favicon.ico, favicon.gif, favicon.png, favicon.jpg.
 - Fixes links and titles in the password reset emails in a Multisite Network.
 
 **Do you want to contribute or help improving this plugin?**
@@ -70,6 +71,10 @@ This plugin was created especially for my Multisite Network, which operates my c
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 4.6.0 =
+
+- Override default Genesis favicon, if there is a favicon in the main WordPress folder. File formats accepted: favicon.ico, favicon.gif, favicon.png, favicon.jpg.
 
 = 4.5.2 =
 
