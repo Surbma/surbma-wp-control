@@ -15,8 +15,7 @@ add_action( 'admin_menu', 'surbma_wp_control_add_menu', 999 );
 
 // Custom styles and scripts for admin pages
 function surbma_wp_control_admin_scripts( $hook ) {
-    if ( $hook == 'toplevel_page_surbma-wp-control' ||
-    $hook == 'premium-wp_page_surbma-wp-control' ) {
+    if ( $hook == 'toplevel_page_surbma-wp-control' ) {
     	wp_enqueue_style( 'surbma-wp-control', SURBMA_WP_CONTROL_PLUGIN_URL . '/css/admin.css' );
     }
 }
