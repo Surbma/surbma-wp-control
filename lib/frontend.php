@@ -30,12 +30,22 @@ function surbma_wp_control_footer_creds() {
 	return $creds;
 }
 
+// Add extra "Lost your password?" link
+function surbma_wp_control_add_lost_your_password_link() {
+	echo '<a class="swc-lyp-button button button-large" href="' . esc_url( wp_lostpassword_url() ) . '">' . __( 'Lost your password?' ) . '</a>';
+}
+add_action( 'login_form','surbma_wp_control_add_lost_your_password_link' );
+
 // Custom login style
 function surbma_wp_control_custom_login_style() {
-	echo SURBMA_WP_CONTROL_LOGIN_STYLE;
+	echo '<style>';
+	echo '.wp-core-ui .button.swc-lyp-button {float: left;}';
+	echo 'body.login form .forgetmenot {display: none;}';
+	if ( defined( 'SURBMA_WP_CONTROL_LOGIN_STYLE' ) )
+		echo SURBMA_WP_CONTROL_LOGIN_STYLE;
+	echo '</style>';
 }
-if ( defined( 'SURBMA_WP_CONTROL_LOGIN_STYLE' ) )
-	add_action( 'login_enqueue_scripts', 'surbma_wp_control_custom_login_style' );
+add_action( 'login_enqueue_scripts', 'surbma_wp_control_custom_login_style' );
 
 // Custom login text
 function surbma_wp_control_add_login_text() {
@@ -59,6 +69,23 @@ function surbma_wp_control_add_wpml_lang_body_class( $classes ) {
 }
 add_filter( 'body_class', 'surbma_wp_control_add_wpml_lang_body_class' );
 
+// Redirect all attachment pages
+function surbma_wp_control_attachment_redirect() {
+	global $post;
+	if ( is_attachment() ) {
+		if ( ( is_object( $post ) && isset( $post->post_parent ) ) && ( is_numeric( $post->post_parent ) && $post->post_parent != 0 ) ) {
+			wp_safe_redirect( get_permalink( $post->post_parent ), 301 );
+			exit;
+		} else {
+			wp_safe_redirect( home_url( '/' ), 301 );
+			exit;
+		}
+	}
+	return false;
+}
+add_action( 'template_redirect', 'surbma_wp_control_attachment_redirect', 1 );
+
+// Disable comments on attachement pages
 function surbma_wp_control_filter_media_comment_status( $open, $post_id ) {
 	$post = get_post( $post_id );
 	if( $post->post_type == 'attachment' ) {
@@ -66,7 +93,7 @@ function surbma_wp_control_filter_media_comment_status( $open, $post_id ) {
 	}
 	return $open;
 }
-add_filter( 'comments_open', 'surbma_wp_control_filter_media_comment_status', 10, 2 );
+// add_filter( 'comments_open', 'surbma_wp_control_filter_media_comment_status', 10, 2 );
 
 /*
 // Fixes "Lost Password?" URLs on login page
