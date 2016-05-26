@@ -39,7 +39,9 @@ add_action( 'login_form','surbma_wp_control_add_lost_your_password_link' );
 // Custom login style
 function surbma_wp_control_custom_login_style() {
 	echo '<style>';
+	echo 'body.login #login {width: 90%;max-width: 400px;}';
 	echo '.wp-core-ui .button.swc-lyp-button {float: left;}';
+	echo 'body.login.wp-core-ui .button {width: 49%;text-align: center;}';
 	echo 'body.login form .forgetmenot {display: none;}';
 	if ( defined( 'SURBMA_WP_CONTROL_LOGIN_STYLE' ) )
 		echo SURBMA_WP_CONTROL_LOGIN_STYLE;

@@ -4,7 +4,7 @@ Donate link: http://surbma.com/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, google analytics, jetpack
 Requires at least: 4.0
 Tested up to: 4.5
-Stable tag: 4.8.0
+Stable tag: 4.8.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,10 @@ This plugin was created especially for my Multisite Network, which operates my c
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 4.8.1 =
+
+- Fixed CSS for login page.
 
 = 4.8.0 =
 
