@@ -112,3 +112,11 @@ function surbma_wp_control_add_gf_visibility_setting() {
 	}
 }
 add_action( 'init', 'surbma_wp_control_add_gf_visibility_setting' );
+
+// Remove the WooThemes Helper notice from the admin
+function surbma_wp_control_remove_woothemes_helper_nag() {
+	if ( class_exists( 'WooCommerce' ) ) {
+		remove_action( 'admin_notices', 'woothemes_updater_notice' );
+	}
+}
+add_action( 'init', 'surbma_wp_control_remove_woothemes_helper_nag' );
