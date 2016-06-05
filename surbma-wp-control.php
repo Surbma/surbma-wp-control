@@ -6,7 +6,7 @@ Plugin URI: http://surbma.com/wordpress-plugins/
 Description: Global control plugin for WordPress Multisite Networks
 Network: True
 
-Version: 4.9.0
+Version: 4.9.1
 
 Author: Surbma
 Author URI: http://surbma.hu/
@@ -73,7 +73,7 @@ function surbma_wp_control_do_google_analytics() {
 		add_action( 'surbma_premium_wp_ga_after_send_object', 'surbma_wp_control_add_google_analytics', 999 );
 	} else {
 ?>
-<script>
+<script type="text/javascript">
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -85,7 +85,7 @@ function surbma_wp_control_do_google_analytics() {
 <?php }
 }
 if ( defined( 'SURBMA_WP_CONTROL_GOOGLE_ANALYTICS' ) ) {
-	add_action( 'wp_head', 'surbma_wp_control_do_google_analytics', 999 );
-	add_action( 'admin_head', 'surbma_wp_control_do_google_analytics', 999 );
-	add_action( 'login_head', 'surbma_wp_control_do_google_analytics', 999 );
+	add_action( 'wp_head', 'surbma_wp_control_do_google_analytics', 998 );
+	add_action( 'admin_head', 'surbma_wp_control_do_google_analytics', 998 );
+	add_action( 'login_head', 'surbma_wp_control_do_google_analytics', 998 );
 }
