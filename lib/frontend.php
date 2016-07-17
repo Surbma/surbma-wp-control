@@ -39,10 +39,12 @@ add_action( 'login_form','surbma_wp_control_add_lost_your_password_link' );
 // Custom login style
 function surbma_wp_control_custom_login_style() {
 	echo '<style>';
-	echo 'body.login #login {width: 90%;max-width: 400px;}';
+	echo 'body.login #login {width: 90%;max-width: 450px;}';
 	echo '.wp-core-ui .button.swc-lyp-button {float: left;}';
 	echo 'body.login.wp-core-ui .button {width: 49%;text-align: center;}';
-	echo 'body.login form .forgetmenot {display: none;}';
+	echo 'body.login form .forgetmenot, body.login #nav {display: none;}';
+	echo 'body.login #backtoblog {text-align: center;}';
+	echo '@media screen and (max-width: 479px) {body.login.wp-core-ui .button {width: 100%;margin-bottom: 16px;}}';
 	if ( defined( 'SURBMA_WP_CONTROL_LOGIN_STYLE' ) )
 		echo SURBMA_WP_CONTROL_LOGIN_STYLE;
 	echo '</style>';
@@ -79,7 +81,7 @@ function surbma_wp_control_attachment_redirect() {
 			wp_safe_redirect( get_permalink( $post->post_parent ), 301 );
 			exit;
 		} else {
-			wp_safe_redirect( home_url( '/' ), 301 );
+			wp_safe_redirect( home_url(), 301 );
 			exit;
 		}
 	}

@@ -4,7 +4,7 @@ Donate link: http://surbma.com/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, google analytics, jetpack, woothemes, woocommerce
 Requires at least: 4.0
 Tested up to: 4.5
-Stable tag: 4.9.1
+Stable tag: 4.10.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,11 @@ This plugin was created especially for my Multisite Network, which operates my c
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 4.10.0 =
+
+- Minor changes in custom login style.
+- Attachment redirect fix to work with multilingual sites.
 
 = 4.9.1 =
 
