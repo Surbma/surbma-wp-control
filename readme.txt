@@ -1,10 +1,10 @@
 === Surbma - WP Control ===
 Contributors: Surbma
 Donate link: http://surbma.com/
-Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, google analytics, jetpack, woothemes, woocommerce
+Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, google analytics, jetpack, woothemes, woocommerce, admin
 Requires at least: 4.0
-Tested up to: 4.5
-Stable tag: 4.10.0
+Tested up to: 4.6
+Stable tag: 4.11.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,7 +20,7 @@ This is a very complex plugin, which is very useful for Multisite Networks made 
 - Fixes the default email from address and name to use the current blog's admin email address and blog name.
 - Global Google Analytics tracking for all your blogs. You have to define the SURBMA_PWP_CONTROL_GOOGLE_ANALYTICS constant in the wp-config.php file. Just use the UA code, nothing else!
 - Enables shortcodes for Text Widgets.
-- Simply replaces the admin footer text to the current blog's name.
+- Custom footer text for admin area. You have to define the SURBMA_WP_CONTROL_ADMIN_FOOTER constant in the wp-config.php file.
 - Fix for Soliloquy menu capability in a Multisite Network.
 - Removes some unwanted Widgets.
 - Removes some unwanted Dashboard Widgets.
@@ -30,9 +30,9 @@ This is a very complex plugin, which is very useful for Multisite Networks made 
 - Enables Gravity Forms visibility option for form fields.
 - Removes version parameters from static files for caching.
 - Removes version number from source code.
-- Custom footer creds text for Genesis themes or any other theme by adding the necessary function to it. You have to define the SURBMA_PWP_CONTROL_FOOTER_CREDS constant in the wp-config.php file.
-- Custom login style. You have to define the SURBMA_PWP_CONTROL_LOGIN_STYLE constant in the wp-config.php file.
-- Custom login text. You have to define the SURBMA_PWP_CONTROL_LOGIN_TEXT constant in the wp-config.php file.
+- Custom footer creds text for Genesis themes or any other theme by adding the necessary function to it. You have to define the SURBMA_WP_CONTROL_FOOTER_CREDS constant in the wp-config.php file.
+- Custom login style. You have to define the SURBMA_WP_CONTROL_LOGIN_STYLE constant in the wp-config.php file.
+- Custom login text. You have to define the SURBMA_WP_CONTROL_LOGIN_TEXT constant in the wp-config.php file.
 - Adds link to read more text.
 - Adds language code in body class if WPML plugin is activated.
 - Customizes Genesis breadcrumb.
@@ -72,6 +72,12 @@ This plugin was created especially for my Multisite Network, which operates my c
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 4.11.0 =
+
+- Custom admin footer text.
+- Added admin menu debug block in the WP Control page.
+- Tested up to WordPress 4.6 version.
 
 = 4.10.0 =
 

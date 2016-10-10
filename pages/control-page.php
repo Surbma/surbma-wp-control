@@ -31,6 +31,11 @@ function surbma_wp_control_page() {
 			<?php $names = $wp_roles->get_names(); ?>
 			<pre><?php print_r( $names ); ?></pre>
 		</div>
+	    <div class="section-block uk-panel uk-panel-box uk-panel-box-secondary uk-panel-header">
+			<h3 class="uk-panel-title"><?php _e( 'Admin Menu', 'surbma-wp-control' ); ?></h3>
+    		<?php global $menu; ?>
+    		<?php echo '<pre>', print_r( $menu, 1 ), '</pre>'; ?>
+		</div>
 		<div class="section-block uk-panel uk-panel-box uk-panel-box-secondary uk-panel-header">
 			<form class="uk-form" method="post" action="options.php">
 				<?php settings_fields( 'pwp_control_options' ); ?>

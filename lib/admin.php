@@ -22,9 +22,18 @@ function surbma_wp_control_admin_scripts( $hook ) {
 add_action( 'admin_enqueue_scripts', 'surbma_wp_control_admin_scripts' );
 
 // Custom text in admin footer
-function surbma_wp_control_custom_admin_footer() {
-	$blogname = get_option( 'blogname' );
-	echo '<a href="' . get_site_option( 'siteurl' ) . '" target="_blank">' . get_site_option( 'site_name', $blogname ) . '</a>';
+function surbma_wp_control_custom_admin_footer( $text ) {
+	$admin_footer = SURBMA_WP_CONTROL_ADMIN_FOOTER;
+	if ( $admin_footer == '' ) {
+		return $text;
+	}
+	elseif ( $admin_footer === true ) {
+		$blogname = get_option( 'blogname' );
+		return '<a href="' . get_site_option( 'siteurl' ) . '" target="_blank">' . get_site_option( 'site_name', $blogname ) . '</a>';
+	}
+	else {
+		return $admin_footer;
+	}
 }
 add_filter( 'admin_footer_text', 'surbma_wp_control_custom_admin_footer' );
 
