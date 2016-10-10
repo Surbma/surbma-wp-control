@@ -23,7 +23,9 @@ add_action( 'admin_enqueue_scripts', 'surbma_wp_control_admin_scripts' );
 
 // Custom text in admin footer
 function surbma_wp_control_custom_admin_footer( $text ) {
-	$admin_footer = SURBMA_WP_CONTROL_ADMIN_FOOTER;
+	$admin_footer = '';
+	if ( defined( 'SURBMA_WP_CONTROL_ADMIN_FOOTER' ) )
+		$admin_footer = SURBMA_WP_CONTROL_ADMIN_FOOTER;
 	if ( $admin_footer == '' ) {
 		return $text;
 	}
