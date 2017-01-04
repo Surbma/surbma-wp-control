@@ -3,8 +3,8 @@ Contributors: Surbma
 Donate link: http://surbma.com/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, google analytics, jetpack, woothemes, woocommerce, admin
 Requires at least: 4.0
-Tested up to: 4.6
-Stable tag: 4.11.1
+Tested up to: 4.7
+Stable tag: 4.11.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,11 @@ This plugin was created especially for my Multisite Network, which operates my c
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 4.11.2 =
+
+- Fixed footer text customization for HTML5 Genesis themes.
+- Tested up to WordPress 4.7 version.
 
 = 4.11.1 =
 
