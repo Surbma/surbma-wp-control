@@ -4,7 +4,7 @@ Donate link: http://surbma.com/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, google analytics, jetpack, woothemes, woocommerce, admin
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 4.11.2
+Stable tag: 4.12.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,10 @@ This plugin was created especially for my Multisite Network, which operates my c
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 4.12.0 =
+
+- Added IP Anonymization option to Global Google Analytics.
 
 = 4.11.2 =
 

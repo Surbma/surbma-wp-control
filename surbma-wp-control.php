@@ -6,7 +6,7 @@ Plugin URI: http://surbma.com/wordpress-plugins/
 Description: Global control plugin for WordPress Multisite Networks
 Network: True
 
-Version: 4.11.2
+Version: 4.12.0
 
 Author: Surbma
 Author URI: http://surbma.hu/
@@ -63,6 +63,7 @@ add_filter( 'wp_mail_from_name', 'surbma_wp_control_wp_mail_from' );
 function surbma_wp_control_add_google_analytics() {
 ?>
 	ga('create', '<?php echo SURBMA_WP_CONTROL_GOOGLE_ANALYTICS; ?>', 'auto', {'name': 'pwp'}, {'allowLinker': true});
+	ga('pwp.set', 'anonymizeIp', true);
 	ga('pwp.send', 'pageview');
 <?php
 }
@@ -80,6 +81,7 @@ function surbma_wp_control_do_google_analytics() {
 	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
 	ga('create', '<?php echo SURBMA_WP_CONTROL_GOOGLE_ANALYTICS; ?>', 'auto', {'name': 'pwp'}, {'allowLinker': true});
+	ga('pwp.set', 'anonymizeIp', true);
 	ga('pwp.send', 'pageview');
 </script>
 <?php }
