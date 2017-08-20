@@ -39,6 +39,18 @@ function surbma_wp_control_custom_admin_footer( $text ) {
 }
 add_filter( 'admin_footer_text', 'surbma_wp_control_custom_admin_footer' );
 
+// Remove the version number from the right bottom of admin footer
+function surbma_wp_control_remove_footer_version() {
+    remove_filter( 'update_footer', 'core_update_footer' );
+}
+add_action( 'admin_init', 'surbma_wp_control_remove_footer_version' );
+
+// Remove the WP logo from the Admin bar
+function surbma_wp_control_remove_wp_logo( $wp_admin_bar ) {
+	$wp_admin_bar->remove_node( 'wp-logo' );
+}
+add_action( 'admin_bar_menu', 'surbma_wp_control_remove_wp_logo', 999 );
+
 // Fix for Soliloquy menu capability in a Multisite Network
 function surbma_wp_control_soliloquy_change_cap( $cap ) {
 	if ( class_exists( 'Soliloquy' ) ) {
