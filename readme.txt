@@ -4,7 +4,7 @@ Donate link: http://surbma.com/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, google analytics, jetpack, woothemes, woocommerce, admin
 Requires at least: 4.0
 Tested up to: 4.8
-Stable tag: 4.13.0
+Stable tag: 4.14.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,7 +28,6 @@ This is a very complex plugin, which is very useful for Multisite Networks made 
 - Removes some unwanted Jetpack modules.
 - No active modules upon Jetpack activation.
 - Enables Gravity Forms visibility option for form fields.
-- Removes version parameters from static files for caching.
 - Removes version number from source code.
 - Removes version number from admin footer.
 - Removes WP logo menu from admin bar.
@@ -74,6 +73,10 @@ This plugin was created especially for my Multisite Network, which operates my c
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 4.14.0 =
+
+- Removed function, that removed version parameters from static files.
 
 = 4.13.0 =
 
