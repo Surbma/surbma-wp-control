@@ -26,7 +26,7 @@ function surbma_wp_control_footer_creds() {
 function surbma_wp_control_add_lost_your_password_link() {
 	echo '<a class="swc-lyp-button button button-large" href="' . esc_url( wp_lostpassword_url() ) . '">' . __( 'Lost your password?' ) . '</a>';
 }
-add_action( 'login_form','surbma_wp_control_add_lost_your_password_link' );
+add_action( 'login_form','surbma_wp_control_add_lost_your_password_link', 999 );
 
 // Custom login style
 function surbma_wp_control_custom_login_style() {
