@@ -84,50 +84,6 @@ add_action( 'wp_dashboard_setup', 'surbma_wp_control_remove_dashboard_widgets' )
 // Disable Welcome Screen
 remove_action( 'welcome_panel', 'wp_welcome_panel' );
 
-// Remove some unwanted Jetpack modules
-function surbma_wp_control_disable_jetpack_modules ( $modules ) {
-	$pwp_control_jp_mods_to_disable = array(
-		'after-the-deadline',
-		'comments',
-		'contact-form',
-		'gravatar-hovercards',
-		'infinite-scroll',
-		'latex',
-		'likes',
-		'markdown',
-		'photon',
-		'post-by-email',
-		'shortlinks',
-		'sso',
-		'subscriptions',
-		'vaultpress',
-		'verification-tools',
-		'videopress',
-		'wpcc',
-	);
-
-	foreach ( $pwp_control_jp_mods_to_disable as $mod ) {
-		if ( isset( $modules[$mod] ) ) {
-			unset( $modules[$mod] );
-		}
-	}
-
-	if ( !defined( 'SURBMA_WP_CONTROL_JETPACK_ENABLE_PROTECT' ) ) {
-		unset( $modules['protect'] );
-	}
-
-	return $modules;
-}
-
-// No active modules upon Jetpack activation
-function surbma_wp_control_set_jetpack_modules() {
-	if ( class_exists( 'Jetpack' ) ) {
-		add_filter( 'jetpack_get_default_modules', '__return_empty_array' );
-		add_filter( 'jetpack_get_available_modules', 'surbma_wp_control_disable_jetpack_modules' );
-	}
-}
-add_action( 'init', 'surbma_wp_control_set_jetpack_modules', 11 );
-
 // Enable Gravity Forms visibility option for form fields
 function surbma_wp_control_add_gf_visibility_setting() {
 	if ( class_exists( 'GFForms' ) ) {
@@ -136,10 +92,11 @@ function surbma_wp_control_add_gf_visibility_setting() {
 }
 add_action( 'init', 'surbma_wp_control_add_gf_visibility_setting' );
 
-// Remove the WooThemes Helper notice from the admin
-function surbma_wp_control_remove_woothemes_helper_nag() {
+// Let's fix some things for WooCommerce
+function surbma_wp_control_woocommerce_fixes() {
 	if ( class_exists( 'WooCommerce' ) ) {
 		remove_action( 'admin_notices', 'woothemes_updater_notice' );
+		add_filter( 'woocommerce_helper_suppress_admin_notices', '__return_true' );
 	}
 }
-add_action( 'init', 'surbma_wp_control_remove_woothemes_helper_nag' );
+add_action( 'init', 'surbma_wp_control_woocommerce_fixes' );

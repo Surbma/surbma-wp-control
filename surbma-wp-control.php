@@ -6,7 +6,7 @@ Plugin URI: http://surbma.com/wordpress-plugins/
 Description: Global control plugin for WordPress Multisite Networks
 Network: True
 
-Version: 4.14.1
+Version: 4.15.0
 
 Author: Surbma
 Author URI: http://surbma.hu/
@@ -62,27 +62,24 @@ add_filter( 'wp_mail_from_name', 'surbma_wp_control_wp_mail_from' );
 // Add global Google Analytics tracking
 function surbma_wp_control_add_google_analytics() {
 ?>
-	ga('create', '<?php echo SURBMA_WP_CONTROL_GOOGLE_ANALYTICS; ?>', 'auto', {'name': 'pwp'}, {'allowLinker': true});
-	ga('pwp.set', 'anonymizeIp', true);
-	ga('pwp.send', 'pageview');
+	gtag('config', '<?php echo SURBMA_WP_CONTROL_GOOGLE_ANALYTICS; ?>', { 'anonymize_ip': true });
 <?php
 }
 function surbma_wp_control_do_google_analytics() {
 	// Check if Surbma - Premium WP plugin is activated and Google Analytics tracking is enabled
 	$options = get_option( 'surbma_premium_wp_google_analytics_fields' );
 	if ( function_exists( 'surbma_premium_wp_google_analytics_display' ) && isset( $options['universalid'] ) && $options['universalid'] != '' ) {
-		add_action( 'surbma_premium_wp_ga_after_send_object', 'surbma_wp_control_add_google_analytics', 999 );
+		add_action( 'surbma_premium_wp_gtag_settings', 'surbma_wp_control_add_google_analytics', 999 );
 	} else {
 ?>
-<script type="text/javascript">
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo SURBMA_WP_CONTROL_GOOGLE_ANALYTICS; ?>"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
 
-	ga('create', '<?php echo SURBMA_WP_CONTROL_GOOGLE_ANALYTICS; ?>', 'auto', {'name': 'pwp'}, {'allowLinker': true});
-	ga('pwp.set', 'anonymizeIp', true);
-	ga('pwp.send', 'pageview');
+	gtag('config', '<?php echo SURBMA_WP_CONTROL_GOOGLE_ANALYTICS; ?>', { 'anonymize_ip': true });
 </script>
 <?php }
 }
