@@ -1,15 +1,15 @@
 <?php
 
 /*
-Plugin Name: Surbma - WP Control
-Plugin URI: http://surbma.com/wordpress-plugins/
+Plugin Name: Surbma | WP Control
+Plugin URI: https://surbma.com/wordpress-plugins/
 Description: Global control plugin for WordPress Multisite Networks
 Network: True
 
-Version: 4.15.0
+Version: 4.16.0
 
 Author: Surbma
-Author URI: http://surbma.hu/
+Author URI: https://surbma.hu/
 
 License: GPLv2
 

@@ -122,3 +122,10 @@ add_filter( 'retrieve_password_title', function( $title ) {
 	$title = sprintf( __('[%s] Password Reset'), $blogname );
 	return $title;
 });
+
+// Add custom directives to virtual robots.txt file
+function surbma_wp_control_robotstxt_function( $output ) {
+	$output .= "Crawl-delay: 120\n";
+	return $output;
+}
+add_filter( 'robots_txt', 'surbma_wp_control_robotstxt_function', 999, 1 );

@@ -1,10 +1,10 @@
-=== Surbma - WP Control ===
+=== Surbma | WP Control ===
 Contributors: Surbma
-Donate link: http://surbma.com/
+Donate link: https://surbma.com/donate/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, google analytics, jetpack, woothemes, woocommerce, admin
 Requires at least: 4.0
-Tested up to: 4.8
-Stable tag: 4.15.0
+Tested up to: 4.9
+Stable tag: 4.16.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,7 @@ This is a very complex plugin, which is very useful for Multisite Networks made 
 - Override default Genesis favicon, if there is a favicon in the main WordPress folder. File formats accepted: favicon.ico, favicon.gif, favicon.png, favicon.jpg.
 - Fixes links and titles in the password reset emails in a Multisite Network.
 - Redirects all attachment pages to its parent page or to homepage.
+- Custom directives for virtual robots.txt file.
 
 **Do you want to contribute or help improving this plugin?**
 
@@ -54,12 +55,12 @@ Please feel free to contribute, help or recommend any new features for my plugin
 
 **Do you want to know more about me?**
 
-Visit my webpage: [Surbma.com](http://surbma.com/)
+Visit my webpage: [Surbma.com](https://surbma.com/)
 
 == Installation ==
 
 1. Upload `surbma-wp-control` folder to the `/wp-content/plugins/` directory
-2. Activate the Surbma - WP Control plugin through the 'Plugins' menu in WordPress
+2. Activate the Surbma | WP Control plugin through the 'Plugins' menu in WordPress
 3. That's it. :)
 
 == Frequently Asked Questions ==
@@ -73,6 +74,12 @@ This plugin was created especially for my Multisite Network, which operates my c
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 4.16.0 =
+
+- Added Crawl-delay directive for the virtual robots.txt file.
+- Tested up to WordPress 4.9 version.
+- PHP 7.2 compatibility check.
 
 = 4.15.0 =
 
