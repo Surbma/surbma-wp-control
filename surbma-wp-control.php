@@ -6,7 +6,7 @@ Plugin URI: https://surbma.com/wordpress-plugins/
 Description: Global control plugin for WordPress Multisite Networks
 Network: True
 
-Version: 4.16.0
+Version: 4.17
 
 Author: Surbma
 Author URI: https://surbma.hu/

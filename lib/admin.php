@@ -37,7 +37,7 @@ function surbma_wp_control_custom_admin_footer( $text ) {
 		return $admin_footer;
 	}
 }
-add_filter( 'admin_footer_text', 'surbma_wp_control_custom_admin_footer' );
+add_filter( 'admin_footer_text', 'surbma_wp_control_custom_admin_footer', 999 );
 
 // Remove the version number from the right bottom of admin footer
 function surbma_wp_control_remove_footer_version() {
