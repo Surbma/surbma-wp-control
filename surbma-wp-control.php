@@ -3,13 +3,13 @@
 /*
 Plugin Name: Surbma | WP Control
 Plugin URI: https://surbma.com/wordpress-plugins/
-Description: Global control plugin for WordPress Multisite Networks
+Description: Very useful fixes for all WordPress installations
 Network: True
 
-Version: 4.17
+Version: 5.0
 
 Author: Surbma
-Author URI: https://surbma.hu/
+Author URI: https://surbma.com/
 
 License: GPLv2
 
@@ -58,6 +58,21 @@ function surbma_wp_control_wp_mail_from( $input ) {
 }
 add_filter( 'wp_mail_from', 'surbma_wp_control_wp_mail_from' );
 add_filter( 'wp_mail_from_name', 'surbma_wp_control_wp_mail_from' );
+
+function surbma_wp_control_clean_file_names ( $filename ) {
+	$tmp = explode( '.', $filename );
+	$reset = reset( $tmp );
+	$end = end( $tmp );
+	$ext = $reset == $end ? '' : '.' . $end;
+	$file = $ext == '' ? $filename : substr( $filename, 0, -( strlen( $ext )+1 ) );
+	$file = str_replace( ' ', '-', $file );
+	$file = str_replace( '_', '-', $file );
+	$file = preg_replace( '/-+/', '-', $file );
+	$file = preg_replace( '/[^A-Za-z0-9\-]/', '', $file );
+	$file = strtolower( $file );
+	return $file . $ext;
+}
+add_filter( 'sanitize_file_name', 'surbma_wp_control_clean_file_names', 10 );
 
 // Add global Google Analytics tracking
 function surbma_wp_control_add_google_analytics() {

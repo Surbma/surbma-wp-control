@@ -1,18 +1,18 @@
 === Surbma | WP Control ===
 Contributors: Surbma
 Donate link: https://surbma.com/donate/
-Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, google analytics, jetpack, woothemes, woocommerce, admin
+Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, jetpack, woothemes, woocommerce
 Requires at least: 4.0
-Tested up to: 4.9
-Stable tag: 4.17
+Tested up to: 5.0
+Stable tag: 5.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Global control plugin for WordPress Multisite Networks
+Very useful fixes for all WordPress installations.
 
 == Description ==
 
-This is a very complex plugin, which is very useful for Multisite Networks made for client website management. I have created this plugin for my own Multisite Networks and I'm continue to add more useful functions to it in the future. This plugin is not for the average WordPress user, but for a WordPress developer or operators. You need a basic knowledge to use WordPress Multisite, FTP and other things to fully take advantage of this plugin.
+This is a very complex plugin, which is very useful for any installations, but mainly for Multisite Networks. I have created this plugin for my own WordPress installations and I'm continue to add more useful functions to it in the future. This plugin is not for the average WordPress user, but for a WordPress developer or site managers. You need a basic knowledge to use WordPress Multisite, FTP and other things to fully take advantage of this plugin.
 
 **Here is a list of the current functions:**
 
@@ -42,6 +42,7 @@ This is a very complex plugin, which is very useful for Multisite Networks made 
 - Fixes links and titles in the password reset emails in a Multisite Network.
 - Redirects all attachment pages to its parent page or to homepage.
 - Custom directives for virtual robots.txt file.
+- Clean file names. Removes any unwanted characters from filenames uploaded to media library.
 
 **Do you want to contribute or help improving this plugin?**
 
@@ -67,13 +68,17 @@ Visit my webpage: [Surbma.com](https://surbma.com/)
 
 = What is this plugin good for? =
 
-This plugin was created especially for my Multisite Network, which operates my clients' websites. It can control some minor, but important parts of a Multisite network, which is very useful if you handle a lot of client websites.
+This plugin was created especially for my Multisite Networks, but works for all WordPress installations. It can control some minor, but important parts of a WordPress website, which is very useful if you handle a lot of client websites.
 
 = What does Surbma mean? =
 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 5.0 =
+
+- NEW - Clean filenames. Removes any unwanted characters from filenames uploaded to media library.
 
 = 4.17 =
 
