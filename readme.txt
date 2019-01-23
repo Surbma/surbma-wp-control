@@ -4,7 +4,7 @@ Donate link: https://surbma.com/donate/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, jetpack, woothemes, woocommerce
 Requires at least: 4.0
 Tested up to: 5.0
-Stable tag: 5.0
+Stable tag: 5.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,10 @@ This plugin was created especially for my Multisite Networks, but works for all 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 5.1 =
+
+- FIX - Clean filename function fix to correctly remove the extension at the end of the filename.
 
 = 5.0 =
 

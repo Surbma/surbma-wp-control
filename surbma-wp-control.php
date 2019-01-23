@@ -6,7 +6,7 @@ Plugin URI: https://surbma.com/wordpress-plugins/
 Description: Very useful fixes for all WordPress installations
 Network: True
 
-Version: 5.0
+Version: 5.1
 
 Author: Surbma
 Author URI: https://surbma.com/
@@ -64,7 +64,7 @@ function surbma_wp_control_clean_file_names ( $filename ) {
 	$reset = reset( $tmp );
 	$end = end( $tmp );
 	$ext = $reset == $end ? '' : '.' . $end;
-	$file = $ext == '' ? $filename : substr( $filename, 0, -( strlen( $ext )+1 ) );
+	$file = $ext == '' ? $filename : substr( $filename, 0, -( strlen( $ext ) ) );
 	$file = str_replace( ' ', '-', $file );
 	$file = str_replace( '_', '-', $file );
 	$file = preg_replace( '/-+/', '-', $file );
