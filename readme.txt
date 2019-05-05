@@ -4,7 +4,8 @@ Donate link: https://surbma.com/donate/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, jetpack, woothemes, woocommerce
 Requires at least: 4.0
 Tested up to: 5.2
-Stable tag: 6.0
+Stable tag: 6.1
+Requires PHP: 5.6
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +78,11 @@ This plugin was created especially for my Multisite Networks, but works for all 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 6.1 =
+
+- Release date: 2019-05-05
+- TWEAK - Added minimum required PHP version.
 
 = 6.0 =
 
