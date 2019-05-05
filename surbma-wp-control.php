@@ -3,10 +3,10 @@
 /*
 Plugin Name: Surbma | WP Control
 Plugin URI: https://surbma.com/wordpress-plugins/
-Description: Very useful fixes for all WordPress installations
+Description: Very useful fixes and add-ons for WordPress Multisite installations.
 Network: True
 
-Version: 5.1
+Version: 6.0
 
 Author: Surbma
 Author URI: https://surbma.com/

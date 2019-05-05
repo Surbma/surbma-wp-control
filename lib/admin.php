@@ -2,22 +2,36 @@
 
 // Admin options menu
 include_once( SURBMA_WP_CONTROL_PLUGIN_DIR . '/pages/control-page.php' );
+include_once( SURBMA_WP_CONTROL_PLUGIN_DIR . '/pages/active-plugins.php' );
+include_once( SURBMA_WP_CONTROL_PLUGIN_DIR . '/pages/active-themes.php' );
 
 function surbma_wp_control_add_menu() {
+	global $surbma_wp_control_page;
 	if ( is_plugin_active( 'surbma-premium-wp/surbma-premium-wp.php' ) ) {
-		add_submenu_page( 'surbma-premium-wp-menu', __( 'WP Control', 'surbma-wp-control' ), __( 'WP Control', 'surbma-wp-control' ), 'update_core', 'surbma-wp-control', 'surbma_wp_control_page' );
+		$surbma_wp_control_page = add_submenu_page( 'surbma-premium-wp-menu', __( 'WP Control', 'surbma-wp-control' ), __( 'WP Control', 'surbma-wp-control' ), 'update_core', 'surbma-wp-control', 'surbma_wp_control_page' );
 	}
 	else {
-		add_menu_page( __( 'WP Control', 'surbma-wp-control' ), 'WP Control', 'update_core', 'surbma-wp-control', 'surbma_wp_control_page', 'dashicons-visibility' );
+		$surbma_wp_control_page = add_menu_page( __( 'WP Control', 'surbma-wp-control' ), 'WP Control', 'update_core', 'surbma-wp-control', 'surbma_wp_control_page', 'dashicons-visibility' );
 	}
 }
 add_action( 'admin_menu', 'surbma_wp_control_add_menu', 999 );
 
+function surbma_wp_control_add_network_menu() {
+	global $surbma_wp_control_active_plugins_page;
+	$surbma_wp_control_active_plugins_page = add_submenu_page( 'plugins.php', __( 'Active plugins', 'surbma-wp-control' ), __( 'Active plugins', 'surbma-wp-control' ), 'manage_network_plugins', 'surbma-wp-control-active-plugins', 'surbma_wp_control_active_plugins' );
+	global $surbma_wp_control_active_themes_page;
+	$surbma_wp_control_active_themes_page = add_submenu_page( 'themes.php', __( 'Active themes', 'surbma-wp-control' ), __( 'Active themes', 'surbma-wp-control' ), 'manage_network_themes', 'surbma-wp-control-active-themes', 'surbma_wp_control_active_themes' );
+}
+add_action( 'network_admin_menu', 'surbma_wp_control_add_network_menu' );
+
 // Custom styles and scripts for admin pages
 function surbma_wp_control_admin_scripts( $hook ) {
-    if ( $hook == 'toplevel_page_surbma-wp-control' ) {
-    	wp_enqueue_style( 'surbma-wp-control', SURBMA_WP_CONTROL_PLUGIN_URL . '/css/admin.css' );
-    }
+	global $surbma_wp_control_page;
+	global $surbma_wp_control_active_plugins_page;
+	global $surbma_wp_control_active_themes_page;
+	if ( $hook == $surbma_wp_control_page || $hook == $surbma_wp_control_active_plugins_page || $hook == $surbma_wp_control_active_themes_page ) {
+		wp_enqueue_style( 'surbma-wp-control', SURBMA_WP_CONTROL_PLUGIN_URL . '/css/admin.css' );
+	}
 }
 add_action( 'admin_enqueue_scripts', 'surbma_wp_control_admin_scripts' );
 
