@@ -58,7 +58,7 @@ function surbma_wp_control_active_plugins() {
 					ksort( $the_plugs );
 					foreach( $the_plugs as $key => $value ) {
 						$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $key );
-						echo '<li>' . $plugin_data['Name'] . '</li>';
+						echo '<li>' . $plugin_data['Name'] . ' | ' . $plugin_data['Version'] . ' | <a href="' . $plugin_data['PluginURI'] . '" target="_blank">' . __( 'Visit plugin site' ) . '</a></li>';
 					}
 					echo '</ul>';
 				} else {

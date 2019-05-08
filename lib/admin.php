@@ -98,6 +98,13 @@ add_action( 'wp_dashboard_setup', 'surbma_wp_control_remove_dashboard_widgets' )
 // Disable Welcome Screen
 remove_action( 'welcome_panel', 'wp_welcome_panel' );
 
+// Remove WordPress core update notifications from the admin
+function surbma_wp_control_hide_update_notice() {
+	remove_action( 'admin_notices', 'update_nag', 3 );
+	remove_action( 'network_admin_notices', 'update_nag', 3 );
+}
+add_action( 'admin_head', 'surbma_wp_control_hide_update_notice' );
+
 // Enable Gravity Forms visibility option for form fields
 function surbma_wp_control_add_gf_visibility_setting() {
 	if ( class_exists( 'GFForms' ) ) {
