@@ -4,7 +4,7 @@
 // Updated to fix $wpdb->prepare warning and display plugin name.
 */
 
-function surbma_wp_control_active_plugins() {
+function surbma_wp_control_plugin_manager() {
 ?>
 <div class="wp-control uk-grid uk-margin-top">
 	<div class="wrap uk-width-9-10">
@@ -64,6 +64,12 @@ function surbma_wp_control_active_plugins() {
 				} else {
 					_e( 'No network actived plugins.', 'surbma-wp-control' );
 				}
+			?>
+		</div>
+
+		<div class="section-block uk-panel uk-panel-box uk-panel-box-secondary uk-panel-header">
+			<h3 class="uk-panel-title"><?php _e( 'Not Activated Plugins', 'surbma-wp-control' ); ?></h3>
+			<?php
 			?>
 		</div>
 

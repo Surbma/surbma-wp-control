@@ -4,7 +4,7 @@
 // Updated to fix $wpdb->prepare warning and display plugin name.
 */
 
-function surbma_wp_control_active_themes() {
+function surbma_wp_control_theme_manager() {
 ?>
 <div class="wp-control uk-grid uk-margin-top">
 	<div class="wrap uk-width-9-10">
@@ -67,6 +67,30 @@ function surbma_wp_control_active_themes() {
 				} else {
 					_e( 'No network actived plugins.', 'surbma-wp-control' );
 				}
+			?>
+		</div>
+
+		<div class="section-block uk-panel uk-panel-box uk-panel-box-secondary uk-panel-header">
+			<h3 class="uk-panel-title"><?php _e( 'Not Activated Themes', 'surbma-wp-control' ); ?></h3>
+			<p><?php _e( 'These Themes are not used on any subsite of this Multisite network.', 'surbma-wp-control' ); ?></p>
+			<?php
+				$themes = wp_get_themes();
+				$sites = get_sites();
+				foreach( $sites as $site ) {
+					switch_to_blog($site->blog_id);
+					$template_name = get_option( 'template', false );
+					$style_path = explode( '/', get_stylesheet_directory() );
+
+					unset( $themes[end( $style_path )] );
+					unset( $themes[$template_name] );
+
+					restore_current_blog();
+				}
+					echo '<ul>';
+				foreach ( $themes as $theme ) {
+					echo '<li>' . $theme->Name . ' | ' . $theme->Version . ' | <a href="' . $theme->get('ThemeURI') . '" target="_blank">' . __( 'Visit Theme site' ) . '</a></li>';
+				}
+					echo '</ul>';
 			?>
 		</div>
 

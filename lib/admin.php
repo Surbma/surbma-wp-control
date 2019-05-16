@@ -2,8 +2,8 @@
 
 // Admin options menu
 include_once( SURBMA_WP_CONTROL_PLUGIN_DIR . '/pages/control-page.php' );
-include_once( SURBMA_WP_CONTROL_PLUGIN_DIR . '/pages/active-plugins.php' );
-include_once( SURBMA_WP_CONTROL_PLUGIN_DIR . '/pages/active-themes.php' );
+include_once( SURBMA_WP_CONTROL_PLUGIN_DIR . '/pages/plugin-manager.php' );
+include_once( SURBMA_WP_CONTROL_PLUGIN_DIR . '/pages/theme-manager.php' );
 
 function surbma_wp_control_add_menu() {
 	global $surbma_wp_control_page;
@@ -18,9 +18,9 @@ add_action( 'admin_menu', 'surbma_wp_control_add_menu', 999 );
 
 function surbma_wp_control_add_network_menu() {
 	global $surbma_wp_control_active_plugins_page;
-	$surbma_wp_control_active_plugins_page = add_submenu_page( 'plugins.php', __( 'Active plugins', 'surbma-wp-control' ), __( 'Active plugins', 'surbma-wp-control' ), 'manage_network_plugins', 'surbma-wp-control-active-plugins', 'surbma_wp_control_active_plugins' );
+	$surbma_wp_control_active_plugins_page = add_submenu_page( 'plugins.php', __( 'Plugin manager', 'surbma-wp-control' ), __( 'Plugin manager', 'surbma-wp-control' ), 'manage_network_plugins', 'surbma-wp-control-plugin-manager', 'surbma_wp_control_plugin_manager' );
 	global $surbma_wp_control_active_themes_page;
-	$surbma_wp_control_active_themes_page = add_submenu_page( 'themes.php', __( 'Active themes', 'surbma-wp-control' ), __( 'Active themes', 'surbma-wp-control' ), 'manage_network_themes', 'surbma-wp-control-active-themes', 'surbma_wp_control_active_themes' );
+	$surbma_wp_control_active_themes_page = add_submenu_page( 'themes.php', __( 'Theme manager', 'surbma-wp-control' ), __( 'Theme manager', 'surbma-wp-control' ), 'manage_network_themes', 'surbma-wp-control-theme-manager', 'surbma_wp_control_theme_manager' );
 }
 add_action( 'network_admin_menu', 'surbma_wp_control_add_network_menu' );
 
