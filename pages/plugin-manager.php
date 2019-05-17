@@ -11,42 +11,38 @@ function surbma_wp_control_plugin_manager() {
 		<h1 class="dashicons-before dashicons-admin-plugins"><?php _e( 'WP Control | Active Plugins', 'surbma-wp-control' ); ?></h1>
 
 		<?php
-			global $wpdb;
-			$blogs = $wpdb->get_results("
-				SELECT blog_id
-				FROM {$wpdb->blogs}
-				WHERE site_id = '{$wpdb->siteid}'
-				AND spam = '0'
-				AND deleted = '0'
-				AND archived = '0'
-			");
-			echo '<table cellpadding="10" cellspacing="0" border="0" style="background: #fff;width: 100%;border: 1px solid #ccc;border-bottom: 0;margin: 0 0 20px;">';
-			echo '<thead>';
-			echo '<tr style="background: #333;color: #fff;">';
-			echo '<th style="width: 60%;text-align: left;border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;">' . __( 'Site name', 'surbma-wp-control' ) . '</th>';
-			echo '<th style="width: 40%;text-align: left;border-bottom: 1px solid #ccc;">' . __( 'Active Plugins', 'surbma-wp-control' ) . '</th>';
-			echo '</tr></thead>';
-			echo '<tbody>';
-			foreach ( $blogs as $blog ) {
-				echo '<tr>';
-				$the_plugs = get_blog_option( $blog->blog_id, 'active_plugins' );
-				printf( '<td style="border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;vertical-align: top;"><strong><a href="%splugins.php" title="Go to the Dashboard for %s" target="_blank">%s</a></strong></td>', get_admin_url( $blog->blog_id ), get_blog_option( $blog->blog_id, 'blogname' ), get_blog_option( $blog->blog_id, 'blogname' ) );
-				echo '<td style="border-bottom: 1px solid #ccc;vertical-align: top;">';
-				if( $the_plugs ) {
-					echo '<ul style="margin: 0;">';
-					foreach( $the_plugs as $key => $value ) {
-						$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $value );
-						echo '<li>' . $plugin_data['Name'] . ' | ' . $plugin_data['Version'] . ' | <a href="' . $plugin_data['PluginURI'] . '" target="_blank">' . __( 'Visit plugin site' ) . '</a></li>';
+			if ( !wp_is_large_network() ) {
+				$sites = get_sites( ['number'  => 10000] );
+				echo '<table cellpadding="10" cellspacing="0" border="0" style="background: #fff;width: 100%;border: 1px solid #ccc;border-bottom: 0;margin: 0 0 20px;">';
+				echo '<thead>';
+				echo '<tr style="background: #333;color: #fff;">';
+				echo '<th style="width: 60%;text-align: left;border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;">' . __( 'Site', 'surbma-wp-control' ) . '</th>';
+				echo '<th style="width: 40%;text-align: left;border-bottom: 1px solid #ccc;">' . __( 'Active Plugins', 'surbma-wp-control' ) . '</th>';
+				echo '</tr></thead>';
+				echo '<tbody>';
+				foreach ( $sites as $site ) {
+					echo '<tr>';
+					$the_plugs = get_blog_option( $site->blog_id, 'active_plugins' );
+					printf( '<td style="border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;vertical-align: top;"><strong>%s</strong> | <a href="%splugins.php" target="_blank">%s</a> | <a href="%s" target="_blank">%s</a></td>', get_blog_option( $site->blog_id, 'blogname' ), get_admin_url( $site->blog_id ), __( 'Dashboard' ), get_home_url( $site->blog_id ), __( 'Visit' ) );
+					echo '<td style="border-bottom: 1px solid #ccc;vertical-align: top;">';
+					if( $the_plugs ) {
+						echo '<ul style="margin: 0;">';
+						foreach( $the_plugs as $key => $value ) {
+							$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $value );
+							echo '<li>' . $plugin_data['Name'] . ' | ' . $plugin_data['Version'] . ' | <a href="' . $plugin_data['PluginURI'] . '" target="_blank">' . __( 'Visit plugin site' ) . '</a></li>';
+						}
+						echo '</ul>';
+					} else {
+						echo __( 'No active plugins on this site.', 'surbma-wp-control' );
 					}
-					echo '</ul>';
-				} else {
-					echo __( 'No active plugins on this site.', 'surbma-wp-control' );
+					echo '</td>';
+					echo '</tr>';
 				}
-				echo '</td>';
-				echo '</tr>';
+				echo '</tbody>';
+				echo '</table>';
+			} else {
+				echo '<p>' . __( 'Sorry, your Multisite install is too large, this plugin is not optimized for such a large network.', 'surbma-wp-control' ) . '</p>';
 			}
-			echo '</tbody>';
-			echo '</table>';
 		?>
 
 		<div class="section-block uk-panel uk-panel-box uk-panel-box-secondary uk-panel-header">
@@ -70,22 +66,26 @@ function surbma_wp_control_plugin_manager() {
 		<div class="section-block uk-panel uk-panel-box uk-panel-box-secondary uk-panel-header">
 			<h3 class="uk-panel-title"><?php _e( 'Not Activated Plugins', 'surbma-wp-control' ); ?></h3>
 			<?php
-				$all_plugins = get_plugins();
-				$sites = get_sites();
-				foreach( $sites as $site ) {
-					switch_to_blog( $site->blog_id );
-					foreach ( $all_plugins as $key => $data ) {
-						if ( is_plugin_active( $key ) ) {
-							unset( $all_plugins[$key] );
+				if ( !wp_is_large_network() ) {
+					$all_plugins = get_plugins();
+					$sites = get_sites( ['number'  => 10000] );
+					foreach( $sites as $site ) {
+						switch_to_blog( $site->blog_id );
+						foreach ( $all_plugins as $key => $data ) {
+							if ( is_plugin_active( $key ) ) {
+								unset( $all_plugins[$key] );
+							}
 						}
+						restore_current_blog();
 					}
-				restore_current_blog();
+					echo '<ul>';
+					foreach ( $all_plugins as $key => $data ) {
+						echo '<li>' . $data['Name'] . ' | ' . $data['Version'] . ' | <a href="' . $data['PluginURI'] . '" target="_blank">' . __( 'Visit plugin site' ) . '</a></li>';
+					}
+					echo '</ul>';
+				} else {
+					echo '<p>' . __( 'Sorry, your Multisite install is too large, this plugin is not optimized for such a large network.', 'surbma-wp-control' ) . '</p>';
 				}
-				echo '<ul>';
-				foreach ( $all_plugins as $key => $data ) {
-					echo '<li>' . $data['Name'] . ' | ' . $data['Version'] . ' | <a href="' . $data['PluginURI'] . '" target="_blank">' . __( 'Visit plugin site' ) . '</a></li>';
-				}
-				echo '</ul>';
 			?>
 		</div>
 

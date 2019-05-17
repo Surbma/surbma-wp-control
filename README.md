@@ -1,4 +1,4 @@
 Surbma - WP Control
 ===================
 
-Global control plugin for WordPress Multisite Networks
+Very useful fixes and add-ons for WordPress Multisite installations.

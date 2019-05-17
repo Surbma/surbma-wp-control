@@ -11,46 +11,42 @@ function surbma_wp_control_theme_manager() {
 		<h1 class="dashicons-before dashicons-admin-appearance"><?php _e( 'WP Control | Active Themes', 'surbma-wp-control' ); ?></h1>
 
 		<?php
-			global $wpdb;
-			$blogs = $wpdb->get_results("
-				SELECT blog_id
-				FROM {$wpdb->blogs}
-				WHERE site_id = '{$wpdb->siteid}'
-				AND spam = '0'
-				AND deleted = '0'
-				AND archived = '0'
-			");
-			echo '<table cellpadding="10" cellspacing="0" border="0" style="background: #fff;width: 100%;border: 1px solid #ccc;border-bottom: 0;margin: 0 0 20px;">';
-			echo '<thead>';
-			echo '<tr style="background: #333;color: #fff;">';
-			echo '<th style="width: 60%;text-align: left;border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;">' . __( 'Site Name', 'surbma-wp-control' ) . '</th>';
-			echo '<th style="width: 20%;text-align: left;border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;">' . __( 'Parent Theme', 'surbma-wp-control' ) . '</th>';
-			echo '<th style="width: 20%;text-align: left;border-bottom: 1px solid #ccc;">' . __( 'Child Theme', 'surbma-wp-control' ) . '</th>';
-			echo '</tr></thead>';
-			echo '<tbody>';
-			foreach ( $blogs as $blog ) {
-				echo '<tr>';
-				$the_template = get_blog_option( $blog->blog_id, 'template' );
-				$the_stylesheet = get_blog_option( $blog->blog_id, 'stylesheet' );
-				printf( '<td style="border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;vertical-align: top;"><strong><a href="%sthemes.php" title="Go to the Dashboard for %s" target="_blank">%s</a></strong></td>', get_admin_url( $blog->blog_id ), get_blog_option( $blog->blog_id, 'blogname' ), get_blog_option( $blog->blog_id, 'blogname' ) );
-				echo '<td style="border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;vertical-align: top;">';
-				if( $the_template ) {
-					echo $the_template;
-				} else {
-					echo __( 'No active theme on this site.', 'surbma-wp-control' );
+			if ( !wp_is_large_network() ) {
+				$sites = get_sites( ['number'  => 10000] );
+				echo '<table cellpadding="10" cellspacing="0" border="0" style="background: #fff;width: 100%;border: 1px solid #ccc;border-bottom: 0;margin: 0 0 20px;">';
+				echo '<thead>';
+				echo '<tr style="background: #333;color: #fff;">';
+				echo '<th style="width: 60%;text-align: left;border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;">' . __( 'Site', 'surbma-wp-control' ) . '</th>';
+				echo '<th style="width: 20%;text-align: left;border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;">' . __( 'Parent Theme', 'surbma-wp-control' ) . '</th>';
+				echo '<th style="width: 20%;text-align: left;border-bottom: 1px solid #ccc;">' . __( 'Child Theme', 'surbma-wp-control' ) . '</th>';
+				echo '</tr></thead>';
+				echo '<tbody>';
+				foreach ( $sites as $site ) {
+					echo '<tr>';
+					$the_template = get_blog_option( $site->blog_id, 'template' );
+					$the_stylesheet = get_blog_option( $site->blog_id, 'stylesheet' );
+					printf( '<td style="border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;vertical-align: top;"><strong>%s</strong> | <a href="%sthemes.php" target="_blank">%s</a> | <a href="%s" target="_blank">%s</a></td>', get_blog_option( $site->blog_id, 'blogname' ), get_admin_url( $site->blog_id ), __( 'Dashboard' ), get_home_url( $site->blog_id ), __( 'Visit' ) );
+					echo '<td style="border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;vertical-align: top;">';
+					if( $the_template ) {
+						echo $the_template;
+					} else {
+						echo __( 'No active theme on this site.', 'surbma-wp-control' );
+					}
+					echo '</td>';
+					echo '<td style="border-bottom: 1px solid #ccc;vertical-align: top;">';
+					if( $the_stylesheet ) {
+						echo $the_stylesheet;
+					} else {
+						echo __( 'No active theme on this site.', 'surbma-wp-control' );
+					}
+					echo '</td>';
+					echo '</tr>';
 				}
-				echo '</td>';
-				echo '<td style="border-bottom: 1px solid #ccc;vertical-align: top;">';
-				if( $the_stylesheet ) {
-					echo $the_stylesheet;
-				} else {
-					echo __( 'No active theme on this site.', 'surbma-wp-control' );
-				}
-				echo '</td>';
-				echo '</tr>';
+				echo '</tbody>';
+				echo '</table>';
+			} else {
+				echo '<p>' . __( 'Sorry, your Multisite install is too large, this plugin is not optimized for such a large network.', 'surbma-wp-control' ) . '</p>';
 			}
-			echo '</tbody>';
-			echo '</table>';
 		?>
 
 		<div class="section-block uk-panel uk-panel-box uk-panel-box-secondary uk-panel-header">
@@ -74,23 +70,27 @@ function surbma_wp_control_theme_manager() {
 			<h3 class="uk-panel-title"><?php _e( 'Not Activated Themes', 'surbma-wp-control' ); ?></h3>
 			<p><?php _e( 'These Themes are not used on any subsite of this Multisite network.', 'surbma-wp-control' ); ?></p>
 			<?php
-				$themes = wp_get_themes();
-				$sites = get_sites();
-				foreach( $sites as $site ) {
-					switch_to_blog( $site->blog_id );
-					$template_name = get_option( 'template' );
-					$style_path = explode( '/', get_stylesheet_directory() );
+				if ( !wp_is_large_network() ) {
+					$themes = wp_get_themes();
+					$sites = get_sites( ['number'  => 10000] );
+					foreach( $sites as $site ) {
+						switch_to_blog( $site->blog_id );
+						$template_name = get_option( 'template' );
+						$style_path = explode( '/', get_stylesheet_directory() );
 
-					unset( $themes[end( $style_path )] );
-					unset( $themes[$template_name] );
+						unset( $themes[end( $style_path )] );
+						unset( $themes[$template_name] );
 
-					restore_current_blog();
+						restore_current_blog();
+					}
+					echo '<ul>';
+					foreach ( $themes as $theme ) {
+						echo '<li>' . $theme->Name . ' | ' . $theme->Version . ' | <a href="' . $theme->get('ThemeURI') . '" target="_blank">' . __( 'Visit Theme site' ) . '</a></li>';
+					}
+					echo '</ul>';
+				} else {
+					echo '<p>' . __( 'Sorry, your Multisite install is too large, this plugin is not optimized for such a large network.', 'surbma-wp-control' ) . '</p>';
 				}
-				echo '<ul>';
-				foreach ( $themes as $theme ) {
-					echo '<li>' . $theme->Name . ' | ' . $theme->Version . ' | <a href="' . $theme->get('ThemeURI') . '" target="_blank">' . __( 'Visit Theme site' ) . '</a></li>';
-				}
-				echo '</ul>';
 			?>
 		</div>
 
