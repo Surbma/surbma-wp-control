@@ -77,8 +77,8 @@ function surbma_wp_control_theme_manager() {
 				$themes = wp_get_themes();
 				$sites = get_sites();
 				foreach( $sites as $site ) {
-					switch_to_blog($site->blog_id);
-					$template_name = get_option( 'template', false );
+					switch_to_blog( $site->blog_id );
+					$template_name = get_option( 'template' );
 					$style_path = explode( '/', get_stylesheet_directory() );
 
 					unset( $themes[end( $style_path )] );
@@ -86,11 +86,11 @@ function surbma_wp_control_theme_manager() {
 
 					restore_current_blog();
 				}
-					echo '<ul>';
+				echo '<ul>';
 				foreach ( $themes as $theme ) {
 					echo '<li>' . $theme->Name . ' | ' . $theme->Version . ' | <a href="' . $theme->get('ThemeURI') . '" target="_blank">' . __( 'Visit Theme site' ) . '</a></li>';
 				}
-					echo '</ul>';
+				echo '</ul>';
 			?>
 		</div>
 

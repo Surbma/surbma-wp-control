@@ -70,6 +70,22 @@ function surbma_wp_control_plugin_manager() {
 		<div class="section-block uk-panel uk-panel-box uk-panel-box-secondary uk-panel-header">
 			<h3 class="uk-panel-title"><?php _e( 'Not Activated Plugins', 'surbma-wp-control' ); ?></h3>
 			<?php
+				$all_plugins = get_plugins();
+				$sites = get_sites();
+				foreach( $sites as $site ) {
+					switch_to_blog( $site->blog_id );
+					foreach ( $all_plugins as $key => $data ) {
+						if ( is_plugin_active( $key ) ) {
+							unset( $all_plugins[$key] );
+						}
+					}
+				restore_current_blog();
+				}
+				echo '<ul>';
+				foreach ( $all_plugins as $key => $data ) {
+					echo '<li>' . $data['Name'] . ' | ' . $data['Version'] . ' | <a href="' . $data['PluginURI'] . '" target="_blank">' . __( 'Visit plugin site' ) . '</a></li>';
+				}
+				echo '</ul>';
 			?>
 		</div>
 
