@@ -25,15 +25,18 @@ function surbma_wp_control_theme_manager() {
 					echo '<tr>';
 					$the_template = get_blog_option( $site->blog_id, 'template' );
 					$the_stylesheet = get_blog_option( $site->blog_id, 'stylesheet' );
-					printf( '<td style="border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;vertical-align: top;"><strong>%s</strong> | <a href="%sthemes.php" target="_blank">%s</a> | <a href="%s" target="_blank">%s</a></td>', get_blog_option( $site->blog_id, 'blogname' ), get_admin_url( $site->blog_id ), __( 'Dashboard' ), get_home_url( $site->blog_id ), __( 'Visit' ) );
-					echo '<td style="border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;vertical-align: top;">';
+					$deleted = get_blog_status( $site->blog_id, 'deleted' ) == 1 ? 'background: #ff8573;' : '';
+					echo '<td style="' . $deleted . 'border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;vertical-align: top;">';
+					printf( '<strong>%s</strong> | <a href="%sthemes.php" target="_blank">%s</a> | <a href="%s" target="_blank">%s</a>', get_blog_option( $site->blog_id, 'blogname' ), get_admin_url( $site->blog_id ), __( 'Dashboard' ), get_home_url( $site->blog_id ), __( 'Visit' ) );
+					echo '</td>';
+					echo '<td style="' . $deleted . 'border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;vertical-align: top;">';
 					if( $the_template ) {
 						echo $the_template;
 					} else {
 						echo __( 'No active theme on this site.', 'surbma-wp-control' );
 					}
 					echo '</td>';
-					echo '<td style="border-bottom: 1px solid #ccc;vertical-align: top;">';
+					echo '<td style="' . $deleted . 'border-bottom: 1px solid #ccc;vertical-align: top;">';
 					if( $the_stylesheet ) {
 						echo $the_stylesheet;
 					} else {
@@ -51,6 +54,7 @@ function surbma_wp_control_theme_manager() {
 
 		<div class="section-block uk-panel uk-panel-box uk-panel-box-secondary uk-panel-header">
 			<h3 class="uk-panel-title"><?php _e( 'Network Activated Themes', 'surbma-wp-control' ); ?></h3>
+			<p><?php _e( 'These Themes are network activated, so they can be used on all subsites of this Multisite network.', 'surbma-wp-control' ); ?></p>
 			<?php
 				$the_themes = get_site_option( 'allowedthemes' );
 				if( $the_themes ) {
@@ -61,7 +65,7 @@ function surbma_wp_control_theme_manager() {
 					}
 					echo '</ul>';
 				} else {
-					_e( 'No network actived plugins.', 'surbma-wp-control' );
+					_e( 'No network actived themes.', 'surbma-wp-control' );
 				}
 			?>
 		</div>

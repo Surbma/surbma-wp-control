@@ -23,8 +23,11 @@ function surbma_wp_control_plugin_manager() {
 				foreach ( $sites as $site ) {
 					echo '<tr>';
 					$the_plugs = get_blog_option( $site->blog_id, 'active_plugins' );
-					printf( '<td style="border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;vertical-align: top;"><strong>%s</strong> | <a href="%splugins.php" target="_blank">%s</a> | <a href="%s" target="_blank">%s</a></td>', get_blog_option( $site->blog_id, 'blogname' ), get_admin_url( $site->blog_id ), __( 'Dashboard' ), get_home_url( $site->blog_id ), __( 'Visit' ) );
-					echo '<td style="border-bottom: 1px solid #ccc;vertical-align: top;">';
+					$deleted = get_blog_status( $site->blog_id, 'deleted' ) == 1 ? 'background: #ff8573;' : '';
+					echo '<td style="' . $deleted . 'border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;vertical-align: top;">';
+					printf( '<strong>%s</strong> | <a href="%splugins.php" target="_blank">%s</a> | <a href="%s" target="_blank">%s</a>', get_blog_option( $site->blog_id, 'blogname' ), get_admin_url( $site->blog_id ), __( 'Dashboard' ), get_home_url( $site->blog_id ), __( 'Visit' ) );
+					echo '</td>';
+					echo '<td style="' . $deleted . 'border-bottom: 1px solid #ccc;vertical-align: top;">';
 					if( $the_plugs ) {
 						echo '<ul style="margin: 0;">';
 						foreach( $the_plugs as $key => $value ) {
@@ -47,6 +50,7 @@ function surbma_wp_control_plugin_manager() {
 
 		<div class="section-block uk-panel uk-panel-box uk-panel-box-secondary uk-panel-header">
 			<h3 class="uk-panel-title"><?php _e( 'Network Activated Plugins', 'surbma-wp-control' ); ?></h3>
+			<p><?php _e( 'These Plugins are network activated, so they are used on all subsites of this Multisite network.', 'surbma-wp-control' ); ?></p>
 			<?php
 				$the_plugs = get_site_option( 'active_sitewide_plugins' );
 				if( $the_plugs ) {
@@ -65,6 +69,7 @@ function surbma_wp_control_plugin_manager() {
 
 		<div class="section-block uk-panel uk-panel-box uk-panel-box-secondary uk-panel-header">
 			<h3 class="uk-panel-title"><?php _e( 'Not Activated Plugins', 'surbma-wp-control' ); ?></h3>
+			<p><?php _e( 'These Plugins are not used on any subsite of this Multisite network.', 'surbma-wp-control' ); ?></p>
 			<?php
 				if ( !wp_is_large_network() ) {
 					$all_plugins = get_plugins();
