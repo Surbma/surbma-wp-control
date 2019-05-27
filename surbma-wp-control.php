@@ -6,7 +6,7 @@ Plugin URI: https://surbma.com/wordpress-plugins/
 Description: Very useful fixes and add-ons for WordPress Multisite installations.
 Network: True
 
-Version: 10.0
+Version: 11.0
 
 Author: Surbma
 Author URI: https://surbma.com/

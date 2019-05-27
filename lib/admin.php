@@ -24,6 +24,21 @@ function surbma_wp_control_add_network_menu() {
 }
 add_action( 'network_admin_menu', 'surbma_wp_control_add_network_menu' );
 
+// Show site ID on network admin all sites page.
+function surbma_wp_control_site_id( $columns ) {
+	$columns['site_id'] = __( 'ID', 'site_id' );
+	return $columns;
+}
+add_filter( 'wpmu_blogs_columns', 'surbma_wp_control_site_id' );
+
+function surbma_wp_control_site_id_columns( $column, $blog_id ) {
+	if ( $column == 'site_id' ) {
+		echo $blog_id;
+	}
+}
+add_action( 'manage_sites_custom_column', 'surbma_wp_control_site_id_columns', 10, 3 );
+add_action( 'manage_blogs_custom_column', 'surbma_wp_control_site_id_columns', 10, 3 );
+
 // Custom styles and scripts for admin pages
 function surbma_wp_control_admin_scripts( $hook ) {
 	global $surbma_wp_control_page;
@@ -55,7 +70,7 @@ add_filter( 'admin_footer_text', 'surbma_wp_control_custom_admin_footer', 999 );
 
 // Remove the version number from the right bottom of admin footer
 function surbma_wp_control_remove_footer_version() {
-    remove_filter( 'update_footer', 'core_update_footer' );
+	remove_filter( 'update_footer', 'core_update_footer' );
 }
 add_action( 'admin_init', 'surbma_wp_control_remove_footer_version' );
 
@@ -85,13 +100,13 @@ add_action( 'widgets_init', 'surbma_wp_control_remove_widgets' );
 
 // Remove some unwanted Dashboard Widgets
 function surbma_wp_control_remove_dashboard_widgets() {
-    remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'core' );
-    remove_meta_box( 'dashboard_plugins', 'dashboard', 'core' );
-    remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'core' );
-    remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
-    remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
+	remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'core' );
+	remove_meta_box( 'dashboard_plugins', 'dashboard', 'core' );
+	remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'core' );
+	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+	remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
 	remove_meta_box( 'dashboard_secondary', 'dashboard', 'side' );
-    remove_meta_box( 'wpe_dify_news_feed', 'dashboard', 'core' );
+	remove_meta_box( 'wpe_dify_news_feed', 'dashboard', 'core' );
 }
 add_action( 'wp_dashboard_setup', 'surbma_wp_control_remove_dashboard_widgets' );
 

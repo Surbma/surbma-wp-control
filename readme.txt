@@ -4,7 +4,7 @@ Donate link: https://surbma.com/donate/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, jetpack, woothemes, woocommerce
 Requires at least: 5.0
 Tested up to: 5.2
-Stable tag: 10.0
+Stable tag: 11.0
 Requires PHP: 7.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -48,6 +48,7 @@ This is a very complex plugin, which is very useful for any installations, but m
 - Redirects all attachment pages to its parent page or to homepage.
 - Custom directives for virtual robots.txt file.
 - Clean file names. Removes any unwanted characters from filenames uploaded to media library.
+- Show site ID on network admin all sites page.
 
 **Do you want to contribute or help improving this plugin?**
 
@@ -80,6 +81,11 @@ This plugin was created especially for my Multisite Networks, but works for all 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 11.0 =
+
+- Release date: 2019-05-27
+- NEW - Show site ID on network admin all sites page.
 
 = 10.0 =
 
