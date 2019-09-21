@@ -26,14 +26,20 @@ add_action( 'network_admin_menu', 'surbma_wp_control_add_network_menu' );
 
 // Show site ID on network admin all sites page.
 function surbma_wp_control_site_id( $columns ) {
-	$columns['site_id'] = __( 'ID', 'site_id' );
+	if ( !defined( 'WPE_APIKEY' ) )
+		$columns['surbma_site_id'] = 'ID';
+	$columns['surbma_ssl'] = 'SSL';
 	return $columns;
 }
 add_filter( 'wpmu_blogs_columns', 'surbma_wp_control_site_id' );
 
 function surbma_wp_control_site_id_columns( $column, $blog_id ) {
-	if ( $column == 'site_id' ) {
+	if ( !defined( 'WPE_APIKEY' ) && $column == 'surbma_site_id' ) {
 		echo $blog_id;
+	}
+	if ( $column == 'surbma_ssl' ) {
+		$ssl = strpos( get_blog_option( $blog_id, 'siteurl' ), 'https' ) === 0 ? 'HTTPS' : '-';
+		echo $ssl;
 	}
 }
 add_action( 'manage_sites_custom_column', 'surbma_wp_control_site_id_columns', 10, 3 );
