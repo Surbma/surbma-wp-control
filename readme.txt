@@ -82,6 +82,12 @@ It is the reverse version of my last name. ;)
 
 == Changelog ==
 
+= 12.1 =
+
+- Release date: 2020-01-29
+- New - Added .distignore file to ignore files and folders from SVN repository.
+- New - Added .wordpress-org folder and assets, that will be used to update SVN assets.
+
 = 12.0 =
 
 - Release date: 2019-09-21
