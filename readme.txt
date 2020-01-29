@@ -4,7 +4,7 @@ Donate link: https://surbma.com/donate/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, jetpack, woothemes, woocommerce
 Requires at least: 5.0
 Tested up to: 5.3
-Stable tag: 12.2
+Stable tag: 13.0
 Requires PHP: 7.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -81,6 +81,14 @@ This plugin was created especially for my Multisite Networks, but works for all 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 13.0 =
+
+- Release date: 2020-01-29
+- NEW - Posts column for all sites listing page.
+- NEW - Pages column for all sites listing page.
+- NEW - Comments column for all sites listing page.
+- NEW - Public status column for all sites listing page.
 
 = 12.2 =
 
