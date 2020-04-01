@@ -76,7 +76,7 @@ function surbma_wp_control_theme_manager() {
 			<?php
 				if ( !wp_is_large_network() ) {
 					$themes = wp_get_themes();
-					$sites = get_sites( ['number'  => 10000] );
+					$sites = get_sites( ['number' => 10000] );
 					foreach( $sites as $site ) {
 						switch_to_blog( $site->blog_id );
 						$template_name = get_option( 'template' );
@@ -87,11 +87,15 @@ function surbma_wp_control_theme_manager() {
 
 						restore_current_blog();
 					}
-					echo '<ul>';
-					foreach ( $themes as $theme ) {
-						echo '<li>' . $theme->Name . ' | ' . $theme->Version . ' | <a href="' . $theme->get('ThemeURI') . '" target="_blank">' . __( 'Visit Theme site' ) . '</a></li>';
+					if( $themes ) {
+						echo '<ul>';
+						foreach ( $themes as $theme ) {
+							echo '<li>' . $theme->Name . ' | ' . $theme->Version . ' | <a href="' . $theme->get('ThemeURI') . '" target="_blank">' . __( 'Visit Theme site' ) . '</a></li>';
+						}
+						echo '</ul>';
+					} else {
+						_e( 'All themes are in use.', 'surbma-wp-control' );
 					}
-					echo '</ul>';
 				} else {
 					echo '<p>' . __( 'Sorry, your Multisite install is too large, this plugin is not optimized for such a large network.', 'surbma-wp-control' ) . '</p>';
 				}
