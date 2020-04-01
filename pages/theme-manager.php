@@ -54,10 +54,10 @@ function surbma_wp_control_theme_manager() {
 
 		<div class="section-block uk-panel uk-panel-box uk-panel-box-secondary uk-panel-header">
 			<h3 class="uk-panel-title"><?php _e( 'Network Activated Themes', 'surbma-wp-control' ); ?></h3>
-			<p><?php _e( 'These Themes are network activated, so they can be used on all subsites of this Multisite network.', 'surbma-wp-control' ); ?></p>
 			<?php
 				$the_themes = get_site_option( 'allowedthemes' );
 				if( $the_themes ) {
+					echo '<p>' . __( 'These Themes are network activated, so they can be used on all subsites of this Multisite network:', 'surbma-wp-control' ) . '</p>';
 					echo '<ul>';
 					ksort( $the_themes );
 					foreach( $the_themes as $key => $value ) {
@@ -72,7 +72,6 @@ function surbma_wp_control_theme_manager() {
 
 		<div class="section-block uk-panel uk-panel-box uk-panel-box-secondary uk-panel-header">
 			<h3 class="uk-panel-title"><?php _e( 'Not Activated Themes', 'surbma-wp-control' ); ?></h3>
-			<p><?php _e( 'These Themes are not used on any subsite of this Multisite network.', 'surbma-wp-control' ); ?></p>
 			<?php
 				if ( !wp_is_large_network() ) {
 					$themes = wp_get_themes();
@@ -88,6 +87,7 @@ function surbma_wp_control_theme_manager() {
 						restore_current_blog();
 					}
 					if( $themes ) {
+						echo '<p>' . __( 'These Themes are not used on any subsite of this Multisite network:', 'surbma-wp-control' ) . '</p>';
 						echo '<ul>';
 						foreach ( $themes as $theme ) {
 							echo '<li>' . $theme->Name . ' | ' . $theme->Version . ' | <a href="' . $theme->get('ThemeURI') . '" target="_blank">' . __( 'Visit Theme site' ) . '</a></li>';
