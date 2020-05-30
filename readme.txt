@@ -4,7 +4,7 @@ Donate link: https://surbma.com/donate/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, jetpack, woothemes, woocommerce
 Requires at least: 5.2
 Tested up to: 5.4
-Stable tag: 13.2
+Stable tag: 14.0
 Requires PHP: 7.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -44,6 +44,7 @@ This is a very complex plugin, which is very useful for any installations, but m
 - Customizes Genesis breadcrumb.
 - Removes the edit link from Genesis themes in the front-end.
 - Override default Genesis favicon, if there is a favicon in the main WordPress folder. File formats accepted: favicon.ico, favicon.gif, favicon.png, favicon.jpg.
+- Adds page content to posts (blog) page.
 - Fixes links and titles in the password reset emails in a Multisite Network.
 - Redirects all attachment pages to its parent page or to homepage.
 - Custom directives for virtual robots.txt file.
@@ -81,6 +82,12 @@ This plugin was created especially for my Multisite Networks, but works for all 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 14.0 =
+
+Release date: 2020-05-30
+
+- NEW - Adds page content to posts (blog) page.
 
 = 13.2 =
 
