@@ -62,6 +62,8 @@ add_filter( 'genesis_pre_load_favicon', function( $favicon_url ) {
 } );
 
 add_action( 'genesis_archive_title_descriptions', function() {
-	$posts_page = get_option( 'page_for_posts' );
-	echo get_post( $posts_page )->post_content;
+	if( is_home() ) {
+		$posts_page = get_option( 'page_for_posts' );
+		echo get_post( $posts_page )->post_content;
+	}
 }, 15 );
