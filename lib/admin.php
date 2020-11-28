@@ -97,6 +97,17 @@ function surbma_wp_control_admin_scripts( $hook ) {
 }
 add_action( 'admin_enqueue_scripts', 'surbma_wp_control_admin_scripts' );
 
+// https://github.com/audrasjb/disable-gutenberg-default-fullscreen-mode
+add_action( 'enqueue_block_editor_assets', function() {
+	$script = "jQuery( window ).load(function() { const isFullscreenMode = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fullscreenMode' ); if ( isFullscreenMode ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fullscreenMode' ); } });";
+	wp_add_inline_script( 'wp-blocks', $script );
+} );
+
+// Some css fixes for the admin
+add_action( 'admin_head', function() {
+	echo '<style>.components-modal__screen-overlay, #wpmu-install-dashboard {display: none !important;}</style>';
+} );
+
 // Custom text in admin footer
 function surbma_wp_control_custom_admin_footer( $text ) {
 	$admin_footer = '';

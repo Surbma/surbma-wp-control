@@ -2,9 +2,9 @@
 Contributors: Surbma, CherryPickStudios
 Donate link: https://surbma.com/donate/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, jetpack, woothemes, woocommerce
-Requires at least: 5.2
-Tested up to: 5.4
-Stable tag: 14.1
+Requires at least: 5.3
+Tested up to: 5.6
+Stable tag: 15.0
 Requires PHP: 7.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -50,6 +50,8 @@ This is a very complex plugin, which is very useful for any installations, but m
 - Custom directives for virtual robots.txt file.
 - Clean file names. Removes any unwanted characters from filenames uploaded to media library.
 - Show site ID on network admin all sites page.
+- Removes the "Welcome to the block editor" popup from the edit page.
+- Disable Gutenberg’s default fullscreen mode.
 
 **Do you want to contribute or help improving this plugin?**
 
@@ -82,6 +84,19 @@ This plugin was created especially for my Multisite Networks, but works for all 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 15.0 =
+
+Release date: 2020-11-29
+
+NEW
+
+- Removes the "Welcome to the block editor" popup from the edit page.
+- Disable Gutenberg’s default fullscreen mode.
+
+FIX
+
+- Moved a css to global admin to load it on all pages.
 
 = 14.1 =
 
