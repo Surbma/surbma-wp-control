@@ -2,9 +2,9 @@
 Contributors: Surbma, CherryPickStudios
 Donate link: https://surbma.com/donate/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, jetpack, woothemes, woocommerce
-Requires at least: 5.3
-Tested up to: 5.6
-Stable tag: 15.1
+Requires at least: 5.4
+Tested up to: 5.7
+Stable tag: 15.2
 Requires PHP: 7.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -84,6 +84,18 @@ This plugin was created especially for my Multisite Networks, but works for all 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 15.2 =
+
+Release date: 2021-03-10
+
+FIXES
+
+- Checking the backlink option if it is set in the database.
+
+OTHER
+
+- Tested up to WordPress 5.7 version.
 
 = 15.1 =
 

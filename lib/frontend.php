@@ -13,8 +13,9 @@ add_filter( 'the_generator', 'surbma_wp_control_remove_version' );
 // Custom footer creds text
 function surbma_wp_control_footer_creds() {
 	$options = get_option( 'pwp_control_option' );
+	$backlinkValue = isset( $options['backlink'] ) ? $options['backlink'] : 0;
 	$bloglink = '<a href="' . get_bloginfo( 'url' ) . '" title="' . get_bloginfo( 'name' ) . ' - ' . get_bloginfo( 'description' ) . '">' . get_bloginfo( 'name' ) . '</a>';
-	if ( $options['backlink'] != '1' && defined( 'SURBMA_WP_CONTROL_FOOTER_CREDS' ) ) {
+	if ( $backlinkValue != '1' && defined( 'SURBMA_WP_CONTROL_FOOTER_CREDS' ) ) {
 		$creds = $bloglink . SURBMA_WP_CONTROL_FOOTER_CREDS;
 	} else {
 		$creds = $bloglink;

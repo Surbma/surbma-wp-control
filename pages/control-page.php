@@ -45,7 +45,8 @@ function surbma_wp_control_page() {
 				<table class="form-table">
 					<tr valign="top"><th scope="row"><?php _e( 'Display backlink?', 'surbma-wp-control' ); ?></th>
 						<td>
-							<input id="pwp_control_option[backlink]" name="pwp_control_option[backlink]" type="checkbox" value="1" <?php checked( '1', $options['backlink'] ); ?> />
+							<?php $backlinkValue = isset( $options['backlink'] ) ? $options['backlink'] : 0; ?>
+							<input id="pwp_control_option[backlink]" name="pwp_control_option[backlink]" type="checkbox" value="1" <?php checked( '1', $backlinkValue ); ?> />
 							<label class="description" for="pwp_control_option[backlink]"><?php _e( 'Remove backlink from footer creds text', 'surbma-wp-control' ); ?></label><br />
 						</td>
 					</tr>
