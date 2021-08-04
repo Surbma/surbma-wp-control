@@ -105,7 +105,7 @@ add_action( 'enqueue_block_editor_assets', function() {
 
 // Some css fixes for the admin
 add_action( 'admin_head', function() {
-	echo '<style>#wpmu-install-dashboard {display: none !important;}</style>';
+	echo '<style>#wpmu-install-dashboard, .notice.litespeed-banner-promo-full {display: none !important;}</style>';
 } );
 
 // Custom text in admin footer
