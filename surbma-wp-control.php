@@ -6,7 +6,7 @@ Plugin URI: https://surbma.com/wordpress-plugins/
 Description: Very useful fixes and add-ons for WordPress Multisite installations.
 Network: True
 
-Version: 15.3
+Version: 15.4
 
 Author: Surbma
 Author URI: https://surbma.com/
@@ -25,10 +25,9 @@ define( 'SURBMA_WP_CONTROL_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SURBMA_WP_CONTROL_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 
 // Localization
-function surbma_wp_control_init() {
+add_action( 'plugins_loaded', function() {
 	load_plugin_textdomain( 'surbma-wp-control', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
-}
-add_action( 'plugins_loaded', 'surbma_wp_control_init' );
+} );
 
 // Include files
 if ( is_admin() ) {
@@ -59,7 +58,8 @@ function surbma_wp_control_wp_mail_from( $input ) {
 add_filter( 'wp_mail_from', 'surbma_wp_control_wp_mail_from' );
 add_filter( 'wp_mail_from_name', 'surbma_wp_control_wp_mail_from' );
 
-function surbma_wp_control_clean_file_names ( $filename ) {
+// Clean file names on upload
+add_filter( 'sanitize_file_name', function( $filename ) {
 	$tmp = explode( '.', $filename );
 	$reset = reset( $tmp );
 	$end = end( $tmp );
@@ -71,8 +71,7 @@ function surbma_wp_control_clean_file_names ( $filename ) {
 	$file = preg_replace( '/[^A-Za-z0-9\-]/', '', $file );
 	$file = strtolower( $file );
 	return $file . $ext;
-}
-add_filter( 'sanitize_file_name', 'surbma_wp_control_clean_file_names', 10 );
+}, 10 );
 
 // Add global Google Analytics tracking
 function surbma_wp_control_add_google_analytics() {
