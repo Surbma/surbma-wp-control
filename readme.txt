@@ -3,8 +3,8 @@ Contributors: Surbma, CherryPickStudios
 Donate link: https://surbma.com/donate/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, jetpack, woothemes, woocommerce
 Requires at least: 5.4
-Tested up to: 5.8
-Stable tag: 15.4
+Tested up to: 5.9
+Stable tag: 15.5
 Requires PHP: 7.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -84,6 +84,18 @@ This plugin was created especially for my Multisite Networks, but works for all 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 15.5 =
+
+Release date: 2022-02-07
+
+FIXES
+
+- Fix login page button design.
+
+OTHER
+
+- Tested up to WordPress 5.9 version.
 
 = 15.4 =
 
