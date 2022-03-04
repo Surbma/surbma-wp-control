@@ -34,10 +34,11 @@ function surbma_wp_control_custom_login_style() {
 	echo '<style>';
 	echo 'body.login #login {width: 90%;max-width: 450px;}';
 	echo '.wp-core-ui .button.swc-lyp-button {float: left;}';
-	echo '#loginform .button {width: 49%;text-align: center;}';
+	echo '#loginform .button {min-width: 49%;text-align: center;}';
 	echo 'body.login form .forgetmenot, body.login #nav {display: none;}';
 	echo 'body.login #backtoblog {text-align: center;}';
-	echo '@media screen and (max-width: 479px) {body.login.wp-core-ui .button {width: 100%;margin-bottom: 16px;}}';
+	echo 'body.login #language-switcher .button {margin-bottom: 0;}';
+	echo '@media screen and (max-width: 479px) {body.login #login .button {width: 100%;margin-bottom: 16px;}}';
 	if ( defined( 'SURBMA_WP_CONTROL_LOGIN_STYLE' ) )
 		echo SURBMA_WP_CONTROL_LOGIN_STYLE;
 	echo '</style>';
