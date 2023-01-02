@@ -3,9 +3,9 @@ Contributors: Surbma, CherryPickStudios
 Donate link: https://surbma.com/donate/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, jetpack, woothemes, woocommerce
 Requires at least: 5.4
-Tested up to: 5.9
-Stable tag: 15.6
-Requires PHP: 7.2
+Tested up to: 6.1
+Stable tag: 16.0
+Requires PHP: 7.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,7 @@ This is a very complex plugin, which is very useful for any installations, but m
 - List all plugins, that are not used anywhere on the network.
 - List all network enabled themes and per-site activated theme with parent theme.
 - List all themes, that are not used anywhere on the network.
+- List all available translations on the Updates page.
 - Custom functions per blog with a custom-functions.php file. You only need to add a pwp-control folder into wp-content folder and than adding folders with the blog ids. In these folders you can have the custom-functions.php file, which is loaded if it exists. This way, you can add as many custom functions to your blogs, as you want.
 - Fixes the default email from address and name to use the current blog's admin email address and blog name.
 - Global Google Analytics tracking for all your blogs. You have to define the SURBMA_PWP_CONTROL_GOOGLE_ANALYTICS constant in the wp-config.php file. Just use the UA code, nothing else!
@@ -84,6 +85,18 @@ This plugin was created especially for my Multisite Networks, but works for all 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 16.0 =
+
+Release date: 2023-01-02
+
+NEW
+
+- List all available translations on the Updates page.
+
+OTHER
+
+- Tested up to WordPress 6.1 version.
 
 = 15.6 =
 

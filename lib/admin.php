@@ -169,6 +169,19 @@ add_action( 'admin_head', function() {
 	remove_action( 'network_admin_notices', 'update_nag', 3 );
 } );
 
+// Let's show all available translations on the updates screen
+add_action( 'core_upgrade_preamble', function() {
+	$translation_updates = wp_get_translation_updates();
+
+	if ( empty( $translation_updates ) ) {
+		return;
+	}
+
+	echo '<table class="widefat" id="update-translations-table"><thead><tr><th>Available translations</th></tr></thead><tbody class="translations"><tr><td><pre>';
+	echo esc_html( print_r( $translation_updates, true ) );
+	echo '</pre></td></tr></tbody></table>';
+} );
+
 // Enable Gravity Forms visibility option for form fields
 add_action( 'init', function() {
 	if ( class_exists( 'GFForms' ) ) {
