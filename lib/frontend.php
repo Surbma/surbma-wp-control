@@ -5,10 +5,13 @@ if ( !has_filter( 'widget_text', 'do_shortcode' ) )
 	add_filter( 'widget_text', 'do_shortcode' );
 
 // Remove version number from source code
-function surbma_wp_control_remove_version() {
-	return '';
-}
-add_filter( 'the_generator', 'surbma_wp_control_remove_version' );
+remove_action( 'wp_head', 'wp_generator' );
+
+// Remove RSD link from source code
+remove_action( 'wp_head', 'rsd_link' );
+
+// Remove Windows Live Writer meta tag from source code
+remove_action( 'wp_head', 'wlwmanifest_link' );
 
 // Custom footer creds text
 function surbma_wp_control_footer_creds() {
