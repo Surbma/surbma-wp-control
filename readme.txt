@@ -3,7 +3,7 @@ Contributors: Surbma, CherryPickStudios
 Donate link: https://surbma.com/donate/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, jetpack, woothemes, woocommerce
 Requires at least: 5.4
-Tested up to: 6.1
+Tested up to: 6.2
 Stable tag: 17.0
 Requires PHP: 7.4
 License: GPLv2
