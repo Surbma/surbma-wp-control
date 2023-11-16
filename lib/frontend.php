@@ -26,35 +26,6 @@ function surbma_wp_control_footer_creds() {
 	return $creds;
 }
 
-// Add extra "Lost your password?" link
-function surbma_wp_control_add_lost_your_password_link() {
-	echo '<a class="swc-lyp-button button button-large" href="' . esc_url( wp_lostpassword_url() ) . '">' . __( 'Lost your password?' ) . '</a>';
-}
-add_action( 'login_form','surbma_wp_control_add_lost_your_password_link', 999 );
-
-// Custom login style
-function surbma_wp_control_custom_login_style() {
-	echo '<style>';
-	echo 'body.login #login {width: 90%;max-width: 450px;}';
-	echo '.wp-core-ui .button.swc-lyp-button {float: left;}';
-	echo '#loginform a.button, #loginform #wp-submit {min-width: 49%;text-align: center;}';
-	echo 'body.login form .forgetmenot, body.login #nav {display: none;}';
-	echo 'body.login #backtoblog {text-align: center;}';
-	echo 'body.login #language-switcher .button {margin-bottom: 0;}';
-	echo '@media screen and (max-width: 479px) {#loginform a.button, #loginform #wp-submit {width: 100%;margin-bottom: 16px;}}';
-	if ( defined( 'SURBMA_WP_CONTROL_LOGIN_STYLE' ) )
-		echo SURBMA_WP_CONTROL_LOGIN_STYLE;
-	echo '</style>';
-}
-add_action( 'login_enqueue_scripts', 'surbma_wp_control_custom_login_style' );
-
-// Custom login text
-function surbma_wp_control_add_login_text() {
-	echo '<div id="login-info">' . SURBMA_WP_CONTROL_LOGIN_TEXT . '</div>';
-}
-if ( defined( 'SURBMA_WP_CONTROL_LOGIN_TEXT' ) )
-	add_action( 'login_footer','surbma_wp_control_add_login_text' );
-
 // Add link to read more text
 function surbma_wp_control_read_more_link( $excerpt ) {
 	return ' <a href="' . get_permalink() . '">' . $excerpt . '</a>';

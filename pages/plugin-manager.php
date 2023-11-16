@@ -22,15 +22,18 @@ function surbma_wp_control_plugin_manager() {
 				echo '<tbody>';
 				foreach ( $sites as $site ) {
 					echo '<tr>';
-					$the_plugs = get_blog_option( $site->blog_id, 'active_plugins' );
 					$deleted = get_blog_status( $site->blog_id, 'deleted' ) == 1 ? 'background: #ff8573;' : '';
 					echo '<td style="' . $deleted . 'border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;vertical-align: top;">';
 					printf( '<strong>%s</strong> | <a href="%splugins.php" target="_blank">%s</a> | <a href="%s" target="_blank">%s</a>', get_blog_option( $site->blog_id, 'blogname' ), get_admin_url( $site->blog_id ), __( 'Dashboard' ), get_home_url( $site->blog_id ), __( 'Visit' ) );
 					echo '</td>';
 					echo '<td style="' . $deleted . 'border-bottom: 1px solid #ccc;vertical-align: top;">';
-					if( $the_plugs ) {
+
+					$active_plugins = get_blog_option( $site->blog_id, 'active_plugins' );					
+					// Sort the array alphabetically by the values
+					asort( $active_plugins );
+					if ( $active_plugins ) {
 						echo '<ul style="margin: 0;">';
-						foreach( $the_plugs as $key => $value ) {
+						foreach( $active_plugins as $key => $value ) {
 							$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $value );
 							echo '<li>' . $plugin_data['Name'] . ' | ' . $plugin_data['Version'] . ' | <a href="' . $plugin_data['PluginURI'] . '" target="_blank">' . __( 'Visit plugin site' ) . '</a></li>';
 						}

@@ -3,8 +3,8 @@ Contributors: Surbma, CherryPickStudios
 Donate link: https://surbma.com/donate/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, jetpack, woothemes, woocommerce
 Requires at least: 5.4
-Tested up to: 6.3
-Stable tag: 17.1
+Tested up to: 6.4
+Stable tag: 18.0
 Requires PHP: 7.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -86,6 +86,18 @@ It is the reverse version of my last name. ;)
 
 == Changelog ==
 
+= 18.0 =
+
+Release date: 2023-11-16
+
+ENHANCEMENT
+
+- Plugin manager's plugin list set to alphabetical order.
+
+OTHER
+
+- Login page customization functions are removed.
+
 = 17.1 =
 
 Release date: 2023-08-31
@@ -93,6 +105,10 @@ Release date: 2023-08-31
 FIX
 
 - Fixed login styling for the password field.
+
+OTHER
+
+- Tested up to WordPress 6.3 version.
 
 = 17.0 =
 
