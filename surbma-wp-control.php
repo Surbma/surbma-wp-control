@@ -6,7 +6,7 @@ Plugin URI: https://surbma.com/wordpress-plugins/
 Description: Very useful fixes and add-ons for WordPress Multisite installations.
 Network: True
 
-Version: 18.0
+Version: 19.0
 
 Author: Surbma
 Author URI: https://surbma.com/
@@ -57,21 +57,6 @@ function surbma_wp_control_wp_mail_from( $input ) {
 }
 add_filter( 'wp_mail_from', 'surbma_wp_control_wp_mail_from' );
 add_filter( 'wp_mail_from_name', 'surbma_wp_control_wp_mail_from' );
-
-// Clean file names on upload
-add_filter( 'sanitize_file_name', function( $filename ) {
-	$tmp = explode( '.', $filename );
-	$reset = reset( $tmp );
-	$end = end( $tmp );
-	$ext = $reset == $end ? '' : '.' . $end;
-	$file = $ext == '' ? $filename : substr( $filename, 0, -( strlen( $ext ) ) );
-	$file = str_replace( ' ', '-', $file );
-	$file = str_replace( '_', '-', $file );
-	$file = preg_replace( '/-+/', '-', $file );
-	$file = preg_replace( '/[^A-Za-z0-9\-]/', '', $file );
-	$file = strtolower( $file );
-	return $file . $ext;
-}, 10 );
 
 // Add global Google Analytics tracking
 function surbma_wp_control_add_google_analytics() {
