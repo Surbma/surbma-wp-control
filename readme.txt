@@ -3,8 +3,8 @@ Contributors: Surbma, CherryPickStudios
 Donate link: https://surbma.com/donate/
 Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, jetpack, woothemes, woocommerce
 Requires at least: 5.4
-Tested up to: 6.5
-Stable tag: 19.0
+Tested up to: 6.6
+Stable tag: 20.0
 Requires PHP: 7.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -21,36 +21,20 @@ This is a very complex plugin, which is very useful for any installations, but m
 - List all plugins, that are not used anywhere on the network.
 - List all network enabled themes and per-site activated theme with parent theme.
 - List all themes, that are not used anywhere on the network.
-- List all available translations on the Updates page.
 - Custom functions per blog with a custom-functions.php file. You only need to add a pwp-control folder into wp-content folder and than adding folders with the blog ids. In these folders you can have the custom-functions.php file, which is loaded if it exists. This way, you can add as many custom functions to your blogs, as you want.
 - Fixes the default email from address and name to use the current blog's admin email address and blog name.
 - Global Google Analytics tracking for all your blogs. You have to define the SURBMA_PWP_CONTROL_GOOGLE_ANALYTICS constant in the wp-config.php file. Just use the UA code, nothing else!
 - Enables shortcodes for Text Widgets.
 - Custom footer text for admin area. You have to define the SURBMA_WP_CONTROL_ADMIN_FOOTER constant in the wp-config.php file.
 - Fix for Soliloquy menu capability in a Multisite Network.
-- Removes some unwanted Widgets.
-- Removes some unwanted Dashboard Widgets.
-- Disables Welcome Screen.
 - Removes some unwanted Jetpack modules.
 - No active modules upon Jetpack activation.
 - Enables Gravity Forms visibility option for form fields.
-- Removes version number from source code.
-- Removes version number from admin footer.
-- Removes WP logo menu from admin bar.
 - Custom footer creds text for Genesis themes or any other theme by adding the necessary function to it. You have to define the SURBMA_WP_CONTROL_FOOTER_CREDS constant in the wp-config.php file.
-- Custom login style. You have to define the SURBMA_WP_CONTROL_LOGIN_STYLE constant in the wp-config.php file.
-- Custom login text. You have to define the SURBMA_WP_CONTROL_LOGIN_TEXT constant in the wp-config.php file.
-- Adds link to read more text.
-- Adds language code in body class if WPML plugin is activated.
 - Customizes Genesis breadcrumb.
 - Removes the edit link from Genesis themes in the front-end.
 - Override default Genesis favicon, if there is a favicon in the main WordPress folder. File formats accepted: favicon.ico, favicon.gif, favicon.png, favicon.jpg.
 - Adds page content to posts (blog) page.
-- Fixes links and titles in the password reset emails in a Multisite Network.
-- Redirects all attachment pages to its parent page or to homepage.
-- Custom directives for virtual robots.txt file.
-- Clean file names. Removes any unwanted characters from filenames uploaded to media library.
-- Show site ID on network admin all sites page.
 - Removes the "Welcome to the block editor" popup from the edit page.
 - Disable Gutenberg’s default fullscreen mode.
 
@@ -85,6 +69,27 @@ This plugin was created especially for my Multisite Networks, but works for all 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 20.0 =
+
+Release date: 2024-08-11
+
+OTHER
+
+- Removed: List all available translations on the Updates page.
+- Removed: Removes some unwanted Widgets.
+- Removed: Removes some unwanted Dashboard Widgets.
+- Removed: Disables Welcome Screen.
+- Removed: Removes version number from source code.
+- Removed: Removes version number from admin footer.
+- Removed: Removes WP logo menu from admin bar.
+- Removed: Adds language code in body class if WPML plugin is activated.
+- Removed: Fixes links and titles in the password reset emails in a Multisite Network.
+- Removed: Redirects all attachment pages to its parent page or to homepage.
+- Removed: Custom directives for virtual robots.txt file.
+- Removed: Show site ID on network admin all sites page.
+- Removed: Adds link to read more text.
+- Tested up to WordPress 6.6 version.
 
 = 19.0 =
 
