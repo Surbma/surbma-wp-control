@@ -6,7 +6,7 @@ Plugin URI: https://surbma.com/wordpress-plugins/
 Description: Very useful fixes and add-ons for WordPress Multisite installations.
 Network: True
 
-Version: 20.0
+Version: 21.0
 
 Author: Surbma
 Author URI: https://surbma.com/
@@ -28,35 +28,6 @@ define( 'SURBMA_WP_CONTROL_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 add_action( 'plugins_loaded', function() {
 	load_plugin_textdomain( 'surbma-wp-control', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 } );
-
-// Include files
-if ( is_admin() ) {
-	include_once( SURBMA_WP_CONTROL_PLUGIN_DIR . '/lib/admin.php' );
-}
-
-if ( !is_admin() ) {
-	include_once( SURBMA_WP_CONTROL_PLUGIN_DIR . '/lib/frontend.php' );
-	if ( wp_basename( get_bloginfo( 'template_directory' ) ) == 'genesis' )
-		include_once( SURBMA_WP_CONTROL_PLUGIN_DIR . '/lib/frontend-genesis.php' );
-}
-
-// Load custom functions if file exists
-$blog_id = get_current_blog_id();
-$custom_functions_file = ABSPATH . 'wp-content/pwp-control/' . $blog_id . '/custom-functions.php';
-if ( file_exists( $custom_functions_file ) )
-	include_once( $custom_functions_file );
-
-// Change the default wordpress@siteurl email address to the admin's email address
-// Change the default WordPress email to the site's title
-function surbma_wp_control_wp_mail_from( $input ) {
-	// Not the default address, probably a comment notification
-	if ( 0 !== stripos( $input, 'wordpress' ) )
-		return $input;
-
-	return get_option( 'wp_mail_from' === current_filter() ? 'admin_email' : 'blogname' );
-}
-add_filter( 'wp_mail_from', 'surbma_wp_control_wp_mail_from' );
-add_filter( 'wp_mail_from_name', 'surbma_wp_control_wp_mail_from' );
 
 // Add global Google Analytics tracking
 function surbma_wp_control_add_google_analytics() {

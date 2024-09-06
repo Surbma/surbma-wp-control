@@ -1,10 +1,10 @@
 === Surbma | WP Control ===
 Contributors: Surbma, CherryPickStudios
 Donate link: https://surbma.com/donate/
-Tags: multisite, network, genesis, gravity forms, gravityforms, soliloquy, jetpack, woothemes, woocommerce
+Tags: multisite, network
 Requires at least: 5.4
 Tested up to: 6.6
-Stable tag: 20.0
+Stable tag: 21.0
 Requires PHP: 7.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -17,26 +17,7 @@ This is a very complex plugin, which is very useful for any installations, but m
 
 **Here is a list of the current functions:**
 
-- List all network actived plugins and per-site activated plugins.
-- List all plugins, that are not used anywhere on the network.
-- List all network enabled themes and per-site activated theme with parent theme.
-- List all themes, that are not used anywhere on the network.
-- Custom functions per blog with a custom-functions.php file. You only need to add a pwp-control folder into wp-content folder and than adding folders with the blog ids. In these folders you can have the custom-functions.php file, which is loaded if it exists. This way, you can add as many custom functions to your blogs, as you want.
-- Fixes the default email from address and name to use the current blog's admin email address and blog name.
 - Global Google Analytics tracking for all your blogs. You have to define the SURBMA_PWP_CONTROL_GOOGLE_ANALYTICS constant in the wp-config.php file. Just use the UA code, nothing else!
-- Enables shortcodes for Text Widgets.
-- Custom footer text for admin area. You have to define the SURBMA_WP_CONTROL_ADMIN_FOOTER constant in the wp-config.php file.
-- Fix for Soliloquy menu capability in a Multisite Network.
-- Removes some unwanted Jetpack modules.
-- No active modules upon Jetpack activation.
-- Enables Gravity Forms visibility option for form fields.
-- Custom footer creds text for Genesis themes or any other theme by adding the necessary function to it. You have to define the SURBMA_WP_CONTROL_FOOTER_CREDS constant in the wp-config.php file.
-- Customizes Genesis breadcrumb.
-- Removes the edit link from Genesis themes in the front-end.
-- Override default Genesis favicon, if there is a favicon in the main WordPress folder. File formats accepted: favicon.ico, favicon.gif, favicon.png, favicon.jpg.
-- Adds page content to posts (blog) page.
-- Removes the "Welcome to the block editor" popup from the edit page.
-- Disable Gutenberg’s default fullscreen mode.
 
 **Do you want to contribute or help improving this plugin?**
 
@@ -69,6 +50,14 @@ This plugin was created especially for my Multisite Networks, but works for all 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 21.0 =
+
+Release date: 2024-09-06
+
+OTHER
+
+- Removed all functions, except global Google Analytics tracking.
 
 = 20.0 =
 
