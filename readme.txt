@@ -4,7 +4,7 @@ Donate link: https://surbma.com/donate/
 Tags: multisite, network
 Requires at least: 5.4
 Tested up to: 6.6
-Stable tag: 21.0
+Stable tag: 22.0
 Requires PHP: 7.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -14,10 +14,6 @@ Very useful fixes and add-ons for WordPress Multisite installations.
 == Description ==
 
 This is a very complex plugin, which is very useful for any installations, but mainly for Multisite Networks. I have created this plugin for my own WordPress installations and I'm continue to add more useful functions to it in the future. This plugin is not for the average WordPress user, but for a WordPress developer or site managers. You need a basic knowledge to use WordPress Multisite, FTP and other things to fully take advantage of this plugin.
-
-**Here is a list of the current functions:**
-
-- Global Google Analytics tracking for all your blogs. You have to define the SURBMA_PWP_CONTROL_GOOGLE_ANALYTICS constant in the wp-config.php file. Just use the UA code, nothing else!
 
 **Do you want to contribute or help improving this plugin?**
 
@@ -50,6 +46,15 @@ This plugin was created especially for my Multisite Networks, but works for all 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 22.0 =
+
+Release date: 2026-05-19
+
+OTHER
+
+- Removed global Google Analytics tracking.
+- Fixed load_plugin_textdomain() "too early" notice on WordPress 6.7+.
 
 = 21.0 =
 
