@@ -6,7 +6,7 @@ Plugin URI: https://surbma.com/wordpress-plugins/
 Description: Very useful fixes and add-ons for WordPress Multisite installations.
 Network: True
 
-Version: 22.0
+Version: 23.0
 
 Author: Surbma
 Author URI: https://surbma.com/
@@ -28,3 +28,8 @@ define( 'SURBMA_WP_CONTROL_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 add_action( 'init', function() {
 	load_plugin_textdomain( 'surbma-wp-control', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 } );
+
+// Admin
+if ( is_admin() ) {
+	require_once SURBMA_WP_CONTROL_PLUGIN_DIR . 'includes/all-admin.php';
+}
