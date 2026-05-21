@@ -4,7 +4,7 @@ Donate link: https://surbma.com/donate/
 Tags: multisite, network
 Requires at least: 5.4
 Tested up to: 7.0
-Stable tag: 25.0
+Stable tag: 26.0
 Requires PHP: 7.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -46,6 +46,14 @@ This plugin was created especially for my Multisite Networks, but works for all 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 26.0 =
+
+Release date: 2026-05-21
+
+NEW
+
+- External link checker: implemented full feature. Scans all published posts across public post types for outbound external links. Results show post title, type, link count, and edit link. Includes nonce verification and full i18n support.
 
 = 25.0 =
 
