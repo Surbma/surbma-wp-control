@@ -19,7 +19,7 @@ if ( ! class_exists( 'Surbma_WP_Control_Fix_Image_Rotation' ) ) {
 	/**
 	 * Handles automatic EXIF-based image orientation correction on upload.
 	 *
-	 * @since 24.0
+	 * @since 25.0
 	 */
 	class Surbma_WP_Control_Fix_Image_Rotation {
 
@@ -27,7 +27,7 @@ if ( ! class_exists( 'Surbma_WP_Control_Fix_Image_Rotation' ) ) {
 		 * Tracks file paths that have already been processed, to prevent
 		 * double-processing (pre-filter and post-upload both fire).
 		 *
-		 * @since 24.0
+		 * @since 25.0
 		 * @access private
 		 * @var array
 		 */
@@ -37,7 +37,7 @@ if ( ! class_exists( 'Surbma_WP_Control_Fix_Image_Rotation' ) ) {
 		 * Stores image metadata before GD processing so it can be restored
 		 * afterwards (GD strips metadata on rotate/flip; Imagick does not).
 		 *
-		 * @since 24.0
+		 * @since 25.0
 		 * @access private
 		 * @var array
 		 */
@@ -46,7 +46,7 @@ if ( ! class_exists( 'Surbma_WP_Control_Fix_Image_Rotation' ) ) {
 		/**
 		 * Singleton instance.
 		 *
-		 * @since 24.0
+		 * @since 25.0
 		 * @access protected
 		 * @var Surbma_WP_Control_Fix_Image_Rotation|null
 		 */
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Surbma_WP_Control_Fix_Image_Rotation' ) ) {
 		/**
 		 * Returns the singleton instance.
 		 *
-		 * @since 24.0
+		 * @since 25.0
 		 * @return Surbma_WP_Control_Fix_Image_Rotation
 		 */
 		public static function get_instance() {
@@ -68,7 +68,7 @@ if ( ! class_exists( 'Surbma_WP_Control_Fix_Image_Rotation' ) ) {
 		/**
 		 * Registers WordPress upload hooks (only when PHP EXIF extension is available).
 		 *
-		 * @since 24.0
+		 * @since 25.0
 		 * @return void
 		 */
 		public function register_hooks() {
@@ -83,7 +83,7 @@ if ( ! class_exists( 'Surbma_WP_Control_Fix_Image_Rotation' ) ) {
 		/**
 		 * Pre-upload filter: runs on the temporary file before WordPress moves it.
 		 *
-		 * @since 24.0
+		 * @since 25.0
 		 * @param array $file An array of data for a single file.
 		 * @return array An array of data for a single file.
 		 */
@@ -98,7 +98,7 @@ if ( ! class_exists( 'Surbma_WP_Control_Fix_Image_Rotation' ) ) {
 		/**
 		 * Post-upload filter: runs on the final file path after WordPress moves it.
 		 *
-		 * @since 24.0
+		 * @since 25.0
 		 * @param array $file Array of upload data (file, url, type).
 		 * @return array Array of upload data.
 		 */
@@ -113,7 +113,7 @@ if ( ! class_exists( 'Surbma_WP_Control_Fix_Image_Rotation' ) ) {
 		/**
 		 * Fixes the orientation of a single image file based on its EXIF data.
 		 *
-		 * @since 24.0
+		 * @since 25.0
 		 * @param string $file Absolute path to the image file.
 		 * @return void
 		 */
@@ -139,7 +139,7 @@ if ( ! class_exists( 'Surbma_WP_Control_Fix_Image_Rotation' ) ) {
 		/**
 		 * Calculates the rotation and flip operations required to normalise orientation.
 		 *
-		 * @since 24.0
+		 * @since 25.0
 		 * @access private
 		 * @param string $file Absolute path to the image file.
 		 * @param array  $exif EXIF data array from exif_read_data().
@@ -200,7 +200,7 @@ if ( ! class_exists( 'Surbma_WP_Control_Fix_Image_Rotation' ) ) {
 		 * and restored via the wp_read_image_metadata filter. Imagick preserves
 		 * metadata natively and requires no special handling.
 		 *
-		 * @since 24.0
+		 * @since 25.0
 		 * @access private
 		 * @param string $file       Absolute path to the image file.
 		 * @param array  $operations Operations array from calculate_flip_and_rotate().
@@ -241,7 +241,7 @@ if ( ! class_exists( 'Surbma_WP_Control_Fix_Image_Rotation' ) ) {
 		 * and only after a successful rotation/flip. Sets orientation to 1 to
 		 * reflect the now-corrected pixel data.
 		 *
-		 * @since 24.0
+		 * @since 25.0
 		 * @param array  $meta Image metadata array.
 		 * @param string $file Absolute path to the image file.
 		 * @return array Possibly-restored image metadata.

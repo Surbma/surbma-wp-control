@@ -30,7 +30,7 @@ add_action( 'init', function() {
 } );
 
 // Fix Image Rotation — always active, no options needed
-require_once SURBMA_WP_CONTROL_PLUGIN_DIR . 'includes/fix-image-rotation.php';
+include_once SURBMA_WP_CONTROL_PLUGIN_DIR . 'includes/fix-image-rotation.php';
 
 // Admin
 if ( is_admin() ) {
