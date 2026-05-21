@@ -4,7 +4,7 @@ Donate link: https://surbma.com/donate/
 Tags: multisite, network
 Requires at least: 5.4
 Tested up to: 7.0
-Stable tag: 23.0
+Stable tag: 24.0
 Requires PHP: 7.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -46,6 +46,14 @@ This plugin was created especially for my Multisite Networks, but works for all 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 24.0 =
+
+Release date: 2026-05-20
+
+NEW
+
+- Images & thumbnails: per-row Enabled checkbox column and Save changes button. Disabled sizes are skipped on future uploads via the `intermediate_image_sizes` filters. Not registered rows show a disabled checkbox.
 
 = 23.0 =
 
