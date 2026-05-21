@@ -4,7 +4,7 @@ Donate link: https://surbma.com/donate/
 Tags: multisite, network
 Requires at least: 5.4
 Tested up to: 7.0
-Stable tag: 24.0
+Stable tag: 25.0
 Requires PHP: 7.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -46,6 +46,14 @@ This plugin was created especially for my Multisite Networks, but works for all 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 25.0 =
+
+Release date: 2026-05-21
+
+NEW
+
+- Integrated automatic image rotation fix based on EXIF orientation data. Uploaded JPG/JPEG/TIFF images from mobile phones and cameras are now automatically corrected on upload. No settings required — active by default.
 
 = 24.0 =
 
