@@ -49,7 +49,12 @@ function surbma_wp_control_link_checker_exclude_enabled() {
 
 /**
  * Check whether a URL's host matches any entry in the whitelist.
- * Supports exact match and subdomain matching.
+ * Supports exact match and wildcard (*) matching.
+ *
+ * If an entry contains *, fnmatch() is used so that:
+ *   - *.example.com  matches any subdomain of example.com (not example.com itself)
+ *   - *-sub.example.com matches any host ending with -sub.example.com
+ * If an entry has no *, only an exact match is accepted.
  *
  * @param string   $url       The URL to test.
  * @param string[] $whitelist Normalised host list from surbma_wp_control_get_link_checker_whitelist().
@@ -64,12 +69,16 @@ function surbma_wp_control_url_is_whitelisted( $url, $whitelist ) {
 		return false;
 	}
 	foreach ( $whitelist as $entry ) {
-		if ( $host === $entry ) {
-			return true;
-		}
-		// Subdomain match: host ends with ".<entry>".
-		if ( substr( $host, -( strlen( $entry ) + 1 ) ) === '.' . $entry ) {
-			return true;
+		if ( strpos( $entry, '*' ) !== false ) {
+			// Wildcard entry: use fnmatch for glob-style matching.
+			if ( fnmatch( $entry, $host ) ) {
+				return true;
+			}
+		} else {
+			// No wildcard: exact match only.
+			if ( $host === $entry ) {
+				return true;
+			}
 		}
 	}
 	return false;
@@ -395,7 +404,7 @@ function surbma_wp_control_render_external_link_checker() {
 								class="large-text code"
 							><?php echo esc_textarea( $whitelist_raw ); ?></textarea>
 							<p class="description">
-								<?php esc_html_e( 'Add one domain per line (e.g. example.com). Subdomains are matched automatically. You may also paste full URLs — the scheme will be stripped.', 'surbma-wp-control' ); ?>
+								<?php esc_html_e( 'Add one domain per line. Use * as a wildcard (e.g. *.example.com, *-sub.example.com). Plain domains match exactly. You may also paste full URLs — the scheme will be stripped.', 'surbma-wp-control' ); ?>
 							</p>
 						</td>
 					</tr>
