@@ -12,8 +12,101 @@ function surbma_wp_control_get_external_link_checker_page_url() {
 }
 
 /**
+ * Return the saved domain whitelist as an array of normalised host strings.
+ * Accepts one domain (or URL) per line; strips scheme and trailing slash.
+ *
+ * @return string[]
+ */
+function surbma_wp_control_get_link_checker_whitelist() {
+	$raw   = get_option( 'surbma_wp_control_link_checker_whitelist', '' );
+	$lines = preg_split( '/\r\n|\r|\n/', $raw );
+	$hosts = array();
+	foreach ( $lines as $line ) {
+		$line = trim( $line );
+		if ( '' === $line ) {
+			continue;
+		}
+		// Strip scheme so users can paste full URLs.
+		$line = preg_replace( '#^https?://#i', '', $line );
+		// Strip trailing slash.
+		$line = rtrim( $line, '/' );
+		if ( '' !== $line ) {
+			$hosts[] = strtolower( $line );
+		}
+	}
+	return $hosts;
+}
+
+/**
+ * Return whether the "Exclude these links" checkbox is enabled.
+ * Defaults to true (checked) even before the user has ever saved the form.
+ *
+ * @return bool
+ */
+function surbma_wp_control_link_checker_exclude_enabled() {
+	return '1' === get_option( 'surbma_wp_control_link_checker_exclude_enabled', '1' );
+}
+
+/**
+ * Check whether a URL's host matches any entry in the whitelist.
+ * Supports exact match and subdomain matching.
+ *
+ * @param string   $url       The URL to test.
+ * @param string[] $whitelist Normalised host list from surbma_wp_control_get_link_checker_whitelist().
+ * @return bool
+ */
+function surbma_wp_control_url_is_whitelisted( $url, $whitelist ) {
+	if ( empty( $whitelist ) ) {
+		return false;
+	}
+	$host = strtolower( wp_parse_url( $url, PHP_URL_HOST ) );
+	if ( ! $host ) {
+		return false;
+	}
+	foreach ( $whitelist as $entry ) {
+		if ( $host === $entry ) {
+			return true;
+		}
+		// Subdomain match: host ends with ".<entry>".
+		if ( substr( $host, -( strlen( $entry ) + 1 ) ) === '.' . $entry ) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
+ * Handle saving whitelist settings.
+ */
+function surbma_wp_control_save_whitelist_settings() {
+	if ( ! isset( $_POST['surbma_wp_control_save_whitelist_nonce'] ) ) {
+		return;
+	}
+	check_admin_referer( 'surbma_wp_control_save_whitelist', 'surbma_wp_control_save_whitelist_nonce' );
+
+	if ( ! current_user_can( 'manage_network_options' ) ) {
+		wp_die( esc_html__( 'You do not have permission to do this.', 'surbma-wp-control' ) );
+	}
+
+	$whitelist = isset( $_POST['surbma_wp_control_link_checker_whitelist'] )
+		? sanitize_textarea_field( wp_unslash( $_POST['surbma_wp_control_link_checker_whitelist'] ) )
+		: '';
+	update_option( 'surbma_wp_control_link_checker_whitelist', $whitelist );
+
+	$exclude = isset( $_POST['surbma_wp_control_link_checker_exclude_enabled'] ) ? '1' : '0';
+	update_option( 'surbma_wp_control_link_checker_exclude_enabled', $exclude );
+
+	wp_safe_redirect(
+		add_query_arg( 'swpc_settings_saved', '1', surbma_wp_control_get_external_link_checker_page_url() )
+	);
+	exit;
+}
+add_action( 'admin_post_surbma_wp_control_save_whitelist', 'surbma_wp_control_save_whitelist_settings' );
+
+/**
  * Collect all published posts/pages across public post types and return
  * an array of items with external links found in post_content.
+ * Whitelisted domains are excluded when the "Exclude these links" option is on.
  *
  * @return array<int, array{post: WP_Post, links: string[]}> Posts that have at least one external link.
  */
@@ -34,8 +127,10 @@ function surbma_wp_control_get_external_links_data() {
 	// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 	$posts = $wpdb->get_results( $query );
 
-	$results = array();
-	$home    = home_url();
+	$results   = array();
+	$home      = home_url();
+	$exclude   = surbma_wp_control_link_checker_exclude_enabled();
+	$whitelist = $exclude ? surbma_wp_control_get_link_checker_whitelist() : array();
 
 	if ( empty( $posts ) ) {
 		return $results;
@@ -48,9 +143,17 @@ function surbma_wp_control_get_external_links_data() {
 		$external_links = array_values(
 			array_filter(
 				$matches[1],
-				function ( $url ) use ( $home ) {
-					return strpos( $url, $home ) === false
-						&& preg_match( '#^https?://#i', $url );
+				function ( $url ) use ( $home, $exclude, $whitelist ) {
+					if ( strpos( $url, $home ) !== false ) {
+						return false;
+					}
+					if ( ! preg_match( '#^https?://#i', $url ) ) {
+						return false;
+					}
+					if ( $exclude && surbma_wp_control_url_is_whitelisted( $url, $whitelist ) ) {
+						return false;
+					}
+					return true;
 				}
 			)
 		);
@@ -179,7 +282,7 @@ function surbma_wp_control_render_external_link_checker_table( $items ) {
 }
 
 /**
- * Enqueue inline CSS and JS for the External link checker popup — only on its admin page.
+ * Enqueue inline CSS and JS for the External link checker popup -- only on its admin page.
  *
  * @param string $hook_suffix The current admin page hook suffix.
  */
@@ -252,14 +355,70 @@ add_action( 'admin_enqueue_scripts', 'surbma_wp_control_external_link_checker_as
  * Render the External link checker page.
  */
 function surbma_wp_control_render_external_link_checker() {
-	$items = surbma_wp_control_get_external_links_data();
+	$items           = surbma_wp_control_get_external_links_data();
+	$whitelist_raw   = get_option( 'surbma_wp_control_link_checker_whitelist', '' );
+	$exclude_enabled = surbma_wp_control_link_checker_exclude_enabled();
+	$saved           = isset( $_GET['swpc_settings_saved'] ) && '1' === $_GET['swpc_settings_saved']; // phpcs:ignore WordPress.Security.NonceVerification
 	?>
 	<div class="wrap">
 		<h1><?php esc_html_e( 'External link checker', 'surbma-wp-control' ); ?></h1>
 
+		<?php if ( $saved ) : ?>
+			<div class="notice notice-success is-dismissible">
+				<p><?php esc_html_e( 'Settings saved.', 'surbma-wp-control' ); ?></p>
+			</div>
+		<?php endif; ?>
+
 		<div class="card" style="max-width: none;">
 			<h2 class="title"><?php esc_html_e( 'External link checker', 'surbma-wp-control' ); ?></h2>
-			<p><?php esc_html_e( 'Scan all published posts and pages for outbound external links.', 'surbma-wp-control' ); ?></p>
+			<p><?php esc_html_e( 'This tool detects suspicious or unintentional outbound links in your published content. It scans all published posts and pages for external links — links pointing to domains outside your site. Use the whitelist below to exclude trusted domains (e.g. your own affiliate partners, CDN providers, or social profiles) so only truly unexpected links are flagged.', 'surbma-wp-control' ); ?></p>
+		</div>
+
+		<div class="card" style="max-width: none; margin-top: 1.5em;">
+			<h2 class="title"><?php esc_html_e( 'Whitelist settings', 'surbma-wp-control' ); ?></h2>
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+				<input type="hidden" name="action" value="surbma_wp_control_save_whitelist">
+				<?php wp_nonce_field( 'surbma_wp_control_save_whitelist', 'surbma_wp_control_save_whitelist_nonce' ); ?>
+				<table class="form-table" role="presentation">
+					<tr>
+						<th scope="row">
+							<label for="surbma_wp_control_link_checker_whitelist">
+								<?php esc_html_e( 'Whitelisted domains', 'surbma-wp-control' ); ?>
+							</label>
+						</th>
+						<td>
+							<textarea
+								id="surbma_wp_control_link_checker_whitelist"
+								name="surbma_wp_control_link_checker_whitelist"
+								rows="6"
+								cols="50"
+								class="large-text code"
+							><?php echo esc_textarea( $whitelist_raw ); ?></textarea>
+							<p class="description">
+								<?php esc_html_e( 'Add one domain per line (e.g. example.com). Subdomains are matched automatically. You may also paste full URLs — the scheme will be stripped.', 'surbma-wp-control' ); ?>
+							</p>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Exclude these links', 'surbma-wp-control' ); ?></th>
+						<td>
+							<label>
+								<input
+									type="checkbox"
+									name="surbma_wp_control_link_checker_exclude_enabled"
+									value="1"
+									<?php checked( $exclude_enabled ); ?>
+								>
+								<?php esc_html_e( 'Exclude links to whitelisted domains from the results', 'surbma-wp-control' ); ?>
+							</label>
+							<p class="description">
+								<?php esc_html_e( 'When checked, links pointing to any domain in the whitelist above will not appear in the results table.', 'surbma-wp-control' ); ?>
+							</p>
+						</td>
+					</tr>
+				</table>
+				<?php submit_button( __( 'Save settings', 'surbma-wp-control' ) ); ?>
+			</form>
 		</div>
 
 		<div class="card" style="max-width: none; margin-top: 1.5em;">
