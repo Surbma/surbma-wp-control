@@ -114,8 +114,8 @@ function surbma_wp_control_render_external_link_checker_table( $items ) {
 		<thead>
 			<tr>
 				<th scope="col"><?php esc_html_e( 'Title', 'surbma-wp-control' ); ?></th>
-				<th scope="col" class="column-type"><?php esc_html_e( 'Type', 'surbma-wp-control' ); ?></th>
-				<th scope="col" class="column-links"><?php esc_html_e( 'External links', 'surbma-wp-control' ); ?></th>
+				<th scope="col" class="column-type" style="text-align:center;"><?php esc_html_e( 'Type', 'surbma-wp-control' ); ?></th>
+				<th scope="col" class="column-links" style="text-align:center;"><?php esc_html_e( 'External links', 'surbma-wp-control' ); ?></th>
 				<th scope="col" class="column-actions"><?php esc_html_e( 'Actions', 'surbma-wp-control' ); ?></th>
 			</tr>
 		</thead>
@@ -128,24 +128,24 @@ function surbma_wp_control_render_external_link_checker_table( $items ) {
 				?>
 				<tr>
 					<td>
-						<strong>
-							<a href="<?php echo esc_url( get_permalink( $post->ID ) ); ?>" target="_blank" rel="noopener noreferrer">
-								<?php echo esc_html( get_the_title( $post->ID ) ); ?>
-							</a>
-						</strong>
+						<strong><?php echo esc_html( get_the_title( $post->ID ) ); ?></strong>
 					</td>
-					<td class="column-type"><?php echo esc_html( $post->post_type ); ?></td>
-					<td class="column-links">
+					<td class="column-type" style="text-align:center;"><?php echo esc_html( $post->post_type ); ?></td>
+					<td class="column-links" style="text-align:center;"><?php echo esc_html( number_format_i18n( $link_count ) ); ?></td>
+					<td class="column-actions">
 						<button
 							type="button"
 							class="button-link swpc-open-links-modal"
 							data-links="<?php echo esc_attr( $links_json ); ?>"
 							data-title="<?php echo esc_attr( get_the_title( $post->ID ) ); ?>"
 						>
-							<?php echo esc_html( number_format_i18n( $link_count ) ); ?>
+							<?php esc_html_e( 'Show links', 'surbma-wp-control' ); ?>
 						</button>
-					</td>
-					<td class="column-actions">
+						<?php echo ' | '; ?>
+						<a href="<?php echo esc_url( get_permalink( $post->ID ) ); ?>" target="_blank" rel="noopener noreferrer">
+							<?php esc_html_e( 'View', 'surbma-wp-control' ); ?>
+						</a>
+						<?php echo ' | '; ?>
 						<a href="<?php echo esc_url( get_edit_post_link( $post->ID ) ); ?>" target="_blank" rel="noopener noreferrer">
 							<?php esc_html_e( 'Edit', 'surbma-wp-control' ); ?>
 						</a>
@@ -189,7 +189,7 @@ function surbma_wp_control_external_link_checker_assets( $hook_suffix ) {
 	}
 
 	$css = '
-/* External link checker – modal */
+/* External link checker - modal */
 .swpc-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100000;display:flex;align-items:center;justify-content:center}
 .swpc-modal-container{background:#fff;border-radius:4px;box-shadow:0 4px 32px rgba(0,0,0,.3);width:min(760px,94vw);max-height:80vh;display:flex;flex-direction:column;overflow:hidden}
 .swpc-modal-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid #dcdcde;background:#f6f7f7}
