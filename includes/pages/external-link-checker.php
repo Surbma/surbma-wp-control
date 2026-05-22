@@ -133,14 +133,14 @@ function surbma_wp_control_render_external_link_checker_table( $items ) {
 					<td class="column-type" style="text-align:center;"><?php echo esc_html( $post->post_type ); ?></td>
 					<td class="column-links" style="text-align:center;"><?php echo esc_html( number_format_i18n( $link_count ) ); ?></td>
 					<td class="column-actions">
-						<button
-							type="button"
-							class="button-link swpc-open-links-modal"
+						<a
+							href="#"
+							class="swpc-open-links-modal"
 							data-links="<?php echo esc_attr( $links_json ); ?>"
 							data-title="<?php echo esc_attr( get_the_title( $post->ID ) ); ?>"
 						>
 							<?php esc_html_e( 'Show links', 'surbma-wp-control' ); ?>
-						</button>
+						</a>
 						<?php echo ' | '; ?>
 						<a href="<?php echo esc_url( get_permalink( $post->ID ) ); ?>" target="_blank" rel="noopener noreferrer">
 							<?php esc_html_e( 'View', 'surbma-wp-control' ); ?>
@@ -198,7 +198,7 @@ function surbma_wp_control_external_link_checker_assets( $hook_suffix ) {
 .swpc-modal-close:hover{color:#1d2327}
 .swpc-modal-body{overflow-y:auto;padding:16px}
 .swpc-modal-links-table td a{word-break:break-all}
-.swpc-open-links-modal{color:#2271b1;cursor:pointer;text-decoration:underline;font-weight:600;background:none;border:none;padding:0;font-size:inherit}
+.swpc-open-links-modal{color:#2271b1;cursor:pointer;text-decoration:underline}
 .swpc-open-links-modal:hover{color:#135e96}
 ';
 
@@ -226,10 +226,11 @@ function surbma_wp_control_external_link_checker_assets( $hook_suffix ) {
 	function closeModal(){overlay.style.display="none";overlay.setAttribute("aria-hidden","true");}
 
 	document.addEventListener("click",function(e){
-		var btn=e.target.closest(".swpc-open-links-modal");
-		if(!btn)return;
-		var links=JSON.parse(btn.dataset.links||"[]");
-		openModal(links,btn.dataset.title||"");
+		var link=e.target.closest(".swpc-open-links-modal");
+		if(!link)return;
+		e.preventDefault();
+		var links=JSON.parse(link.dataset.links||"[]");
+		openModal(links,link.dataset.title||"");
 	});
 	closeBtn.addEventListener("click",closeModal);
 	overlay.addEventListener("click",function(e){if(e.target===overlay)closeModal();});
@@ -251,14 +252,7 @@ add_action( 'admin_enqueue_scripts', 'surbma_wp_control_external_link_checker_as
  * Render the External link checker page.
  */
 function surbma_wp_control_render_external_link_checker() {
-	$checked = false;
-	$items   = array();
-
-	if ( isset( $_POST['surbma_wp_control_check_links'] ) ) {
-		check_admin_referer( 'surbma_wp_control_check_links' );
-		$checked = true;
-		$items   = surbma_wp_control_get_external_links_data();
-	}
+	$items = surbma_wp_control_get_external_links_data();
 	?>
 	<div class="wrap">
 		<h1><?php esc_html_e( 'External link checker', 'surbma-wp-control' ); ?></h1>
@@ -266,24 +260,12 @@ function surbma_wp_control_render_external_link_checker() {
 		<div class="card" style="max-width: none;">
 			<h2 class="title"><?php esc_html_e( 'External link checker', 'surbma-wp-control' ); ?></h2>
 			<p><?php esc_html_e( 'Scan all published posts and pages for outbound external links.', 'surbma-wp-control' ); ?></p>
-
-			<form method="post" action="<?php echo esc_url( surbma_wp_control_get_external_link_checker_page_url() ); ?>">
-				<?php wp_nonce_field( 'surbma_wp_control_check_links' ); ?>
-				<input
-					type="submit"
-					name="surbma_wp_control_check_links"
-					class="button button-primary"
-					value="<?php esc_attr_e( 'Check posts', 'surbma-wp-control' ); ?>"
-				>
-			</form>
 		</div>
 
-		<?php if ( $checked ) : ?>
-			<div class="card" style="max-width: none; margin-top: 1.5em;">
-				<h2 class="title"><?php esc_html_e( 'Results', 'surbma-wp-control' ); ?></h2>
-				<?php surbma_wp_control_render_external_link_checker_table( $items ); ?>
-			</div>
-		<?php endif; ?>
+		<div class="card" style="max-width: none; margin-top: 1.5em;">
+			<h2 class="title"><?php esc_html_e( 'Results', 'surbma-wp-control' ); ?></h2>
+			<?php surbma_wp_control_render_external_link_checker_table( $items ); ?>
+		</div>
 	</div>
 	<?php
 }
