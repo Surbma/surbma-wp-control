@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-**Surbma | WP Control** is a WordPress plugin published on WordPress.org. It is network-activated for WordPress Multisite. As of **v23.0** (2026-05-20), it provides an admin menu in each site’s wp-admin (not Network Admin on multisite), with placeholder pages for future features gated on `SURBMA_WP_CONTROL_*` constants in `wp-config.php`.
+**Surbma | WP Control** is a WordPress plugin published on WordPress.org. It is network-activated for WordPress Multisite. As of **v26.0** (2026-05-22), it provides an admin menu in each site’s wp-admin (not Network Admin on multisite), with feature pages gated on `SURBMA_WP_CONTROL_*` constants in `wp-config.php`.
 
 The plugin is a stripped-down public companion to the private **PWP Control** must-use plugin (described in the parent `agent-os/` standards). Do not confuse them: this plugin uses the `SURBMA_WP_CONTROL_` constant prefix, not `PWP_CONTROL_`.
 
-## Current Code (v23.0)
+## Current Code (v26.0)
 
 **Bootstrap** ([`surbma-wp-control.php`](surbma-wp-control.php)):
 
@@ -25,7 +25,7 @@ The plugin is a stripped-down public companion to the private **PWP Control** mu
 - `pages/dashboard.php` — empty dashboard shell
 - `pages/images-thumbnails.php` — Images & thumbnails page (combined sizes + usage table per site)
 - `images-thumbnails-usage.php` — registered size helpers, metadata/content usage scanners, transient cache
-- `pages/external-link-checker.php` — placeholder for upcoming feature
+- `pages/external-link-checker.php` — External link checker page (on-demand scan of published posts/pages for outbound links)
 
 **Images & thumbnails page:**
 
@@ -35,6 +35,14 @@ The plugin is a stripped-down public companion to the private **PWP Control** mu
 - **Active image sizes** list shown below each site’s table.
 - Cache: transient `surbma_wp_control_media_cleaner_{blog_id}`, default 1h; filter `surbma_wp_control_media_cleaner_cache_ttl`; refresh via `?refresh=1`.
 - **Multisite:** no Network Admin menu; use each site’s wp-admin.
+
+**External link checker page:**
+
+- On-demand scan triggered by a "Check posts" button (POST with nonce).
+- Scans all published posts across all public post types for `<a href>` links that are external (not matching `home_url()`).
+- Results table: Title (linked to front-end), Type, External links count, Edit action.
+- Summary line above the table: posts-with-links count and total link count.
+- No caching — runs live on each form submission.
 
 ## Project Standards
 

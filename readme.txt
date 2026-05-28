@@ -4,7 +4,7 @@ Donate link: https://surbma.com/donate/
 Tags: multisite, network
 Requires at least: 5.4
 Tested up to: 7.0
-Stable tag: 23.0
+Stable tag: 27.0
 Requires PHP: 7.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -46,6 +46,41 @@ This plugin was created especially for my Multisite Networks, but works for all 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 27.0 =
+
+Release date: 2026-05-22
+
+NEW
+
+- External link checker: Added domain whitelist textarea — one domain per line, subdomains matched automatically.
+- External link checker: Added "Exclude these links" checkbox (checked by default) — whitelisted domains are filtered from results.
+- External link checker: Extended description to clarify the tool detects suspicious/unintentional outbound links.
+
+
+= 26.0 =
+
+Release date: 2026-05-21
+
+NEW
+
+- External link checker: implemented full feature. Scans all published posts across public post types for outbound external links. Results show post title, type, link count, and edit link. Includes nonce verification and full i18n support.
+
+= 25.0 =
+
+Release date: 2026-05-21
+
+NEW
+
+- Integrated automatic image rotation fix based on EXIF orientation data. Uploaded JPG/JPEG/TIFF images from mobile phones and cameras are now automatically corrected on upload. No settings required — active by default.
+
+= 24.0 =
+
+Release date: 2026-05-20
+
+NEW
+
+- Images & thumbnails: per-row Enabled checkbox column and Save changes button. Disabled sizes are skipped on future uploads via the `intermediate_image_sizes` filters. Not registered rows show a disabled checkbox.
 
 = 23.0 =
 

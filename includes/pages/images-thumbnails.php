@@ -373,6 +373,7 @@ function surbma_wp_control_render_images_thumbnails_site_section( $site_data ) {
 				<th scope="col" class="column-status"><?php esc_html_e( 'Status', 'surbma-wp-control' ); ?></th>
 				<th scope="col" class="column-in-library"><?php esc_html_e( 'In library', 'surbma-wp-control' ); ?></th>
 				<th scope="col" class="column-in-content"><?php esc_html_e( 'In content', 'surbma-wp-control' ); ?></th>
+				<th scope="col" class="column-enabled"><?php esc_html_e( 'Enabled', 'surbma-wp-control' ); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -385,6 +386,9 @@ function surbma_wp_control_render_images_thumbnails_site_section( $site_data ) {
 				$in_library    = $meta_count > 0;
 				$in_content    = $content_count > 0;
 				$has_dimensions = (int) $dimensions['width'] > 0 && (int) $dimensions['height'] > 0;
+				$is_registered  = 'not_registered' !== $registration;
+				$is_enabled     = 'enabled' === $registration;
+				$checkbox_id    = 'surbma-wp-control-enabled-' . sanitize_html_class( $name );
 				?>
 				<tr>
 					<td><strong><?php echo esc_html( $name ); ?></strong></td>
@@ -439,6 +443,29 @@ function surbma_wp_control_render_images_thumbnails_site_section( $site_data ) {
 							esc_html_e( 'Not referenced', 'surbma-wp-control' );
 						}
 						?>
+					</td>
+					<td class="column-enabled">
+						<?php if ( $is_registered ) : ?>
+							<input type="hidden" name="surbma_wp_control_submitted_sizes[]" value="<?php echo esc_attr( $name ); ?>" />
+							<label for="<?php echo esc_attr( $checkbox_id ); ?>" class="screen-reader-text">
+								<?php
+								printf(
+									/* translators: %s: image size slug */
+									esc_html__( 'Enable image size %s', 'surbma-wp-control' ),
+									esc_html( $name )
+								);
+								?>
+							</label>
+							<input
+								type="checkbox"
+								id="<?php echo esc_attr( $checkbox_id ); ?>"
+								name="surbma_wp_control_enabled_sizes[]"
+								value="<?php echo esc_attr( $name ); ?>"
+								<?php checked( $is_enabled ); ?>
+							/>
+						<?php else : ?>
+							<input type="checkbox" disabled />
+						<?php endif; ?>
 					</td>
 				</tr>
 			<?php endforeach; ?>
@@ -523,11 +550,18 @@ function surbma_wp_control_render_images_thumbnails() {
 	$refresh_url = add_query_arg( 'refresh', '1', $page_url );
 
 	surbma_wp_control_print_images_thumbnails_status_styles();
+	$settings_updated = isset( $_GET['settings-updated'] ) && '1' === $_GET['settings-updated'];
 	?>
 	<div class="wrap surbma-wp-control-images-thumbnails">
 		<h1><?php esc_html_e( 'Images & thumbnails', 'surbma-wp-control' ); ?></h1>
 
 		<hr class="wp-header-end">
+
+		<?php if ( $settings_updated ) : ?>
+			<div class="notice notice-success is-dismissible">
+				<p><?php esc_html_e( 'Image size settings saved.', 'surbma-wp-control' ); ?></p>
+			</div>
+		<?php endif; ?>
 
 		<p>
 			<?php esc_html_e( 'Registered image sizes for this site, whether they are enabled for generation, and whether they appear in the media library or in content. Rows marked Not registered are legacy sizes still stored in attachment metadata. “In library” means at least one attachment has that size in metadata. “In content” means the size slug or dimensions were found in posts or post meta. Counts are references, not unique posts.', 'surbma-wp-control' ); ?>
@@ -537,10 +571,19 @@ function surbma_wp_control_render_images_thumbnails() {
 			<a href="<?php echo esc_url( $refresh_url ); ?>" class="button button-secondary"><?php esc_html_e( 'Refresh scan', 'surbma-wp-control' ); ?></a>
 		</p>
 
-		<?php surbma_wp_control_render_images_thumbnails_single_site( $force_refresh ); ?>
+		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+			<input type="hidden" name="action" value="<?php echo esc_attr( SURBMA_WP_CONTROL_SAVE_IMAGE_SIZES_ACTION ); ?>" />
+			<?php wp_nonce_field( SURBMA_WP_CONTROL_SAVE_IMAGE_SIZES_ACTION ); ?>
+
+			<?php surbma_wp_control_render_images_thumbnails_single_site( $force_refresh ); ?>
+
+			<p style="text-align: right;">
+				<?php submit_button( __( 'Save changes', 'surbma-wp-control' ), 'primary', 'submit', false ); ?>
+			</p>
+		</form>
 
 		<p class="description">
-			<?php esc_html_e( 'In library reflects metadata only, not guaranteed files on disk. In content uses heuristics and may miss page builders or CDN URLs. Two sizes with the same dimensions can match the same URL pattern. Disabling sizes and regenerating thumbnails is done outside this plugin.', 'surbma-wp-control' ); ?>
+			<?php esc_html_e( 'In library reflects metadata only, not guaranteed files on disk. In content uses heuristics and may miss page builders or CDN URLs. Two sizes with the same dimensions can match the same URL pattern. Disabling a size here removes it from future uploads; regenerating existing thumbnails is done outside this plugin.', 'surbma-wp-control' ); ?>
 		</p>
 	</div>
 	<?php

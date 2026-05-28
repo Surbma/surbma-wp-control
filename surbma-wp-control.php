@@ -6,7 +6,7 @@ Plugin URI: https://surbma.com/wordpress-plugins/
 Description: Very useful fixes and add-ons for WordPress Multisite installations.
 Network: True
 
-Version: 23.0
+Version: 27.0
 
 Author: Surbma
 Author URI: https://surbma.com/
@@ -28,6 +28,9 @@ define( 'SURBMA_WP_CONTROL_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 add_action( 'init', function() {
 	load_plugin_textdomain( 'surbma-wp-control', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 } );
+
+// Fix Image Rotation — always active, no options needed
+include_once SURBMA_WP_CONTROL_PLUGIN_DIR . 'includes/fix-image-rotation.php';
 
 // Admin
 if ( is_admin() ) {

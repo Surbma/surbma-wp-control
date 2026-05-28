@@ -1,6 +1,15 @@
-/.wordpress-org
+/.claude
+/.cursor
 /.git
 /.github
+/.wordpress-org
+/agent-os
+/vendor
 
 .distignore
 .gitignore
+AGENTS.md
+CLAUDE.md
+composer.json
+composer.lock
+phpcs.xml
