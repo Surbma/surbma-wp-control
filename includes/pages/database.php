@@ -430,7 +430,7 @@ function surbma_wp_control_render_database_tab_tables( $wpdb ) {
 		?>
 		<style>
 			.surbma-wp-control-status--no {
-				color: #d63638;
+				color: #d63638 !important;
 				font-weight: 600;
 			}
 		</style>
