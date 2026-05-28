@@ -454,7 +454,6 @@ function surbma_wp_control_render_database_tab_tables( $wpdb ) {
 					$total_size      = $table['total_size'];
 					$total_db_size  += $total_size;
 					$size            = size_format( $total_size, 2 );
-					$needs_fix       = ( 'InnoDB' !== $table_type || 'utf8mb4_unicode_ci' !== $table_collation );
 					?>
 					<tr>
 						<td><?php echo esc_html( $table_name ); ?></td>
