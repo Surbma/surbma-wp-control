@@ -4,7 +4,7 @@ Donate link: https://surbma.com/donate/
 Tags: multisite, network
 Requires at least: 5.4
 Tested up to: 7.0
-Stable tag: 28.0
+Stable tag: 28.1
 Requires PHP: 7.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -46,6 +46,15 @@ This plugin was created especially for my Multisite Networks, but works for all 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 28.1 =
+
+Release date: 2026-05-28
+
+FIX
+
+- Database: Register Database submenu in admin menu (includes/admin-menu.php).
+- Database: Include database.php in all-admin loader (includes/all-admin.php).
 
 = 28.0 =
 
