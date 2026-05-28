@@ -46,5 +46,14 @@ function surbma_wp_control_register_site_admin_menu() {
 		'surbma-wp-control-external-links',
 		'surbma_wp_control_render_external_link_checker'
 	);
+
+	add_submenu_page(
+		'surbma-wp-control',
+		__( 'Database', 'surbma-wp-control' ),
+		__( 'Database', 'surbma-wp-control' ),
+		'manage_options',
+		'surbma-wp-control-database',
+		'surbma_wp_control_render_database'
+	);
 }
 add_action( 'admin_menu', 'surbma_wp_control_register_site_admin_menu', 999 );
