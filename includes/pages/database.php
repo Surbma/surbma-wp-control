@@ -529,15 +529,16 @@ function surbma_wp_control_render_database_tab_options( $wpdb, $mode ) {
 		<tbody>
 			<?php foreach ( $options as $option ) : ?>
 				<?php
-				$option_name  = $option['option_name'];
-				$autoload_val = $option['autoload'];
-				$option_size  = (int) $option['option_size'];
-				$total       += $option_size;
-				$size         = size_format( $option_size, 2 );
+				$option_name   = $option['option_name'];
+				$autoload_val  = $option['autoload'];
+				$option_size   = (int) $option['option_size'];
+				$total        += $option_size;
+				$size          = size_format( $option_size, 2 );
+				$autoload_icon = in_array( $autoload_val, array( 'yes', 'on', 'auto-on', 'auto' ), true ) ? '✅' : '❌';
 				?>
 				<tr>
 					<td><?php echo esc_html( $option_name ); ?></td>
-					<td style="text-align: center;"><?php echo esc_html( $autoload_val ); ?></td>
+					<td style="text-align: center;"><?php echo $autoload_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
 					<td style="text-align: right;"><?php echo esc_html( $size ); ?></td>
 				</tr>
 			<?php endforeach; ?>
